@@ -28,10 +28,10 @@
     </nav>
     <main>
     </main>
-    <footer id="pieEDD">
+    <footer>
         <div>
             <a href="/feed/rss.xml" type="application/rss+xml" target="_blank"><i class="fa-solid fa-rss"></i></a>
-            <a href="https://github.com/GonJunLor/108EDDProyectoEDD" target="_blank">
+            <a href="https://github.com/GonJunLor/GJLDAWProyectoDAW" target="_blank">
                 <i class="fa-brands fa-github"></i>
             </a>
             <a href="https://mogutable.com/" target="_blank"><i class="fa-solid fa-house"></i></a>
