@@ -539,7 +539,12 @@ Apache NetBeans IDE 20
 #### 1.2.5 **Visual Studio Code**
 
 ## 2. GitHub
-
+Configuracion global en local
+Abrimos git bash y configuramos nuestro email y nuestro nombre
+````
+gitconfig--global user.email“usuario@dominio”
+gitconfig--global user.name “usuario”
+````
 ## 3.Entorno de Explotación
 
 ---
