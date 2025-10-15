@@ -37,8 +37,6 @@
         - [Configuración](#configuración-1)
         - [Monitorización](#monitorización-1)
         - [Mantenimiento](#mantenimiento-1)
-      - [Preparación](#preparación)
-      - [Instalar apache](#instalar-apache)
       - [1.1.4 MySQL](#114-mysql)
         - [Instalación](#instalación-2)
         - [Configuración](#configuración-2)
