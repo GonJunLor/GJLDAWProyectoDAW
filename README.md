@@ -308,26 +308,159 @@ ServerName gjl-used
 sudo apt install php8.3-fpm php8.3
 ````
 ##### Configuración
+**Ficheros de configuración de PHP para php-fpm:**
+* **/etc/php/8.3/fpm/conf.d**: Módulos instalados en esta configuración de php (enlaces simbólicos a /etc/php/8.3/mods-available)
+* **/etc/php/8.3/fpm/php-fpm.conf** : Configuración general de php-fpm
+* **/etc/php/8.3/fpm/php.ini** : Configuraicón de php para este escenario
+* **/etc/php/8.3/fpm/pool.d** : Directorio con distintos pool de configuración. Cada aplicación puede tener una configuración distinta (procesos distintos) de php-fpm.
 
-##### Monitorización
-##### Mantenimiento
-#### Preparación
-- Vamos a usar php como un servicio con PHP-FPM para ello primero hay que instalar dos paquetes y despues listamos para comprobar que se ha instalado
-````
-sudo apt install software-properties-common -y
-sudo add-apt-repository ppa:ondrej/php -y
-ls /etc/apt/sources.list.d/ | grep ondrej
-````
-#### Instalar apache
-- Instalamos las librerias, desactivamos php para poder cambiar al servicio FPM
-````
-sudo apt install libapache2-mod-php8.3 php8.3-fpm -y
-sudo a2dismod php8.3
-sudo a2dismod mpm_prefork
-sudo a2enmod mpm_event proxy_fcgi
+Por defecto tenemos un pool cuya configuración la encontramos en **/etc/php/8.3/fpm/pool.d/ www.conf**, en este fichero podemos configurar parámetros, los más importantes son:
+
+* **[www]**: -es el nombre del pool, si tenemos varios, cada uno tiene que tener un nombre.
+* ** user y group** : Usuario y grupo con el que va a ejecutar los procesos
+* **listen**: Se indica el socket unix o el socket TCP donde se van a escuchar los procesos:
+  * Por defecto, escucha por un socket unix: listen=/run/php/php8.3-fpm.sock
+  * Si queremos que escuche por TCO; listen=127.0.0.1:9000
+* Directivas de procesamiento, gestión de procesos:
+  * **pm**: Por defecto es igual a dynamic (el número de procesos se crean y se destruyen de forma dinámica). Otros valores: static o ondemand.
+  * Otras directivas: **pm.max_children** (número máxio de procesos hijo que pueden ser creados al mismo tiempo para manejar solicitudes), **pm.start_servers** (cuantos procesos PHP-FPM se lanzararón al inicio de forma automática),**pm.min_spare_servers**( número mínimo de procesos del servidor inactivos para manejar nuevas solicitudes),...
+  * **pm.status_path=/status**: No es necesario, vamos a activar la URL de status para comprobar el estado del proceso.
+
+Reiniciar el servicio:
+```bash
+sudo systemctl restart php8.3-fpm
+```
+
+**Configuración de Apache2 con PHP-FPM**
+---
+
+Apache2 va a funcionar como proxy inverso(reverse proxy) para las peticiones de los recursos php. cuando solicitamos un fichero php, apache2 le pasará la petición a php-fpm para que interprete el php y luego devuelva la respuesta al servidor web.
+
+```mermaid
+graph TD
+   Navegador -->
+   Apache[Apache proxy-fcgi] -->
+   Aplicación[PHP-FPM]
+```
+
+```bash
+sudo a2enmod proxy_fcgi setenvif
+```
+
+
+**Activarlo para cada virtualhost**
+
+Un **socket** es un "canal de comunicación* entre dos procesos, en nuestro caso es entre el programa Apache con PHP-FPM.
+
+Se pueden usar dos tipos de SOCKET:
+
+* Si php-fpm está escuchando en un SOCKET TCP
+
+Usa una dirección IP y un puerto para comunicarse, por lo tanto usa el protocolo TCP/IP (comunicación en red) y puede conectarse desde otra máquina si el puerto está abierto.
+  
+```bash
+  ProxyPassMatch ^/(.*\.php)$ fcgi://127.0.0.1:9000/var/www/html/$1
+```
+
+- La directiva `ProxyPassMatch`Indica a Apache que use un sistema proxy con una expresión regular para indicar qué peticiones redirigir.
+
+- `^/(.*\.php)` Es la expresión regular que cpatura cualquier URL que termina en .php y el contenido del parentesis se guarda en $1. Por ejemplo: /index.php, /blog/post.php,etc
+-  `fcgi://127.0.0.1:9000/var/www/html/$1` define el destino FastCGI donde enviará las peticiones:
+   -  fcgi:// usa el protocolo FastCGI
+   -  127.0.0.1:9000 dirección y puerto donde PHP-FPM está escuchando
+   -  /var/www/html/$1 ruta real del archivo PHP en el servidor (Apache sustituye $1 por el nombre del archivo)
+
+* Si php-fpm está escuchando en un  SOCKET UNIX (local)
+  
+Existe un **archivo especial** en `/run/php/php8.3-fpm.sock`que actua como punto de comunicación dentro de la propia máquina en sistemas UNIX/Linux y no usa puertos ni direcciones IP.
+ 
+ Se pone esta expresion en el archivo /etc/apache2/sites-available/000-default.conf
+```bash
+  ProxyPassMatch ^/(.*\.php)$ unix:/run/php/php8.3-fpm.sock|fcgi://127.0.0.1/var/www/html
+```
+![Alt](images/apache2000DefaultPHP.png)
+
+Otra forma de hacerlo:
+
+* Si php-fpm está escuchando en un socket TCP
+  La directiva `SetHandler` indica qué manejador debe usarse para procesar las solicitudes de ciertos archivos.
+  En este caso los archivos PHP, los envía al proxy FastCGI
+  
+```bash
+<FilesMatch "\.php$">
+  	SetHandler "proxy:fcgi://127.0.0.1:9000"
+  </FilesMatch>
+```
+
+* Si php-fpm está escuchado en un socket UNIX
+
+```bash
+  <FilesMatch "\.php$">
+ 	  SetHandler "proxy:unix:/run/php/php8.2-fpm.sock|fcgi://127.0.0.1/"
+  </FilesMatch>
+```
+
+**Activarlo para todos los virtualhost**
+El fichero de configuraicón `php8.3-fpm`en el directorio `/etc/apache2/conf-available`, por defecto funciona cuando php-fpm está escuchando en un socket UNIX:
+
+```bash
+<FilesMatch ".+\.ph(?:ar|p|tml)$">
+    SetHandler "proxy:unix:/run/php/php8.3-fpm.sock|fcgi://localhost"
+</FilesMatch>
+```
+
+`<FilesMatch ".+\.ph(?:ar|p|tml)$"> ` Aplica esta configuración solo a archivos cuyo nombre coincida con esa expresión regular:
+
+.+\.phar
+
+.+\.php
+
+.+\.phtml
+
+Es decir: a cualquier archivo PHP o variantes (.phar, .php, .phtml).
+
+`SetHandler "proxy:unix:/run/php/php8.3-fpm.sock|fcgi://localhost"`
+
+Esta es la línea clave.
+
+* `SetHandler`  define cómo Apache debe procesar esos archivos.
+
+* `proxy` usa el módulo de Apache llamado mod_proxy.
+
+* `unix:/run/php/php8.3-fpm.sock ` indica que la comunicación con PHP-FPM será a través de un socket UNIX local (no TCP).
+
+* `|fcgi://localhost ` especifica el protocolo FastCGI, y que el destino lógico (nombre del backend) es “localhost”.
+  
+Por último activamos (o comprobar que esta activado):
+
+```bash
 sudo a2enconf php8.3-fpm
-sudo systemctl restart apache2
-````
+```
+
+**Comprobación de funcionamiento PHP-FPM**
+---
+
+PHP-FPM puede escuchar por socket UNIX o TCP/IP (host:puerto). Revisar cada "pool" en Ubuntu en `/etc/php/8.3/fpm/pool.d/www.conf`
+
+```bash
+grep '^listen' /etc/php/8.3/fpm/pool.d/*.conf
+```
+
+Dos posibles resultados:
+
+```bash
+listen = /run/php/php8.3-fpm.sock
+
+```
+
+Esta escuchando en socket UNIX
+
+```bash
+listen = 127.0.0.1:9000
+```
+
+Está escuchando por TCP/IP en la dirección local
+
 - Configuramos el php.ini para un entorno de desarrollo, primero hacemos copia del archivo. 
 ````
 cd /etc/php/8.3/fpm/
@@ -351,6 +484,10 @@ sudo systemctl status php8.3-fpm.service
 ````
 apache2ctl -M
 ````
+##### Monitorización
+
+##### Mantenimiento
+
 #### 1.1.4 MySQL
 ##### Instalación
 ##### Configuración
