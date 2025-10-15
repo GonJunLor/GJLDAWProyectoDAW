@@ -3,7 +3,7 @@
 
 |  CFGS DESARROLLO  DE APLICACIONES WEB |
 |:-----------:|
-|![Alt](images/portada.jpg)|
+|![Alt](webroot/media/images/portada.jpg)|
 | DESPLIEGUE DE APLICACIONES WEB
 | CYBERSEGURIDAD
 | DAWES Tema 2. INSTALACIÓN, CONFIGURACIÓN Y DOCUMENTACIÓN DE ENTORNO DE DESARROLLO Y DEL ENTORNO DE EXPLOTACIÓN |
@@ -295,7 +295,7 @@ sudo nano sites-available/000-default.conf
 CustomLog ${APACHE_LOG_DIR}/access.log combined
 ````
 * Quitar aviso al usar el comando apache2ctl configtest.
-![Alt](images/apache1.png)
+![Alt](webroot/media/images/apache1.png)
 * añadimos el nombre del servidor al final del archivo de configuración apache2.conf
 ````
 sudo nano /etc/apache2/apache2.conf
@@ -337,16 +337,16 @@ sudo nano php.ini
 - php-fpm.conf como configurar
 
 - Editamos el archivo php.ini (con ctrl+w buscamos) y cambiamos tres cosas
-![Alt](images/php1.png)
-![Alt](images/php2.png)
+![Alt](webroot/media/images/php1.png)
+![Alt](webroot/media/images/php2.png)
 - Reiniciamos el servicio php y comprobamos que esta running
 ````
 sudo systemctl restart php8.3-fpm.service
 sudo systemctl status php8.3-fpm.service
 ````
 - con el comando phpinfo(); comprobamos que se han habilitado los cambios 
-![Alt](images/php3.png)
-![Alt](images/php4.png)
+![Alt](webroot/media/images/php3.png)
+![Alt](webroot/media/images/php4.png)
 - para ver los modulos activos, concretamente interesa el mpm_XXX
 ````
 apache2ctl -M
@@ -385,19 +385,19 @@ Apache NetBeans IDE 20
 - capturas solo de la parte ineteresada, no de toda la pantalla
 #### Crear proyecto con conexion (SFTP) al servidor
 - Nuevo proyecto PHP marcando la opción "PHP Application from Remote Server"
-![Alt](images/nb1.png)
+![Alt](webroot/media/images/nb1.png)
 - Ponemos nombre de proyecto y cambiamos la ruta por la nuestra personal
-![Alt](images/nb2.png)
+![Alt](webroot/media/images/nb2.png)
 - Configuramos la url con nuestro servidor y el nombre del proyecto en el servidor, en el caso del proyecto principal no tiene carpeta es la raíz (/)
-![Alt](images/nb3.png)
+![Alt](webroot/media/images/nb3.png)
 - La primera vez que creamos un proyecto con conexión al servidor hay que configurarlo con nombre de usuario, contraseña y directorio inicial
-![Alt](images/nb4.png)
+![Alt](webroot/media/images/nb4.png)
 - Si todo ha ido bien se conectará al servidor y entrará en la carpeta del proyecto que previamente tenemos que haber creado y que haya por lo menos un archivo en ella. Aquí ya marcamos para que se bajen los archivos que queramos.
-![Alt](images/nb5.png)
+![Alt](webroot/media/images/nb5.png)
 
 #### Borrar proyecto con conexion (SFTP) al servidor
 - botón secundario sobre el proyecto y delete. Nos pedirá confirmación y si queremos que borre los archivos en nuestro ordenador. Los del servidor lo tenemos que borrar a mano.
-![Alt](images/nb6.png)
+![Alt](webroot/media/images/nb6.png)
 
 #### 1.2.5 **Visual Studio Code**
 
