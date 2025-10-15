@@ -37,8 +37,6 @@
         - [Configuración](#configuración-1)
         - [Monitorización](#monitorización-1)
         - [Mantenimiento](#mantenimiento-1)
-      - [Preparación](#preparación)
-      - [Instalar apache](#instalar-apache)
       - [1.1.4 MySQL](#114-mysql)
         - [Instalación](#instalación-2)
         - [Configuración](#configuración-2)
@@ -331,8 +329,8 @@ Reiniciar el servicio:
 sudo systemctl restart php8.3-fpm
 ```
 
-**Configuración de Apache2 con PHP-FPM**
----
+Configuración de Apache2 con PHP-FPM
+
 
 Apache2 va a funcionar como proxy inverso(reverse proxy) para las peticiones de los recursos php. cuando solicitamos un fichero php, apache2 le pasará la petición a php-fpm para que interprete el php y luego devuelva la respuesta al servidor web.
 
@@ -437,8 +435,8 @@ Por último activamos (o comprobar que esta activado):
 sudo a2enconf php8.3-fpm
 ```
 
-**Comprobación de funcionamiento PHP-FPM**
----
+Comprobación de funcionamiento PHP-FPM
+
 
 PHP-FPM puede escuchar por socket UNIX o TCP/IP (host:puerto). Revisar cada "pool" en Ubuntu en `/etc/php/8.3/fpm/pool.d/www.conf`
 
