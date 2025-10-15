@@ -378,7 +378,7 @@ Existe un **archivo especial** en `/run/php/php8.3-fpm.sock`que actua como punto
 ```bash
   ProxyPassMatch ^/(.*\.php)$ unix:/run/php/php8.3-fpm.sock|fcgi://127.0.0.1/var/www/html
 ```
-![Alt](images/apache2000DefaultPHP.png)
+![Alt](webroot/media/images/apache2000DefaultPHP.png)
 
 Otra forma de hacerlo:
 
