@@ -32,7 +32,8 @@
         - [Verficación del servicio](#verficación-del-servicio)
         - [Virtual Hosts](#virtual-hosts)
         - [Archivos de configuración](#archivos-de-configuración)
-      - [1.1.3 PHP](#113-php)
+      - [1.1.3 PHP V1](#113-php-v1)
+      - [1.1.3 PHP V2](#113-php-v2)
         - [Instalación](#instalación-1)
         - [Configuración](#configuración-1)
         - [Monitorización](#monitorización-1)
@@ -300,7 +301,47 @@ sudo nano /etc/apache2/apache2.conf
 ServerName gjl-used
 ````
 * Para poder poner directivas solo a nuestra web lo hacemos con un archivo .htaccess, pero para poder usar este archivo primero tenemos que cambiar la configuracion de apache2.conf
-#### 1.1.3 PHP
+#### 1.1.3 PHP V1
+En este apartado vamos a ver la forma de instalar el servicio de php en nuestro Ubuntu Server con Apache instalado.
+
+1. Actualizamos el sistema:
+````
+sudo apt update
+````
+2. Agregamos el repositorio PPA de Ondrej
+````
+sudo apt install software-properties-common -y
+sudo add-apt-repository ppa:ondrej/php -y
+````
+3. Comprobamos si se ha instalado
+````
+ls /etc/apt/sources.list.d/ | grep ondrej
+````
+4. Volvemos a actualizar el sistema
+````
+sudo apt update
+````
+5. Instalamos PHP-FPM y módulos apache
+````
+sudo apt install libapache2-mod-php8.3 php8.3-fpm -y
+sudo a2enmod proxy_fcgi
+````
+6. Desactivamos php8.3 y prefork
+````
+sudo a2dismod php8.3
+sudo a2dismod mpm_prefork
+````
+7. Activamos el evento proxy-fcgi y php 8.3-fpm
+````
+sudo a2enmod mpm_event proxy_fcgi
+sudo a2enconf php8.3-fpm
+````
+8. Reniciamos el servicio de apache
+````
+sudo systemctl restart apache2
+````
+
+#### 1.1.3 PHP V2
 ##### Instalación
 ````
 sudo apt install php8.3-fpm php8.3
