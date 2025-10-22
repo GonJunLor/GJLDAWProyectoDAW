@@ -575,9 +575,10 @@ sudo ls -l /etc/ssl/certs/ | grep gjl-used
 sudo ls -l /etc/ssl/private/ | grep gjl-used
 ````
 ![Alt](webroot/media/images/https2.png)
-* Activamos ssl
+* Activamos ssl y reiniciar
 ````
 sudo a2enmod ssl
+sudo systemctl restart apache2
 ````
 * Copiar el fichero default-ssl.conf a gjl-used.conf
 ````
