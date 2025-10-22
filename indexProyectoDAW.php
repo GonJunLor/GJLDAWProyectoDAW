@@ -40,7 +40,7 @@
                 </article>
                 <article class="practica">
                     <iframe src="README.html"></iframe>
-                    <a href="https://github.com/GonJunLor/GJLDAWProyectoDAW/blob/master/README.md" target="_blank">
+                    <a href="https://github.com/GonJunLor/GJLDAWProyectoDAW/blob/developerGJL/README.md" target="_blank">
                         <img src="webroot/media/images/ies.png" alt="Banner">
                         <div class="superpuesto"></div>
                         <h4>README.html (github)</h4>
