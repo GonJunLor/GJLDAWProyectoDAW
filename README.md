@@ -33,8 +33,7 @@
         - [Virtual Hosts](#virtual-hosts)
         - [Archivos de configuración](#archivos-de-configuración)
         - [Errores con htaccess](#errores-con-htaccess)
-      - [1.1.3 PHP V1](#113-php-v1)
-      - [1.1.3 PHP V2](#113-php-v2)
+      - [1.1.3 PHP](#113-php)
         - [Instalación](#instalación-1)
         - [Configuración](#configuración-1)
         - [Monitorización](#monitorización-1)
@@ -319,47 +318,8 @@ ErrorDocument 404 /GJLDWESProyectoDWES/error/404.html
 ErrorDocument 403 /GJLDWESProyectoDWES/error/403.html
 ErrorDocument 500 /GJLDWESProyectoDWES/error/500.html
 ````
-#### 1.1.3 PHP V1
-En este apartado vamos a ver la forma de instalar el servicio de php en nuestro Ubuntu Server con Apache instalado.
 
-1. Actualizamos el sistema:
-````
-sudo apt update
-````
-2. Agregamos el repositorio PPA de Ondrej
-````
-sudo apt install software-properties-common -y
-sudo add-apt-repository ppa:ondrej/php -y
-````
-3. Comprobamos si se ha instalado
-````
-ls /etc/apt/sources.list.d/ | grep ondrej
-````
-4. Volvemos a actualizar el sistema
-````
-sudo apt update
-````
-5. Instalamos PHP-FPM y módulos apache
-````
-sudo apt install libapache2-mod-php8.3 php8.3-fpm -y
-sudo a2enmod proxy_fcgi
-````
-6. Desactivamos php8.3 y prefork
-````
-sudo a2dismod php8.3
-sudo a2dismod mpm_prefork
-````
-7. Activamos el evento proxy-fcgi y php 8.3-fpm
-````
-sudo a2enmod mpm_event proxy_fcgi
-sudo a2enconf php8.3-fpm
-````
-8. Reniciamos el servicio de apache
-````
-sudo systemctl restart apache2
-````
-
-#### 1.1.3 PHP V2
+#### 1.1.3 PHP
 ##### Instalación
 ````
 sudo apt install php8.3-fpm php8.3
@@ -603,6 +563,41 @@ Creamos una pagina info.php en la raiz de nuestro servidor con la la siguiente l
 ##### Mantenimiento
 
 #### 1.1.6 Servidor web seguro (HTTPS)
+* Creamos los certificados y configuramos los datos
+````
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/gjl-used.key -out /etc/ssl/certs/gjl-used.crt
+````
+![Alt](webroot/media/images/https1.png)
+
+* Comprobamos que se han creado
+````
+sudo ls -l /etc/ssl/certs/ | grep gjl-used
+sudo ls -l /etc/ssl/private/ | grep gjl-used
+````
+![Alt](webroot/media/images/https2.png)
+* Activamos ssl
+````
+sudo a2enmod ssl
+````
+* Copiar el fichero default-ssl.conf a gjl-used.conf
+````
+cd /etc/apache2/sites-available/
+sudo cp default-ssl.conf gjl-used.conf 
+````
+* Modificar el fichero. Indicar donde está el certificado. Poniendo los nombre nuevos gjl-used.crt y .key
+````
+sudo nano gjl-used.conf
+````
+![Alt](webroot/media/images/https3.png)
+* Activar sitio
+````
+sudo a2ensite gjl-used.conf
+````
+* Abrir el puerto 443
+````
+sudo ufw allow 443
+````
+
 #### 1.1.7 DNS
 #### 1.1.8 SFTP
 
