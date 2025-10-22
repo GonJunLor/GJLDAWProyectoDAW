@@ -27,6 +27,27 @@
         <h2>Gonzalo Junquera Lorenzo</h2>
     </nav>
     <main>
+        <section>
+            <header><h2>Documentos</h2></header>
+            <div>
+                <article class="practica">
+                    <iframe src="README.md"></iframe>
+                    <a href="README.md" target="_blank">
+                        <img src="webroot/media/images/ies.png" alt="Banner">
+                        <div class="superpuesto"></div>
+                        <h4>README.md</h4>
+                    </a>
+                </article>
+                <article class="practica">
+                    <iframe src="README.html"></iframe>
+                    <a href="https://github.com/GonJunLor/GJLDAWProyectoDAW/blob/master/README.md" target="_blank">
+                        <img src="webroot/media/images/ies.png" alt="Banner">
+                        <div class="superpuesto"></div>
+                        <h4>README.html (github)</h4>
+                    </a>
+                </article>
+            </div>
+        </section>
     </main>
     <footer>
         <div>

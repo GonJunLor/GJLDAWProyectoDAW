@@ -32,6 +32,7 @@
         - [Verficación del servicio](#verficación-del-servicio)
         - [Virtual Hosts](#virtual-hosts)
         - [Archivos de configuración](#archivos-de-configuración)
+        - [Errores con htaccess](#errores-con-htaccess)
       - [1.1.3 PHP V1](#113-php-v1)
       - [1.1.3 PHP V2](#113-php-v2)
         - [Instalación](#instalación-1)
@@ -44,6 +45,10 @@
         - [Monitorización](#monitorización-2)
         - [Mantenimiento](#mantenimiento-2)
       - [1.1.5 XDebug](#115-xdebug)
+        - [Instalación](#instalación-3)
+        - [Configuración](#configuración-3)
+        - [Monitorización](#monitorización-3)
+        - [Mantenimiento](#mantenimiento-3)
       - [1.1.6 Servidor web seguro (HTTPS)](#116-servidor-web-seguro-https)
       - [1.1.7 DNS](#117-dns)
       - [1.1.8 SFTP](#118-sftp)
@@ -56,8 +61,8 @@
       - [1.2.2 **Navegadores**](#122-navegadores)
       - [1.2.3 **MobaXterm**](#123-mobaxterm)
       - [1.2.4 **Netbeans**](#124-netbeans)
-        - [Instalación](#instalación-3)
-        - [Configuración](#configuración-3)
+        - [Instalación](#instalación-4)
+        - [Configuración](#configuración-4)
         - [Ejemplo de uso](#ejemplo-de-uso)
       - [Crear proyecto con conexion (SFTP) al servidor](#crear-proyecto-con-conexion-sftp-al-servidor)
       - [Borrar proyecto con conexion (SFTP) al servidor](#borrar-proyecto-con-conexion-sftp-al-servidor)
@@ -301,6 +306,19 @@ sudo nano /etc/apache2/apache2.conf
 ServerName gjl-used
 ````
 * Para poder poner directivas solo a nuestra web lo hacemos con un archivo .htaccess, pero para poder usar este archivo primero tenemos que cambiar la configuracion de apache2.conf
+
+##### Errores con htaccess
+Al lado del index general de nuestra aplicación creamos el archivo .htaccess el cual manejará los errores 500, 404 y 403.
+* Inicialmente podemos configurar un mensaje de error en este mismo archivo añadiendo esta línea.
+````
+ErrorDocument 404 "Mensaje de error"
+````
+* Mejor se hace con enlaces a paginas html de errores que estan en la carpeta error. De momento usamos rutas absolutas desde la raiz de nuestro servidor
+````
+ErrorDocument 404 /GJLDWESProyectoDWES/error/404.html
+ErrorDocument 403 /GJLDWESProyectoDWES/error/403.html
+ErrorDocument 500 /GJLDWESProyectoDWES/error/500.html
+````
 #### 1.1.3 PHP V1
 En este apartado vamos a ver la forma de instalar el servicio de php en nuestro Ubuntu Server con Apache instalado.
 
@@ -534,6 +552,55 @@ apache2ctl -M
 ##### Mantenimiento
 
 #### 1.1.5 XDebug
+##### Instalación
+Primero, actualiza la lista de paquetes y luego instala el paquete específico para PHP 8.3:
+````
+sudo apt update
+sudo apt install php8.3-xdebug
+````
+Habilitamos el servicio
+````
+sudo phpenmod xdebug
+````
+##### Configuración
+Puerto 9003, 
+Abrimos el archivo:
+````
+sudo nano /etc/php/8.3/mods-available/xdebug.ini
+````
+Modificamos el archivo para configurar el modo depuración.
+* Por defecto
+````
+zend_extension=xdebug.so
+````
+* Xdebug 2
+````
+xdebug.remote_enable=on
+xdebug.remote_handler=dbgp
+xdebug.client_port=localhost
+xdebug.remote_port=9003
+xdebug.idekey="netbeans-xdebug"
+````
+* Xdebug 3
+````
+xdebug.mode=debug
+xdebug.client_host=localhost
+xdebug.client_port=9003
+xdebug.idekey="netbeans-xdebug"
+````
+Reiniciamos todos los servicios y habilitamos xdebug
+````
+sudo systemctl restart php8.3-fpm.service
+sudo systemctl restart apache2
+````
+##### Monitorización
+Desde el navegador podemos ver la sección de xdebug en phpinfo.
+Creamos una pagina info.php en la raiz de nuestro servidor con la la siguiente linea y la abrimos con el navegador
+````
+<?php phpinfo(); ?>
+````
+![Alt](webroot/media/images/xdebug.png)
+##### Mantenimiento
 
 #### 1.1.6 Servidor web seguro (HTTPS)
 #### 1.1.7 DNS
