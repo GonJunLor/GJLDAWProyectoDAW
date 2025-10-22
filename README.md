@@ -49,6 +49,10 @@
         - [Monitorización](#monitorización-3)
         - [Mantenimiento](#mantenimiento-3)
       - [1.1.6 Servidor web seguro (HTTPS)](#116-servidor-web-seguro-https)
+        - [Instalación](#instalación-4)
+        - [Configuración](#configuración-4)
+        - [Monitorización](#monitorización-4)
+        - [Mantenimiento](#mantenimiento-4)
       - [1.1.7 DNS](#117-dns)
       - [1.1.8 SFTP](#118-sftp)
       - [1.1.9 Apache Tomcat](#119-apache-tomcat)
@@ -60,8 +64,8 @@
       - [1.2.2 **Navegadores**](#122-navegadores)
       - [1.2.3 **MobaXterm**](#123-mobaxterm)
       - [1.2.4 **Netbeans**](#124-netbeans)
-        - [Instalación](#instalación-4)
-        - [Configuración](#configuración-4)
+        - [Instalación](#instalación-5)
+        - [Configuración](#configuración-5)
         - [Ejemplo de uso](#ejemplo-de-uso)
       - [Crear proyecto con conexion (SFTP) al servidor](#crear-proyecto-con-conexion-sftp-al-servidor)
       - [Borrar proyecto con conexion (SFTP) al servidor](#borrar-proyecto-con-conexion-sftp-al-servidor)
@@ -563,6 +567,7 @@ Creamos una pagina info.php en la raiz de nuestro servidor con la la siguiente l
 ##### Mantenimiento
 
 #### 1.1.6 Servidor web seguro (HTTPS)
+##### Instalación
 * Creamos los certificados y configuramos los datos
 ````
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/gjl-used.key -out /etc/ssl/certs/gjl-used.crt
@@ -580,6 +585,7 @@ sudo ls -l /etc/ssl/private/ | grep gjl-used
 sudo a2enmod ssl
 sudo systemctl restart apache2
 ````
+##### Configuración
 * Copiar el fichero default-ssl.conf a gjl-used.conf
 ````
 cd /etc/apache2/sites-available/
@@ -598,6 +604,8 @@ sudo a2ensite gjl-used.conf
 ````
 sudo ufw allow 443
 ````
+##### Monitorización
+##### Mantenimiento
 
 #### 1.1.7 DNS
 #### 1.1.8 SFTP
