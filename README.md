@@ -44,6 +44,9 @@
         - [Configuración](#configuración-3)
         - [Monitorización](#monitorización-3)
         - [Mantenimiento](#mantenimiento-3)
+      - [1.1.6 Módulos PHP](#116-módulos-php)
+        - [php8.3-mysql](#php83-mysql)
+        - [php8.3-intl](#php83-intl)
       - [1.1.7 Servidor web seguro (HTTPS)](#117-servidor-web-seguro-https)
         - [Instalación](#instalación-4)
         - [Configuración](#configuración-4)
@@ -69,7 +72,13 @@
         - [Ejemplo de uso](#ejemplo-de-uso)
       - [Crear proyecto con conexion (SFTP) al servidor](#crear-proyecto-con-conexion-sftp-al-servidor)
       - [Borrar proyecto con conexion (SFTP) al servidor](#borrar-proyecto-con-conexion-sftp-al-servidor)
+        - [Monitorización](#monitorización-6)
+        - [Mantenimiento](#mantenimiento-6)
       - [1.2.5 **Visual Studio Code**](#125-visual-studio-code)
+        - [Instalación](#instalación-7)
+        - [Configuración](#configuración-7)
+        - [Monitorización](#monitorización-7)
+        - [Mantenimiento](#mantenimiento-7)
   - [2. GitHub](#2-github)
   - [3.Entorno de Explotación](#3entorno-de-explotación)
 
@@ -83,11 +92,11 @@ Este documento es una guía detallada del proceso de instalación y configuraci�
 
 ##### **Comprobaciones sistema operativo**
 - Tipo de sistema operativo
-````
+````Bash
 uname -a
 ````
 - Ver procesos
-````
+````Bash
 ps -ef
 ````
 
@@ -102,7 +111,7 @@ ps -ef
 > **DNS**: 10.151.123.21 10.151.126.21
 
 * Creamos una copia del archivo que viene por defecto 50-cloud-init.yml
-````
+````Bash
 cd /etc/netplan
 sudo cp 50-cloud-init.yml enp0s3.yaml
 ````
@@ -125,17 +134,17 @@ network:
         - to: default
            via: 10.199.8.1   
   version: 2
-````
+```
 - Actualizar la configuración de red
-````
+````Bash
 sudo netplan apply
 ````
 ##### **Cambiar nombre servidor**
-````
+````Bash
 sudo hostnamectl set-hostname gjl-used
 ````
 - También cambiamos el nombre en ese archivo y comprobamos con cat
-````
+````Bash
 sudo nano /etc/hosts
 cat /etc/hosts
 ````
@@ -150,11 +159,11 @@ sudo apt upgrade
 ##### **Configuración fecha y hora**
 
 [Establecer fecha, hora y zona horaria](https://somebooks.es/establecer-la-fecha-hora-y-zona-horaria-en-la-terminal-de-ubuntu-20-04-lts/ "Cambiar fecha y hora")
-````
+````Bash
 sudo timedatectl set-timezone Europe/Madrid
 ````
 ##### **Antivirus**
-````
+````Bash
 sudo apt install clamav
 ````
 ##### **Cuentas administradoras**
@@ -164,75 +173,75 @@ sudo apt install clamav
 > - [X] miadmin2/paso
 
 * Para crear el usuario miadmin2 como administrador en los mismos grupos que miadmin, miadmin está creado al instalar ubuntu server. Después le ponemos una contraseña
-````
+````Bash
 sudo useradd -m -G sudo,adm,cdrom,dip,plugdev,lxd -s /bin/bash miadmin2
 sudo passwd miadmin2
 ````
 * Para borrar un usuario
-````
+````Bash
 sudo userdel miadmin2
 ````
 * Para ver datos de las cuentas
-````
+````Bash
 cat /etc/passwd
 cat /etc/group
 ````
 ##### **Habilitar cortafuegos**
 
 - Activar cortafuegos
-````
+````Bash
 sudo ufw enable
 ````
 - Abrir puerto 22
-````
+````Bash
 sudo ufw allow 22
 ````
 - Ver puertos abiertos, cualquiera de los dos comandos.
-````
+````Bash
 sudo ufw status
 sudo ufw status numbered 
 ````
 - Quitar número de puerto
-````
+````Bash
 sudo ufw delete [numPuerto]
 ````
 ##### **Conexión al servidor desde windows**
 * Arrancamos el servicio ssh en el servidor
-````
+````Bash
 sudo systemctl start ssh
 ````
 * Comprobamos que esta en active (running)
-````
+````Bash
 sudo systemctl status ssh
 ````
 * Abrimos la consola de windows (simbolo del sistema): usamos el comando ssh con nuestro nombre de usuario y ip del servidor, despues nos pedirá la clave.
-````
+````Bash
 ssh miadmin@10.10.199.8.153
 ````
 
 ##### **Comprobar ip, puerta de enlace y dns**
 * Para ver la ip, el nombre de nuestro adaptador de red (enp0s3), si es dinámica pondra dynamic en la misma linea, si es estática no pondrá nada.
-````
+````Bash
 ip a
 ````
 * Para ver la puerta de enlace, en la primera linea pone la puerta de enlace y tambien el nombre de la tarjeta de red
-````
+````Bash
 ip r
 ````
 * Para ver los dns, en DNS Servers se ve cuales hay configurados, tambien vemos a que dominio pertenecemos en DNS Domain
-````
+````Bash
 resolvectl
 ````
 ##### **Particiones**
 * Con ambos comandos vemos que particiones hay y de que tamaño son. El primero da mas información del tamaño usado.
-````
+````Bash
 df -h
 lsblk [-a][-fm][-fn]
 fdisk -l
 ````
 ##### **Actualización**
 * Para comprobar si hay actualizaciones y despues que actualice todo lo necesario
-````
+````Bash
 sudo apt update
 sudo apt upgrade
 ````
@@ -241,12 +250,12 @@ sudo apt upgrade
 
 ##### Instalación
 - Instalamos apache
-````
+````Bash
 sudo apt update
 sudo apt install apache2
 ````
 - Abrir puerto 80, comprobamos y desactivamos el 80(v6)
-````
+````Bash
 sudo ufw allow 80
 sudo ufw status numbered
 sudo ufw delete 3
@@ -259,19 +268,19 @@ sudo ufw delete 3
   - grupo:www-data
   - shell:/bin/bash
   - 
-````
+````Bash
 sudo useradd -M -d /var/www/html -N -g www-data -s /bin/bash operadorweb
 ````
 - Cambiamos la contraseña (paso)
-````
+````Bash
 sudo passwd operadorweb
 ````
 - Cambiamos el propietario de la carpeta html y el grupo
-````
+````Bash
 sudo chown -R operadorweb:www-data /var/www/html
 ````
 - Cambiamos los permisos de la carpeta html
-````
+````Bash
 sudo chmod -R 775 /var/www/html
 ````
 
@@ -279,14 +288,14 @@ sudo chmod -R 775 /var/www/html
 
 Estan en etc/apache2/
 * Redirección de errores a archivo error.log, añadimos la línea CustomLog al archivo 000-default.conf. Previamente hay que tener creada la carpeta error en /var/www/html/
-````
+````Bash
 sudo nano sites-available/000-default.conf
 CustomLog ${APACHE_LOG_DIR}/access.log combined
 ````
 * Quitar aviso al usar el comando apache2ctl configtest.
 ![Alt](webroot/media/images/apache1.png)
 * añadimos el nombre del servidor al final del archivo de configuración apache2.conf
-````
+````Bash
 sudo nano /etc/apache2/apache2.conf
 ServerName gjl-used
 ````
@@ -295,11 +304,11 @@ ServerName gjl-used
 **Errores con htaccess**
 Al lado del index general de nuestra aplicación creamos el archivo .htaccess el cual manejará los errores 500, 404 y 403.
 * Inicialmente podemos configurar un mensaje de error en este mismo archivo añadiendo esta línea.
-````
+````Bash
 ErrorDocument 404 "Mensaje de error"
 ````
 * Mejor se hace con enlaces a paginas html de errores que estan en la carpeta error. De momento usamos rutas absolutas desde la raiz de nuestro servidor
-````
+````Bash
 ErrorDocument 404 /GJLDWESProyectoDWES/error/404.html
 ErrorDocument 403 /GJLDWESProyectoDWES/error/403.html
 ErrorDocument 500 /GJLDWESProyectoDWES/error/500.html
@@ -311,7 +320,7 @@ ErrorDocument 500 /GJLDWESProyectoDWES/error/500.html
 sudo systemctl status apache2
 ````
 - Comprobamos ubicacion de la carpeta y los archivos web
-````
+````Bash
 cd /var/www/html
 ls
 ````
@@ -320,7 +329,7 @@ ls
 
 #### 1.1.3 PHP
 ##### Instalación
-````
+````Bash
 sudo apt install php8.3-fpm php8.3
 ````
 ##### Configuración
@@ -369,7 +378,7 @@ sudo a2enconf php8.3-fpm
 ```
 **Configuramos el php.ini para un entorno de desarrollo, primero hacemos copia del archivo.**
 
-````
+````Bash
 cd /etc/php/8.3/fpm/
 sudo cp php.ini php.ini.bk20251007
 sudo nano php.ini
@@ -380,7 +389,7 @@ sudo nano php.ini
 ![Alt](webroot/media/images/php1.png)
 ![Alt](webroot/media/images/php2.png)
 - Reiniciamos el servicio php y comprobamos que esta running
-````
+````Bash
 sudo systemctl restart php8.3-fpm.service
 sudo systemctl status php8.3-fpm.service
 ````
@@ -388,7 +397,7 @@ sudo systemctl status php8.3-fpm.service
 ![Alt](webroot/media/images/php3.png)
 ![Alt](webroot/media/images/php4.png)
 - para ver los modulos activos, concretamente interesa el mpm_XXX
-````
+````Bash
 apache2ctl -M
 ````
 
@@ -422,127 +431,165 @@ Está escuchando por TCP/IP en la dirección local
 
 #### 1.1.4 MariaDB
 ##### Instalación
-````
+````Bash
 sudo apt udpate
 sudo apt install mariadb-server -y
 ````
-##### Configuración
+- Abrimos puerto 3306
+````Bash
+sudo ufw allow 3306
 
 ````
+##### Configuración
+
+````Bash
 sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf
 ````
+Modificamos la linea bind-address, este cambio permite a mariadb acepte conexiones desde cualquier IP Reinicia el servidor MariaDB:
+
+![Alt](webroot/media/images/mariadb1.png)
+````Bash
+sudo systemctl restart mariadb
 ````
+
+**Comprobación del puerto usado por el servidor Mariadb**
+````Bash
 sudo ss -punta |grep mariadb
+tcp   LISTEN  0  80  127.0.0.1:3306   0.0.0.0:*   users:(("mariadbd",pid=1234,fd=10))
 ````
+
+**Listar los procesos en ejecución relacionados con el servidor mariadb**
+````bash
+sudo ps -aux |grep maria
 ````
+
+**Creación de un usuario administrador que utilice autenticación con constraseña**
+````Bash
 GRANT ALL ON *.* TO 'adminsql'@'%' IDENTIFIED BY 'paso' WITH GRANT OPTION;
 ````
-````
-sudo apt install php8.3-mysql
-sudo systemctl restart php8.3-fpm
-````
+
 ##### Monitorización
 Comandos útiles del servicio
 
-Acción	Comando	Descripción
+````Bash
+# Iniciar el servicio	
+sudo systemctl start mariadb
+# Detener el servicio	
+sudo systemctl stop mariadb
+# Reiniciar el servicio	
+sudo systemctl restart mariadb
+# Ver estado del servicio	
+sudo systemctl status mariadb
+# Habilitar inicio automático	
+sudo systemctl enable mariadb
+# Deshabilitar inicio automático	
+sudo systemctl disable mariadb
+# Ver versión instalada	
+mariadb --version	Muestra la versión actual de MariaDB instalada.
 ````
-````
-Iniciar el servicio	sudo systemctl start mariadb	Inicia el servidor MariaDB.
-Detener el servicio	sudo systemctl stop mariadb	Detiene el servidor MariaDB.
-Reiniciar el servicio	sudo systemctl restart mariadb	Reinicia el servidor.
-Ver estado del servicio	sudo systemctl status mariadb	Muestra si el servidor está activo o inactivo.
-Habilitar inicio automático	sudo systemctl enable mariadb	Configura el servicio para iniciarse al arrancar el sistema.
-Deshabilitar inicio automático	sudo systemctl disable mariadb	Evita que el servicio se inicie automáticamente.
-Ver versión instalada	mariadb --version	Muestra la versión actual de MariaDB instalada.
+
 ##### Mantenimiento
 
 #### 1.1.5 XDebug
 ##### Instalación
 Primero, actualiza la lista de paquetes y luego instala el paquete específico para PHP 8.3:
-````
+````Bash
 sudo apt update
 sudo apt install php8.3-xdebug
 ````
 Habilitamos el servicio
-````
+````Bash
 sudo phpenmod xdebug
 ````
 ##### Configuración
 Puerto 9003, 
-Abrimos el archivo:
+Editamos el fichero de configuración:
+````Bash
+sudo nano /etc/php/8.3/fpm/conf.d/20-xdebug.ini
 ````
-sudo nano /etc/php/8.3/mods-available/xdebug.ini
-````
-Modificamos el archivo para configurar el modo depuración.
-* Por defecto
-````
-zend_extension=xdebug.so
-````
-* Xdebug 2
-````
-xdebug.remote_enable=on
-xdebug.remote_handler=dbgp
-xdebug.client_port=localhost
-xdebug.remote_port=9003
-xdebug.idekey="netbeans-xdebug"
-````
-* Xdebug 3
-````
-xdebug.mode=debug
-xdebug.client_host=localhost
+Y añade
+````Bash
+xdebug.mode=develop,debug
+xdebug.start_with_request=yes
+xdebug.client_host=127.0.0.1
 xdebug.client_port=9003
+xdebug.log=/tmp/xdebug.log
+xdebug.log_level=7
 xdebug.idekey="netbeans-xdebug"
+xdebug.discover_client_host=1
+````
+Dar permisos para escribir los log
+````Bash
+sudo touch /tmp/xdebug.log
+sudo chmod 666 /tmp/xdebug.log
+sudo chown root:root /tmp/xdebug.log
 ````
 Reiniciamos todos los servicios y habilitamos xdebug
-````
+````Bash
 sudo systemctl restart php8.3-fpm.service
 sudo systemctl restart apache2
 ````
 ##### Monitorización
 Desde el navegador podemos ver la sección de xdebug en phpinfo.
 Creamos una pagina info.php en la raiz de nuestro servidor con la la siguiente linea y la abrimos con el navegador
-````
+````Bash
 <?php phpinfo(); ?>
 ````
 ![Alt](webroot/media/images/xdebug.png)
 ##### Mantenimiento
 
+#### 1.1.6 Módulos PHP
+
+##### php8.3-mysql
+
+**Instalación**
+````Bash
+sudo apt install php8.3-mysql
+sudo systemctl restart php8.3-fpm
+````
+**Mostrar que extensión se han instalado**
+````Bash
+sudo php -m | grep mysql
+````
+
+##### php8.3-intl
+
 #### 1.1.7 Servidor web seguro (HTTPS)
 ##### Instalación
 * Creamos los certificados y configuramos los datos
-````
+````Bash
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/gjl-used.key -out /etc/ssl/certs/gjl-used.crt
 ````
 ![Alt](webroot/media/images/https1.png)
 
 * Comprobamos que se han creado
-````
+````Bash
 sudo ls -l /etc/ssl/certs/ | grep gjl-used
 sudo ls -l /etc/ssl/private/ | grep gjl-used
 ````
 ![Alt](webroot/media/images/https2.png)
 * Activamos ssl y reiniciar
-````
+````Bash
 sudo a2enmod ssl
 sudo systemctl restart apache2
 ````
 ##### Configuración
 * Copiar el fichero default-ssl.conf a gjl-used.conf
-````
+````Bash
 cd /etc/apache2/sites-available/
 sudo cp default-ssl.conf gjl-used.conf 
 ````
 * Modificar el fichero. Indicar donde está el certificado. Poniendo los nombre nuevos gjl-used.crt y .key
-````
+````Bash
 sudo nano gjl-used.conf
 ````
 ![Alt](webroot/media/images/https3.png)
 * Activar sitio
-````
+````Bash
 sudo a2ensite gjl-used.conf
 ````
 * Abrir el puerto 443
-````
+````Bash
 sudo ufw allow 443
 ````
 ##### Monitorización
@@ -582,26 +629,44 @@ Apache NetBeans IDE 20
 - capturas solo de la parte ineteresada, no de toda la pantalla
 #### Crear proyecto con conexion (SFTP) al servidor
 - Nuevo proyecto PHP marcando la opción "PHP Application from Remote Server"
+
 ![Alt](webroot/media/images/nb1.png)
 - Ponemos nombre de proyecto y cambiamos la ruta por la nuestra personal
+
 ![Alt](webroot/media/images/nb2.png)
 - Configuramos la url con nuestro servidor y el nombre del proyecto en el servidor, en el caso del proyecto principal no tiene carpeta es la raíz (/)
+
 ![Alt](webroot/media/images/nb3.png)
 - La primera vez que creamos un proyecto con conexión al servidor hay que configurarlo con nombre de usuario, contraseña y directorio inicial
+
 ![Alt](webroot/media/images/nb4.png)
 - Si todo ha ido bien se conectará al servidor y entrará en la carpeta del proyecto que previamente tenemos que haber creado y que haya por lo menos un archivo en ella. Aquí ya marcamos para que se bajen los archivos que queramos.
+
 ![Alt](webroot/media/images/nb5.png)
 
 #### Borrar proyecto con conexion (SFTP) al servidor
 - botón secundario sobre el proyecto y delete. Nos pedirá confirmación y si queremos que borre los archivos en nuestro ordenador. Los del servidor lo tenemos que borrar a mano.
+
 ![Alt](webroot/media/images/nb6.png)
 
+##### Monitorización
+
+##### Mantenimiento
+
 #### 1.2.5 **Visual Studio Code**
+
+##### Instalación
+
+##### Configuración
+
+##### Monitorización
+
+##### Mantenimiento
 
 ## 2. GitHub
 Configuracion global en local
 Abrimos git bash y configuramos nuestro email y nuestro nombre
-````
+````Bash
 git config --global user.name "Tu Nombre Completo"
 git config --global user.email "tu.email@ejemplo.com"
 ````
