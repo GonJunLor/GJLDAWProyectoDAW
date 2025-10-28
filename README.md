@@ -29,16 +29,12 @@
         - [Configuración](#configuración)
         - [Monitorización](#monitorización)
         - [Mantenimiento](#mantenimiento)
-        - [Verficación del servicio](#verficación-del-servicio)
-        - [Virtual Hosts](#virtual-hosts)
-        - [Archivos de configuración](#archivos-de-configuración)
-        - [Errores con htaccess](#errores-con-htaccess)
       - [1.1.3 PHP](#113-php)
         - [Instalación](#instalación-1)
         - [Configuración](#configuración-1)
         - [Monitorización](#monitorización-1)
         - [Mantenimiento](#mantenimiento-1)
-      - [1.1.4 MySQL](#114-mysql)
+      - [1.1.4 MariaDB](#114-mariadb)
         - [Instalación](#instalación-2)
         - [Configuración](#configuración-2)
         - [Monitorización](#monitorización-2)
@@ -48,7 +44,7 @@
         - [Configuración](#configuración-3)
         - [Monitorización](#monitorización-3)
         - [Mantenimiento](#mantenimiento-3)
-      - [1.1.6 Servidor web seguro (HTTPS)](#116-servidor-web-seguro-https)
+      - [1.1.7 Servidor web seguro (HTTPS)](#117-servidor-web-seguro-https)
         - [Instalación](#instalación-4)
         - [Configuración](#configuración-4)
         - [Monitorización](#monitorización-4)
@@ -63,9 +59,13 @@
         - [**Cuentas administradoras**](#cuentas-administradoras-1)
       - [1.2.2 **Navegadores**](#122-navegadores)
       - [1.2.3 **MobaXterm**](#123-mobaxterm)
-      - [1.2.4 **Netbeans**](#124-netbeans)
         - [Instalación](#instalación-5)
         - [Configuración](#configuración-5)
+        - [Monitorización](#monitorización-5)
+        - [Mantenimiento](#mantenimiento-5)
+      - [1.2.4 **Netbeans**](#124-netbeans)
+        - [Instalación](#instalación-6)
+        - [Configuración](#configuración-6)
         - [Ejemplo de uso](#ejemplo-de-uso)
       - [Crear proyecto con conexion (SFTP) al servidor](#crear-proyecto-con-conexion-sftp-al-servidor)
       - [Borrar proyecto con conexion (SFTP) al servidor](#borrar-proyecto-con-conexion-sftp-al-servidor)
@@ -275,26 +275,8 @@ sudo chown -R operadorweb:www-data /var/www/html
 sudo chmod -R 775 /var/www/html
 ````
 
+**Archivos de configuración**
 
-##### Monitorización
-- Comprobamos que el servicio esta en ejecucion (running)
-````
-sudo systemctl status apache2
-````
-- Comprobamos ubicacion de la carpeta y los archivos web
-````
-cd /var/www/html
-ls
-````
-##### Mantenimiento
-
-
-##### Verficación del servicio
-
-
-##### Virtual Hosts
-
-##### Archivos de configuración
 Estan en etc/apache2/
 * Redirección de errores a archivo error.log, añadimos la línea CustomLog al archivo 000-default.conf. Previamente hay que tener creada la carpeta error en /var/www/html/
 ````
@@ -310,7 +292,7 @@ ServerName gjl-used
 ````
 * Para poder poner directivas solo a nuestra web lo hacemos con un archivo .htaccess, pero para poder usar este archivo primero tenemos que cambiar la configuracion de apache2.conf
 
-##### Errores con htaccess
+**Errores con htaccess**
 Al lado del index general de nuestra aplicación creamos el archivo .htaccess el cual manejará los errores 500, 404 y 403.
 * Inicialmente podemos configurar un mensaje de error en este mismo archivo añadiendo esta línea.
 ````
@@ -323,6 +305,19 @@ ErrorDocument 403 /GJLDWESProyectoDWES/error/403.html
 ErrorDocument 500 /GJLDWESProyectoDWES/error/500.html
 ````
 
+##### Monitorización
+- Comprobamos que el servicio esta en ejecucion (running)
+````bash
+sudo systemctl status apache2
+````
+- Comprobamos ubicacion de la carpeta y los archivos web
+````
+cd /var/www/html
+ls
+````
+##### Mantenimiento
+
+
 #### 1.1.3 PHP
 ##### Instalación
 ````
@@ -332,37 +327,15 @@ sudo apt install php8.3-fpm php8.3
 **Ficheros de configuración de PHP para php-fpm:**
 * **/etc/php/8.3/fpm/conf.d**: Módulos instalados en esta configuración de php (enlaces simbólicos a /etc/php/8.3/mods-available)
 * **/etc/php/8.3/fpm/php-fpm.conf** : Configuración general de php-fpm
-* **/etc/php/8.3/fpm/php.ini** : Configuraicón de php para este escenario
+* **/etc/php/8.3/fpm/php.ini** : Configuración de php para este escenario
 * **/etc/php/8.3/fpm/pool.d** : Directorio con distintos pool de configuración. Cada aplicación puede tener una configuración distinta (procesos distintos) de php-fpm.
-
-Por defecto tenemos un pool cuya configuración la encontramos en **/etc/php/8.3/fpm/pool.d/ www.conf**, en este fichero podemos configurar parámetros, los más importantes son:
-
-* **[www]**: -es el nombre del pool, si tenemos varios, cada uno tiene que tener un nombre.
-* ** user y group** : Usuario y grupo con el que va a ejecutar los procesos
-* **listen**: Se indica el socket unix o el socket TCP donde se van a escuchar los procesos:
-  * Por defecto, escucha por un socket unix: listen=/run/php/php8.3-fpm.sock
-  * Si queremos que escuche por TCO; listen=127.0.0.1:9000
-* Directivas de procesamiento, gestión de procesos:
-  * **pm**: Por defecto es igual a dynamic (el número de procesos se crean y se destruyen de forma dinámica). Otros valores: static o ondemand.
-  * Otras directivas: **pm.max_children** (número máxio de procesos hijo que pueden ser creados al mismo tiempo para manejar solicitudes), **pm.start_servers** (cuantos procesos PHP-FPM se lanzararón al inicio de forma automática),**pm.min_spare_servers**( número mínimo de procesos del servidor inactivos para manejar nuevas solicitudes),...
-  * **pm.status_path=/status**: No es necesario, vamos a activar la URL de status para comprobar el estado del proceso.
 
 Reiniciar el servicio:
 ```bash
 sudo systemctl restart php8.3-fpm
 ```
 
-Configuración de Apache2 con PHP-FPM
-
-
-Apache2 va a funcionar como proxy inverso(reverse proxy) para las peticiones de los recursos php. cuando solicitamos un fichero php, apache2 le pasará la petición a php-fpm para que interprete el php y luego devuelva la respuesta al servidor web.
-
-```mermaid
-graph TD
-   Navegador -->
-   Apache[Apache proxy-fcgi] -->
-   Aplicación[PHP-FPM]
-```
+Activamos el módulo de Apache2 con PHP-FPM
 
 ```bash
 sudo a2enmod proxy_fcgi setenvif
@@ -370,28 +343,6 @@ sudo a2enmod proxy_fcgi setenvif
 
 
 **Activarlo para cada virtualhost**
-
-Un **socket** es un "canal de comunicación* entre dos procesos, en nuestro caso es entre el programa Apache con PHP-FPM.
-
-Se pueden usar dos tipos de SOCKET:
-
-* Si php-fpm está escuchando en un SOCKET TCP
-
-Usa una dirección IP y un puerto para comunicarse, por lo tanto usa el protocolo TCP/IP (comunicación en red) y puede conectarse desde otra máquina si el puerto está abierto.
-  
-```bash
-  ProxyPassMatch ^/(.*\.php)$ fcgi://127.0.0.1:9000/var/www/html/$1
-```
-
-- La directiva `ProxyPassMatch`Indica a Apache que use un sistema proxy con una expresión regular para indicar qué peticiones redirigir.
-
-- `^/(.*\.php)` Es la expresión regular que cpatura cualquier URL que termina en .php y el contenido del parentesis se guarda en $1. Por ejemplo: /index.php, /blog/post.php,etc
--  `fcgi://127.0.0.1:9000/var/www/html/$1` define el destino FastCGI donde enviará las peticiones:
-   -  fcgi:// usa el protocolo FastCGI
-   -  127.0.0.1:9000 dirección y puerto donde PHP-FPM está escuchando
-   -  /var/www/html/$1 ruta real del archivo PHP en el servidor (Apache sustituye $1 por el nombre del archivo)
-
-* Si php-fpm está escuchando en un  SOCKET UNIX (local)
   
 Existe un **archivo especial** en `/run/php/php8.3-fpm.sock`que actua como punto de comunicación dentro de la propia máquina en sistemas UNIX/Linux y no usa puertos ni direcciones IP.
  
@@ -401,63 +352,47 @@ Existe un **archivo especial** en `/run/php/php8.3-fpm.sock`que actua como punto
 ```
 ![Alt](webroot/media/images/apache2000DefaultPHP.png)
 
-Otra forma de hacerlo:
-
-* Si php-fpm está escuchando en un socket TCP
-  La directiva `SetHandler` indica qué manejador debe usarse para procesar las solicitudes de ciertos archivos.
-  En este caso los archivos PHP, los envía al proxy FastCGI
-  
-```bash
-<FilesMatch "\.php$">
-  	SetHandler "proxy:fcgi://127.0.0.1:9000"
-  </FilesMatch>
-```
-
-* Si php-fpm está escuchado en un socket UNIX
-
-```bash
-  <FilesMatch "\.php$">
- 	  SetHandler "proxy:unix:/run/php/php8.2-fpm.sock|fcgi://127.0.0.1/"
-  </FilesMatch>
-```
-
 **Activarlo para todos los virtualhost**
-El fichero de configuraicón `php8.3-fpm`en el directorio `/etc/apache2/conf-available`, por defecto funciona cuando php-fpm está escuchando en un socket UNIX:
+
+El fichero de configuración `php8.3-fpm`en el directorio `/etc/apache2/conf-available`, por defecto funciona cuando php-fpm está escuchando en un socket UNIX:
 
 ```bash
 <FilesMatch ".+\.ph(?:ar|p|tml)$">
     SetHandler "proxy:unix:/run/php/php8.3-fpm.sock|fcgi://localhost"
 </FilesMatch>
 ```
-
-`<FilesMatch ".+\.ph(?:ar|p|tml)$"> ` Aplica esta configuración solo a archivos cuyo nombre coincida con esa expresión regular:
-
-.+\.phar
-
-.+\.php
-
-.+\.phtml
-
-Es decir: a cualquier archivo PHP o variantes (.phar, .php, .phtml).
-
-`SetHandler "proxy:unix:/run/php/php8.3-fpm.sock|fcgi://localhost"`
-
-Esta es la línea clave.
-
-* `SetHandler`  define cómo Apache debe procesar esos archivos.
-
-* `proxy` usa el módulo de Apache llamado mod_proxy.
-
-* `unix:/run/php/php8.3-fpm.sock ` indica que la comunicación con PHP-FPM será a través de un socket UNIX local (no TCP).
-
-* `|fcgi://localhost ` especifica el protocolo FastCGI, y que el destino lógico (nombre del backend) es “localhost”.
   
 Por último activamos (o comprobar que esta activado):
 
 ```bash
 sudo a2enconf php8.3-fpm
 ```
+**Configuramos el php.ini para un entorno de desarrollo, primero hacemos copia del archivo.**
 
+````
+cd /etc/php/8.3/fpm/
+sudo cp php.ini php.ini.bk20251007
+sudo nano php.ini
+````
+- php-fpm.conf como configurar
+
+- Editamos el archivo php.ini (con ctrl+w buscamos) y cambiamos tres cosas
+![Alt](webroot/media/images/php1.png)
+![Alt](webroot/media/images/php2.png)
+- Reiniciamos el servicio php y comprobamos que esta running
+````
+sudo systemctl restart php8.3-fpm.service
+sudo systemctl status php8.3-fpm.service
+````
+- con el comando phpinfo(); comprobamos que se han habilitado los cambios 
+![Alt](webroot/media/images/php3.png)
+![Alt](webroot/media/images/php4.png)
+- para ver los modulos activos, concretamente interesa el mpm_XXX
+````
+apache2ctl -M
+````
+
+##### Monitorización
 Comprobación de funcionamiento PHP-FPM
 
 
@@ -482,37 +417,43 @@ listen = 127.0.0.1:9000
 
 Está escuchando por TCP/IP en la dirección local
 
-- Configuramos el php.ini para un entorno de desarrollo, primero hacemos copia del archivo. 
-````
-cd /etc/php/8.3/fpm/
-sudo cp php.ini php.ini.bk20251007
-sudo nano php.ini
-````
-- php-fpm.conf como configurar
-
-- Editamos el archivo php.ini (con ctrl+w buscamos) y cambiamos tres cosas
-![Alt](webroot/media/images/php1.png)
-![Alt](webroot/media/images/php2.png)
-- Reiniciamos el servicio php y comprobamos que esta running
-````
-sudo systemctl restart php8.3-fpm.service
-sudo systemctl status php8.3-fpm.service
-````
-- con el comando phpinfo(); comprobamos que se han habilitado los cambios 
-![Alt](webroot/media/images/php3.png)
-![Alt](webroot/media/images/php4.png)
-- para ver los modulos activos, concretamente interesa el mpm_XXX
-````
-apache2ctl -M
-````
-##### Monitorización
 
 ##### Mantenimiento
 
-#### 1.1.4 MySQL
+#### 1.1.4 MariaDB
 ##### Instalación
+````
+sudo apt udpate
+sudo apt install mariadb-server -y
+````
 ##### Configuración
+
+````
+sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf
+````
+````
+sudo ss -punta |grep mariadb
+````
+````
+GRANT ALL ON *.* TO 'adminsql'@'%' IDENTIFIED BY 'paso' WITH GRANT OPTION;
+````
+````
+sudo apt install php8.3-mysql
+sudo systemctl restart php8.3-fpm
+````
 ##### Monitorización
+Comandos útiles del servicio
+
+Acción	Comando	Descripción
+````
+````
+Iniciar el servicio	sudo systemctl start mariadb	Inicia el servidor MariaDB.
+Detener el servicio	sudo systemctl stop mariadb	Detiene el servidor MariaDB.
+Reiniciar el servicio	sudo systemctl restart mariadb	Reinicia el servidor.
+Ver estado del servicio	sudo systemctl status mariadb	Muestra si el servidor está activo o inactivo.
+Habilitar inicio automático	sudo systemctl enable mariadb	Configura el servicio para iniciarse al arrancar el sistema.
+Deshabilitar inicio automático	sudo systemctl disable mariadb	Evita que el servicio se inicie automáticamente.
+Ver versión instalada	mariadb --version	Muestra la versión actual de MariaDB instalada.
 ##### Mantenimiento
 
 #### 1.1.5 XDebug
@@ -566,7 +507,7 @@ Creamos una pagina info.php en la raiz de nuestro servidor con la la siguiente l
 ![Alt](webroot/media/images/xdebug.png)
 ##### Mantenimiento
 
-#### 1.1.6 Servidor web seguro (HTTPS)
+#### 1.1.7 Servidor web seguro (HTTPS)
 ##### Instalación
 * Creamos los certificados y configuramos los datos
 ````
@@ -620,6 +561,15 @@ sudo ufw allow 443
 #### 1.2.2 **Navegadores**
 #### 1.2.3 **MobaXterm**
 - ver la parte del servidor y local con el otro programa
+
+##### Instalación
+
+##### Configuración
+
+##### Monitorización
+
+##### Mantenimiento
+
 #### 1.2.4 **Netbeans**
 ##### Instalación
 Apache NetBeans IDE 20
