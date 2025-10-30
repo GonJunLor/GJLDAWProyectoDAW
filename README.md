@@ -39,19 +39,15 @@
         - [Configuración](#configuración-2)
         - [Monitorización](#monitorización-2)
         - [Mantenimiento](#mantenimiento-2)
-      - [1.1.5 XDebug](#115-xdebug)
+      - [1.1.5 Módulos PHP](#115-módulos-php)
+        - [php8.3-mysql](#php83-mysql)
+        - [php8.3-intl](#php83-intl)
+        - [php8.3-xdebug](#php83-xdebug)
+      - [1.1.6 Servidor web seguro (HTTPS)](#116-servidor-web-seguro-https)
         - [Instalación](#instalación-3)
         - [Configuración](#configuración-3)
         - [Monitorización](#monitorización-3)
         - [Mantenimiento](#mantenimiento-3)
-      - [1.1.6 Módulos PHP](#116-módulos-php)
-        - [php8.3-mysql](#php83-mysql)
-        - [php8.3-intl](#php83-intl)
-      - [1.1.7 Servidor web seguro (HTTPS)](#117-servidor-web-seguro-https)
-        - [Instalación](#instalación-4)
-        - [Configuración](#configuración-4)
-        - [Monitorización](#monitorización-4)
-        - [Mantenimiento](#mantenimiento-4)
       - [1.1.7 DNS](#117-dns)
       - [1.1.8 SFTP](#118-sftp)
       - [1.1.9 Apache Tomcat](#119-apache-tomcat)
@@ -62,23 +58,23 @@
         - [**Cuentas administradoras**](#cuentas-administradoras-1)
       - [1.2.2 **Navegadores**](#122-navegadores)
       - [1.2.3 **MobaXterm**](#123-mobaxterm)
+        - [Instalación](#instalación-4)
+        - [Configuración](#configuración-4)
+        - [Monitorización](#monitorización-4)
+        - [Mantenimiento](#mantenimiento-4)
+      - [1.2.4 **Netbeans**](#124-netbeans)
         - [Instalación](#instalación-5)
         - [Configuración](#configuración-5)
-        - [Monitorización](#monitorización-5)
-        - [Mantenimiento](#mantenimiento-5)
-      - [1.2.4 **Netbeans**](#124-netbeans)
-        - [Instalación](#instalación-6)
-        - [Configuración](#configuración-6)
         - [Ejemplo de uso](#ejemplo-de-uso)
       - [Crear proyecto con conexion (SFTP) al servidor](#crear-proyecto-con-conexion-sftp-al-servidor)
       - [Borrar proyecto con conexion (SFTP) al servidor](#borrar-proyecto-con-conexion-sftp-al-servidor)
+        - [Monitorización](#monitorización-5)
+        - [Mantenimiento](#mantenimiento-5)
+      - [1.2.5 **Visual Studio Code**](#125-visual-studio-code)
+        - [Instalación](#instalación-6)
+        - [Configuración](#configuración-6)
         - [Monitorización](#monitorización-6)
         - [Mantenimiento](#mantenimiento-6)
-      - [1.2.5 **Visual Studio Code**](#125-visual-studio-code)
-        - [Instalación](#instalación-7)
-        - [Configuración](#configuración-7)
-        - [Monitorización](#monitorización-7)
-        - [Mantenimiento](#mantenimiento-7)
   - [2. GitHub](#2-github)
   - [3.Entorno de Explotación](#3entorno-de-explotación)
 
@@ -94,6 +90,7 @@ Este documento es una guía detallada del proceso de instalación y configuraci�
 - Tipo de sistema operativo
 ````Bash
 uname -a
+hostnamectl
 ````
 - Ver procesos
 ````Bash
@@ -165,6 +162,10 @@ sudo timedatectl set-timezone Europe/Madrid
 ##### **Antivirus**
 ````Bash
 sudo apt install clamav
+````
+Ver versión
+````Bash
+clamscan --version
 ````
 ##### **Cuentas administradoras**
 
@@ -490,18 +491,35 @@ mariadb --version	Muestra la versión actual de MariaDB instalada.
 
 ##### Mantenimiento
 
-#### 1.1.5 XDebug
-##### Instalación
+
+#### 1.1.5 Módulos PHP
+
+##### php8.3-mysql
+
+**Instalación**
+````Bash
+sudo apt install php8.3-mysql
+sudo systemctl restart php8.3-fpm
+````
+**Mostrar que extensión se han instalado**
+````Bash
+sudo php -m | grep mysql
+````
+
+##### php8.3-intl
+
+##### php8.3-xdebug
+**Instalación**
 Primero, actualiza la lista de paquetes y luego instala el paquete específico para PHP 8.3:
 ````Bash
 sudo apt update
 sudo apt install php8.3-xdebug
 ````
-Habilitamos el servicio
+Habilitamos el módulo
 ````Bash
 sudo phpenmod xdebug
 ````
-##### Configuración
+**Configuración**
 Puerto 9003, 
 Editamos el fichero de configuración:
 ````Bash
@@ -529,32 +547,17 @@ Reiniciamos todos los servicios y habilitamos xdebug
 sudo systemctl restart php8.3-fpm.service
 sudo systemctl restart apache2
 ````
-##### Monitorización
+**Monitorización**
 Desde el navegador podemos ver la sección de xdebug en phpinfo.
 Creamos una pagina info.php en la raiz de nuestro servidor con la la siguiente linea y la abrimos con el navegador
 ````Bash
 <?php phpinfo(); ?>
 ````
 ![Alt](webroot/media/images/xdebug.png)
-##### Mantenimiento
+**Mantenimiento**
 
-#### 1.1.6 Módulos PHP
 
-##### php8.3-mysql
-
-**Instalación**
-````Bash
-sudo apt install php8.3-mysql
-sudo systemctl restart php8.3-fpm
-````
-**Mostrar que extensión se han instalado**
-````Bash
-sudo php -m | grep mysql
-````
-
-##### php8.3-intl
-
-#### 1.1.7 Servidor web seguro (HTTPS)
+#### 1.1.6 Servidor web seguro (HTTPS)
 ##### Instalación
 * Creamos los certificados y configuramos los datos
 ````Bash
