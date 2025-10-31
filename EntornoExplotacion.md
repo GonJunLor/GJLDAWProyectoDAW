@@ -10,10 +10,12 @@
 
 
 - [CFGS Desarrollo de Aplicaciones Web](#cfgs-desarrollo-de-aplicaciones-web)
-- [1. Entorno de desarrollo](EntornoDesarrollo.md)
-- [2. Windows 11](Windows11.md)
-- [2. GitHub](GitHub.md)
-- [3. Entorno de Explotación](EntornoExplotacion.md)
+
+  - [3.Entorno de Explotación](#3entorno-de-explotación)
+
+
+## 3.Entorno de Explotación
+
 
 
 > **Gonzalo Junquera Lorenzo**  

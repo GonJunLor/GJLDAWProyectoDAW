@@ -10,11 +10,17 @@
 
 
 - [CFGS Desarrollo de Aplicaciones Web](#cfgs-desarrollo-de-aplicaciones-web)
-- [1. Entorno de desarrollo](EntornoDesarrollo.md)
-- [2. Windows 11](Windows11.md)
-- [2. GitHub](GitHub.md)
-- [3. Entorno de Explotación](EntornoExplotacion.md)
 
+  - [2. GitHub](#2-github)
+
+
+## 2. GitHub
+Configuracion global en local
+Abrimos git bash y configuramos nuestro email y nuestro nombre
+````Bash
+git config --global user.name "Tu Nombre Completo"
+git config --global user.email "tu.email@ejemplo.com"
+````
 
 > **Gonzalo Junquera Lorenzo**  
 > Curso: 2025/2026  
