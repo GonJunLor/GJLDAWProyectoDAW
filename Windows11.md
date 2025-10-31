@@ -1,5 +1,5 @@
 <!-- title: README -->
-# CFGS Desarrollo de Aplicaciones Web
+# 2. Windows 10/11
 
 |  CFGS DESARROLLO  DE APLICACIONES WEB |
 |:-----------:|
@@ -9,60 +9,55 @@
 | DAWES Tema 2. INSTALACIÓN, CONFIGURACIÓN Y DOCUMENTACIÓN DE ENTORNO DE DESARROLLO Y DEL ENTORNO DE EXPLOTACIÓN |
 
 
-- [CFGS Desarrollo de Aplicaciones Web](#cfgs-desarrollo-de-aplicaciones-web)
-
-    - [1.2 Windows 11/10](#12-windows-1110)
-      - [1.2.1 **Configuración inicial**](#121-configuración-inicial)
-        - [**Nombre y configuración de red**](#nombre-y-configuración-de-red)
-        - [**Cuentas administradoras**](#cuentas-administradoras-1)
-      - [1.2.2 **Navegadores**](#122-navegadores)
-      - [1.2.3 **MobaXterm**](#123-mobaxterm)
-        - [Instalación](#instalación-4)
-        - [Configuración](#configuración-4)
-        - [Monitorización](#monitorización-4)
-        - [Mantenimiento](#mantenimiento-4)
-      - [1.2.4 **Netbeans**](#124-netbeans)
-        - [Instalación](#instalación-5)
-        - [Configuración](#configuración-5)
-        - [Ejemplo de uso](#ejemplo-de-uso)
-      - [Crear proyecto con conexion (SFTP) al servidor](#crear-proyecto-con-conexion-sftp-al-servidor)
-      - [Borrar proyecto con conexion (SFTP) al servidor](#borrar-proyecto-con-conexion-sftp-al-servidor)
-        - [Monitorización](#monitorización-5)
-        - [Mantenimiento](#mantenimiento-5)
-      - [1.2.5 **Visual Studio Code**](#125-visual-studio-code)
-        - [Instalación](#instalación-6)
-        - [Configuración](#configuración-6)
-        - [Monitorización](#monitorización-6)
-        - [Mantenimiento](#mantenimiento-6)
+- [2. Windows 10/11](#2-windows-1011)
+    - [2.1 **Configuración inicial**](#21-configuración-inicial)
+      - [**Nombre y configuración de red**](#nombre-y-configuración-de-red)
+      - [**Cuentas administradoras**](#cuentas-administradoras)
+    - [2.2 **Navegadores**](#22-navegadores)
+    - [2.3 **MobaXterm**](#23-mobaxterm)
+      - [Instalación](#instalación)
+      - [Configuración](#configuración)
+      - [Ejemplo de uso](#ejemplo-de-uso)
+    - [2.4 **Netbeans**](#24-netbeans)
+      - [Instalación](#instalación-1)
+      - [Configuración](#configuración-1)
+      - [Ejemplo de uso](#ejemplo-de-uso-1)
+    - [2.5 **Visual Studio Code**](#25-visual-studio-code)
+      - [Instalación](#instalación-2)
+      - [Configuración](#configuración-2)
+      - [Ejemplo de uso](#ejemplo-de-uso-2)
 
 
-### 1.2 Windows 11/10
-#### 1.2.1 **Configuración inicial**
-##### **Nombre y configuración de red**
-##### **Cuentas administradoras**
-#### 1.2.2 **Navegadores**
-#### 1.2.3 **MobaXterm**
+### 2.1 **Configuración inicial**
+
+#### **Nombre y configuración de red**
+
+#### **Cuentas administradoras**
+
+### 2.2 **Navegadores**
+
+### 2.3 **MobaXterm**
 - ver la parte del servidor y local con el otro programa
 
-##### Instalación
+#### Instalación
 
-##### Configuración
+#### Configuración
 
-##### Monitorización
+#### Ejemplo de uso
 
-##### Mantenimiento
-
-#### 1.2.4 **Netbeans**
-##### Instalación
+### 2.4 **Netbeans**
+#### Instalación
 Apache NetBeans IDE 20
 
-##### Configuración
-##### Ejemplo de uso
+#### Configuración
+
+#### Ejemplo de uso
 - version y plugins de netbeans
 - como usar github
 - como llevar a casa y volver a usar aquí
 - capturas solo de la parte ineteresada, no de toda la pantalla
-#### Crear proyecto con conexion (SFTP) al servidor
+
+**Crear proyecto con conexion (SFTP) al servidor**
 - Nuevo proyecto PHP marcando la opción "PHP Application from Remote Server"
 
 ![Alt](webroot/media/images/nb1.png)
@@ -79,25 +74,43 @@ Apache NetBeans IDE 20
 
 ![Alt](webroot/media/images/nb5.png)
 
-#### Borrar proyecto con conexion (SFTP) al servidor
+**Borrar proyecto con conexion (SFTP) al servidor**
 - botón secundario sobre el proyecto y delete. Nos pedirá confirmación y si queremos que borre los archivos en nuestro ordenador. Los del servidor lo tenemos que borrar a mano.
 
 ![Alt](webroot/media/images/nb6.png)
 
-##### Monitorización
 
-##### Mantenimiento
+### 2.5 **Visual Studio Code**
 
-#### 1.2.5 **Visual Studio Code**
+#### Instalación
 
-##### Instalación
+#### Configuración
 
-##### Configuración
+**Git Graph (Extensión)**
 
-##### Monitorización
+<img src="webroot/media/images/vscExt01.png" width="600px">
 
-##### Mantenimiento
+**Live Server (Extensión)**
 
+<img src="webroot/media/images/vscExt02.png" width="600px">
+
+**Markdown All in One (Extensión)**
+
+<img src="webroot/media/images/vscExt03.png" width="600px">
+
+**SQLTools (Extensión)**
+
+<img src="webroot/media/images/vscExt04.png" width="600px">
+
+**SQLTools MySQL/MariaDB/TiDB (Extensión)**
+
+<img src="webroot/media/images/vscExt05.png" width="600px">
+
+**Nombre (Extensión)**
+
+<img src="webroot/media/images/vscExt06.png" width="600px">
+
+#### Ejemplo de uso
 
 > **Gonzalo Junquera Lorenzo**  
 > Curso: 2025/2026  
