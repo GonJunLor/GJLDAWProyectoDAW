@@ -455,20 +455,8 @@ GRANT ALL ON *.* TO 'adminsql'@'%' IDENTIFIED BY 'paso' WITH GRANT OPTION;
 ````
 
 **Instalar modulo pdo_mysql**
-Para que funcione el poder usar la clase PDO desde php.
-Primero comprobamos la version de php que tenemos instalada
-````Bash
-php -v
-````
-Acualizamos e instalamos la version acorde a nuestro php
-````Bash
-sudo apt update
-sudo apt install php8.3-mysql
-````
-Reiniciamos apache
-````Bash
-sudo systemctl restart apache2
-````
+Para que funcione el poder usar la clase PDO desde php. (Ver sección modulos php [php8.3-mysql](#php83-mysql))
+
 ##### Monitorización
 Comandos útiles del servicio
 
@@ -497,11 +485,22 @@ mariadb --version	Muestra la versión actual de MariaDB instalada.
 ##### php8.3-mysql
 
 **Instalación**
+
+Primero comprobamos la version de php que tenemos instalada
 ````Bash
-sudo apt install php8.3-mysql
-sudo systemctl restart php8.3-fpm
+php -v
 ````
-**Mostrar que extensión se han instalado**
+Acualizamos e instalamos la version acorde a nuestro php
+````Bash
+sudo apt update
+sudo apt install php8.3-mysql
+````
+Reiniciamos apache y php
+````Bash
+sudo systemctl restart php8.3-fpm
+sudo systemctl restart apache2
+````
+Mostrar que extensión se han instalado
 ````Bash
 sudo php -m | grep mysql
 ````
