@@ -52,6 +52,7 @@
       - [1.1.8 SFTP](#118-sftp)
       - [1.1.9 Apache Tomcat](#119-apache-tomcat)
       - [1.1.10 LDAP](#1110-ldap)
+    - [1.2 XAMP](#12-xamp)
 
 ## 1. Entorno de Desarrollo
 
@@ -377,6 +378,10 @@ sudo systemctl status php8.3-fpm.service
 apache2ctl -M
 ````
 
+- Comando para cambiar la version activa de php: Con eso te salta un dialogo con las vesiones que tienes instaladas, la que esta activa y si quieres cambiar la activa
+````Bash
+sudo update-alternatives --config php
+````
 ##### Monitorización
 Comprobación de funcionamiento PHP-FPM
 
@@ -440,10 +445,30 @@ sudo ps -aux |grep maria
 ````
 
 **Creación de un usuario administrador que utilice autenticación con constraseña**
+Entramos en la consola de mariadb
+````Bash
+sudo mariadb
+````
+Creamos el usuario que usaremos para conectarnos a esta base de datos
 ````Bash
 GRANT ALL ON *.* TO 'adminsql'@'%' IDENTIFIED BY 'paso' WITH GRANT OPTION;
 ````
 
+**Instalar modulo pdo_mysql**
+Para que funcione el poder usar la clase PDO desde php.
+Primero comprobamos la version de php que tenemos instalada
+````Bash
+php -v
+````
+Acualizamos e instalamos la version acorde a nuestro php
+````Bash
+sudo apt update
+sudo apt install php8.3-mysql
+````
+Reiniciamos apache
+````Bash
+sudo systemctl restart apache2
+````
 ##### Monitorización
 Comandos útiles del servicio
 
