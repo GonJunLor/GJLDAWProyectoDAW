@@ -13,7 +13,7 @@ CFGS Desarrollo de Aplicaciones Web
 - [2. Windows 11](Windows11.md)
 - [3. GitHub](GitHub.md)
 - [4. Entorno de Explotación](EntornoExplotacion.md)
->>>>>>> origin/developerGJL
+
 
 
 > **Gonzalo Junquera Lorenzo**  
