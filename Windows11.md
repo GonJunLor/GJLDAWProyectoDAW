@@ -106,9 +106,13 @@ Apache NetBeans IDE 20
 
 <img src="webroot/media/images/vscExt05.png" width="600px">
 
-**Nombre (Extensión)**
+**vscode-pdf (Extensión)**
 
 <img src="webroot/media/images/vscExt06.png" width="600px">
+
+**SFTP (Extensión)**
+
+<img src="webroot/media/images/vscExt07.png" width="600px">
 
 #### Ejemplo de uso
 
