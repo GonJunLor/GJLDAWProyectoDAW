@@ -8,12 +8,14 @@
 | CYBERSEGURIDAD
 | DAWES Tema 2. INSTALACIÓN, CONFIGURACIÓN Y DOCUMENTACIÓN DE ENTORNO DE DESARROLLO Y DEL ENTORNO DE EXPLOTACIÓN |
 
-CFGS Desarrollo de Aplicaciones Web
-- [1. Entorno de desarrollo](EntornoDesarrollo.md)
-- [2. Windows 11](Windows11.md)
-- [3. GitHub](GitHub.md)
-- [4. Entorno de Explotación](EntornoExplotacion.md)
->>>>>>> origin/developerGJL
+
+- [CFGS Desarrollo de Aplicaciones Web](#cfgs-desarrollo-de-aplicaciones-web)
+
+  - [3.Entorno de Explotación](#3entorno-de-explotación)
+
+
+## 3.Entorno de Explotación
+
 
 
 > **Gonzalo Junquera Lorenzo**  

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>README</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <!-- title: README -->
+<h1 id="cfgs-desarrollo-de-aplicaciones-web">CFGS Desarrollo de Aplicaciones Web</h1>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">CFGS DESARROLLO  DE APLICACIONES WEB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img src="webroot\media\images\portada.jpg" alt="Alt"></td>
+</tr>
+<tr>
+<td style="text-align:center">DESPLIEGUE DE APLICACIONES WEB</td>
+</tr>
+<tr>
+<td style="text-align:center">CYBERSEGURIDAD</td>
+</tr>
+<tr>
+<td style="text-align:center">DAWES Tema 2. INSTALACIÓN, CONFIGURACIÓN Y DOCUMENTACIÓN DE ENTORNO DE DESARROLLO Y DEL ENTORNO DE EXPLOTACIÓN</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><a href="#cfgs-desarrollo-de-aplicaciones-web">CFGS Desarrollo de Aplicaciones Web</a>
+<ul>
+<li><a href="#1-entorno-de-desarrollo">1. Entorno de Desarrollo</a>
+<ul>
+<li><a href="#11-ubuntu-server-24043-lts">1.1 Ubuntu Server 24.04.3 LTS</a>
+<ul>
+<li><a href="#111-configuraci%C3%B3n-inicial">1.1.1 <strong>Configuración inicial</strong></a>
+<ul>
+<li><a href="#cambiar-nombre-servidor"><strong>Cambiar nombre servidor</strong></a></li>
+<li><a href="#actualizar-el-sistema"><strong>Actualizar el sistema</strong></a></li>
+<li><a href="#configuraci%C3%B3n-fecha-y-hora"><strong>Configuración fecha y hora</strong></a></li>
+<li><a href="#cuentas-administradoras"><strong>Cuentas administradoras</strong></a></li>
+<li><a href="#habilitar-cortafuegos"><strong>Habilitar cortafuegos</strong></a></li>
+<li><a href="#conexi%C3%B3n-al-servidor-desde-windows"><strong>Conexión al servidor desde windows</strong></a></li>
+<li><a href="#comprobar-ip-puerta-de-enlace-y-dns"><strong>Comprobar ip, puerta de enlace y dns</strong></a></li>
+<li><a href="#particiones"><strong>Particiones</strong></a></li>
+<li><a href="#actualizaci%C3%B3n"><strong>Actualización</strong></a></li>
+<li><a href="#comprobaciones-sistema-operativo"><strong>Comprobaciones sistema operativo</strong></a></li>
+</ul>
+</li>
+<li><a href="#112-instalaci%C3%B3n-del-servidor-web">1.1.2 Instalación del servidor web</a>
+<ul>
+<li><a href="#instalaci%C3%B3n">Instalación</a></li>
+<li><a href="#verficaci%C3%B3n-del-servicio">Verficación del servicio</a></li>
+<li><a href="#virtual-hosts">Virtual Hosts</a></li>
+<li><a href="#permisos-y-usuarios">Permisos y usuarios</a></li>
+<li><a href="#archivos-de-configuraci%C3%B3n">Archivos de configuración</a></li>
+</ul>
+</li>
+<li><a href="#113-php">1.1.3 PHP</a></li>
+<li><a href="#preparaci%C3%B3n">Preparación</a></li>
+<li><a href="#instalar-apache">Instalar apache</a></li>
+<li><a href="#114-mysql">1.1.4 MySQL</a></li>
+<li><a href="#115-xdebug">1.1.5 XDebug</a></li>
+<li><a href="#116-servidor-web-seguro-https">1.1.6 Servidor web seguro (HTTPS)</a></li>
+<li><a href="#117-dns">1.1.7 DNS</a></li>
+<li><a href="#118-sftp">1.1.8 SFTP</a></li>
+<li><a href="#119-apache-tomcat">1.1.9 Apache Tomcat</a></li>
+<li><a href="#1110-ldap">1.1.10 LDAP</a></li>
+</ul>
+</li>
+<li><a href="#12-windows-1110">1.2 Windows 11/10</a>
+<ul>
+<li><a href="#121-configuraci%C3%B3n-inicial">1.2.1 <strong>Configuración inicial</strong></a>
+<ul>
+<li><a href="#nombre-y-configuraci%C3%B3n-de-red"><strong>Nombre y configuración de red</strong></a></li>
+<li><a href="#cuentas-administradoras-1"><strong>Cuentas administradoras</strong></a></li>
+</ul>
+</li>
+<li><a href="#122-navegadores">1.2.2 <strong>Navegadores</strong></a></li>
+<li><a href="#123-filezilla">1.2.3 <strong>FileZilla</strong></a></li>
+<li><a href="#124-netbeans">1.2.4 <strong>Netbeans</strong></a></li>
+<li><a href="#crear-proyecto-con-conexion-sftp-al-servidor">Crear proyecto con conexion (SFTP) al servidor</a></li>
+<li><a href="#borrar-proyecto-con-conexion-sftp-al-servidor">Borrar proyecto con conexion (SFTP) al servidor</a></li>
+<li><a href="#125-visual-studio-code">1.2.5 <strong>Visual Studio Code</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2-github">2. GitHub</a></li>
+<li><a href="#3entorno-de-explotaci%C3%B3n">3.Entorno de Explotación</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="1-entorno-de-desarrollo">1. Entorno de Desarrollo</h2>
+<h3 id="11-ubuntu-server-24043-lts">1.1 Ubuntu Server 24.04.3 LTS</h3>
+<p>Este documento es una guía detallada del proceso de instalación y configuración de un servidor de aplicaciones en Ubuntu Server utilizando Apache, con soporte PHP y MySQL</p>
+<h4 id="111-configuración-inicial">1.1.1 <strong>Configuración inicial</strong></h4>
+<ul>
+<li>Nombre y configuración de red</li>
+</ul>
+<blockquote>
+<p><strong>Nombre de la máquina</strong>: gjl-uslimpia<br>
+<strong>Memoria RAM</strong>: 2G<br>
+<strong>Particiones</strong>: 150G(/) y resto (/var)<br>
+<strong>Configuración de red interface</strong>: enp0s3 <br>
+<strong>Dirección IP</strong> :10.199.8.153/22<br>
+<strong>GW</strong>: 10.199.8.1/22<br>
+<strong>DNS</strong>: 10.151.123.21 10.151.126.21</p>
+</blockquote>
+<ul>
+<li>Creamos una copia del archivo que viene por defecto 50-cloud-init.yml</li>
+</ul>
+<pre><code>cd /etc/netplan
+sudo cp 50-cloud-init.yml enp0s3.yaml
+</code></pre>
+<ul>
+<li>Editar el fichero de configuración del interface de red  <strong>/etc/netplan/enp0s3.yaml</strong></li>
+</ul>
+<pre><code class="language-bash">
+<span class="hljs-comment"># This is the network config written by &#x27;subiquity&#x27;</span>
+network:
+  ethernets:
+    enp0s3:
+      addresses:
+       - 10.199.8.153/22
+      nameservers:
+         addresses:
+         - 10.151.123.21
+         - 10.151.126.21
+      search: [educa.jcyl.es]
+      routes:
+        - to: default
+           via: 10.199.8.1   
+  version: 2
+</code></pre>
+<ul>
+<li>Actualizar la configuración de red</li>
+</ul>
+<pre><code>sudo netplan apply
+</code></pre>
+<h5 id="cambiar-nombre-servidor"><strong>Cambiar nombre servidor</strong></h5>
+<pre><code>sudo hostnamectl set-hostname gjl-used
+</code></pre>
+<ul>
+<li>También cambiamos el nombre en ese archivo y comprobamos con cat</li>
+</ul>
+<pre><code>sudo nano /etc/hosts
+cat /etc/hosts
+</code></pre>
+<h5 id="actualizar-el-sistema"><strong>Actualizar el sistema</strong></h5>
+<pre><code class="language-bash">sudo apt update
+sudo apt upgrade
+</code></pre>
+<h5 id="configuración-fecha-y-hora"><strong>Configuración fecha y hora</strong></h5>
+<p><a href="https://somebooks.es/establecer-la-fecha-hora-y-zona-horaria-en-la-terminal-de-ubuntu-20-04-lts/" title="Cambiar fecha y hora">Establecer fecha, hora y zona horaria</a></p>
+<pre><code>sudo timedatectl set-timezone Europe/Madrid
+</code></pre>
+<h5 id="cuentas-administradoras"><strong>Cuentas administradoras</strong></h5>
+<blockquote>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox" checked=""type="checkbox"> root(inicio)</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox" checked=""type="checkbox"> miadmin/paso</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox" checked=""type="checkbox"> miadmin2/paso</li>
+</ul>
+</blockquote>
+<ul>
+<li>Para crear el usuario miadmin2 como administrador, miadmin está creado al instalar ubuntu server</li>
+</ul>
+<pre><code>sudo usermod -aG sudo miadmin2
+</code></pre>
+<ul>
+<li>Para ver datos de las cuentas</li>
+</ul>
+<pre><code>cat /etc/passwd
+cat /etc/group
+</code></pre>
+<h5 id="habilitar-cortafuegos"><strong>Habilitar cortafuegos</strong></h5>
+<ul>
+<li>Activar cortafuegos</li>
+</ul>
+<pre><code>sudo ufw enable
+</code></pre>
+<ul>
+<li>Abrir puerto 22</li>
+</ul>
+<pre><code>sudo ufw allow 22
+</code></pre>
+<ul>
+<li>Ver puertos abiertos, cualquiera de los dos comandos.</li>
+</ul>
+<pre><code>sudo ufw status
+sudo ufw status numbered 
+</code></pre>
+<ul>
+<li>Quitar número de puerto</li>
+</ul>
+<pre><code>sudo ufw delete [numPuerto]
+</code></pre>
+<h5 id="conexión-al-servidor-desde-windows"><strong>Conexión al servidor desde windows</strong></h5>
+<ul>
+<li>Arrancamos el servicio ssh en el servidor</li>
+</ul>
+<pre><code>sudo systemctl start ssh
+</code></pre>
+<ul>
+<li>Comprobamos que esta en active (running)</li>
+</ul>
+<pre><code>sudo systemctl status ssh
+</code></pre>
+<ul>
+<li>Abrimos la consola de windows (simbolo del sistema): usamos el comando ssh con nuestro nombre de usuario y ip del servidor, despues nos pedirá la clave.</li>
+</ul>
+<pre><code>ssh miadmin@10.10.199.8.153
+</code></pre>
+<h5 id="comprobar-ip-puerta-de-enlace-y-dns"><strong>Comprobar ip, puerta de enlace y dns</strong></h5>
+<ul>
+<li>Para ver la ip, el nombre de nuestro adaptador de red (enp0s3), si es dinámica pondra dynamic en la misma linea, si es estática no pondrá nada.</li>
+</ul>
+<pre><code>ip a
+</code></pre>
+<ul>
+<li>Para ver la puerta de enlace, en la primera linea pone la puerta de enlace y tambien el nombre de la tarjeta de red</li>
+</ul>
+<pre><code>ip r
+</code></pre>
+<ul>
+<li>Para ver los dns, en DNS Servers se ve cuales hay configurados, tambien vemos a que dominio pertenecemos en DNS Domain</li>
+</ul>
+<pre><code>resolvectl
+</code></pre>
+<h5 id="particiones"><strong>Particiones</strong></h5>
+<ul>
+<li>Con ambos comandos vemos que particiones hay y de que tamaño son. El primero da mas información del tamaño usado.</li>
+</ul>
+<pre><code>df -h
+lsblk
+</code></pre>
+<h5 id="actualización"><strong>Actualización</strong></h5>
+<ul>
+<li>Para comprobar si hay actualizaciones y despues que actualice todo lo necesario</li>
+</ul>
+<pre><code>sudo apt update
+sudo apt upgrade
+</code></pre>
+<h5 id="comprobaciones-sistema-operativo"><strong>Comprobaciones sistema operativo</strong></h5>
+<ul>
+<li>Tipo de sistema operativo</li>
+</ul>
+<pre><code>uname -a
+</code></pre>
+<ul>
+<li>Ver procesos</li>
+</ul>
+<pre><code>ps -ef
+</code></pre>
+<h4 id="112-instalación-del-servidor-web">1.1.2 Instalación del servidor web</h4>
+<h5 id="instalación">Instalación</h5>
+<ul>
+<li>Abrir puerto 80, comprobamos y desactivamos el 80(v6)</li>
+</ul>
+<pre><code>sudo ufw allow 80
+sudo ufw status numbered
+sudo ufw delete 3
+</code></pre>
+<ul>
+<li>Instalamos apache</li>
+</ul>
+<pre><code>sudo apt update
+sudo apt install apache2
+</code></pre>
+<h5 id="verficación-del-servicio">Verficación del servicio</h5>
+<ul>
+<li>Comprobamos que el servicio esta en ejecucion (running)</li>
+</ul>
+<pre><code>sudo systemctl status apache2
+</code></pre>
+<ul>
+<li>Comprobamos ubicacion de la carpeta y los archivos web</li>
+</ul>
+<pre><code>cd /var/www/html
+ls
+</code></pre>
+<h5 id="virtual-hosts">Virtual Hosts</h5>
+<h5 id="permisos-y-usuarios">Permisos y usuarios</h5>
+<ul>
+<li>Creamos usuario del dominio para administrar la web.
+<ul>
+<li>Nombre: operadorweb/paso</li>
+<li>directorio de trabajo: /var/www/html</li>
+<li>grupo:www-data</li>
+<li>shell:/bin/bash</li>
+<li></li>
+</ul>
+</li>
+</ul>
+<pre><code>sudo useradd -M -d /var/www/html -N -g www-data -s /bin/bash operadorweb
+</code></pre>
+<ul>
+<li>Cambiamos la contraseña (paso)</li>
+</ul>
+<pre><code>sudo passwd operadorweb
+</code></pre>
+<ul>
+<li>Cambiamos el propietario de la carpeta html y el grupo</li>
+</ul>
+<pre><code>sudo chown -R operadorweb:www-data /var/www/html
+</code></pre>
+<ul>
+<li>Cambiamos los permisos de la carpeta html</li>
+</ul>
+<pre><code>sudo chmod -R 775 /var/www/html
+</code></pre>
+<ul>
+<li>Ordenar:</li>
+</ul>
+<pre><code>Entrar en etc/apache2
+Si hay archivos load y conf son módulos configurables
+Lo normal es no estropear el archivo de configuracion global de apache2
+En cada servidor tengo diferentes sitios para diferentes dominios con su configuración
+Explicar estructura del arbol de archivos de apache2
+En Apache para configurar puedo ir a ficheros tipo .conf o con .htaccess para poner directivas. En nuestro caso
+el .htaccess está desactivado
+En el archivo apache2. conf vamos a cambiar en Directory /var/www/ la opcion AllowOverride None por All
+sudo systemctl restart apache2 -- antes de esto hay que crear un directorio llamado error con operadorweb
+apache2ctl configtest
+En apache2.conf poner al final Servername enl-used
+Crear en operadorweb un archivo .htaccess
+En Directory /var/www/html/ que `ponga index.php y luego index.html
+ 
+</code></pre>
+<h5 id="archivos-de-configuración">Archivos de configuración</h5>
+<p>Estan en etc/apache2/</p>
+<ul>
+<li>Redirección de errores a archivo error.log, añadimos esta línea al archivo 000-default.conf. Creamos la carpeta error en /var/www/html/</li>
+</ul>
+<pre><code>sudo nano sites-available/000-default.conf
+CustomLog ${APACHE_LOG_DIR}/access.log combined
+</code></pre>
+<ul>
+<li>Quitar aviso de ... , añadimos el nombre del servidor al final del archivo de configuración apache2.conf</li>
+</ul>
+<pre><code>ServerName gjl-used
+</code></pre>
+<ul>
+<li>Para poder poner directivas solo a nuestra web lo hacemos con un archivo .htaccess, pero para poder usar este archivo primero tenemos que cambiar la configuracion de apache2.conf</li>
+</ul>
+<h4 id="113-php">1.1.3 PHP</h4>
+<h4 id="preparación">Preparación</h4>
+<ul>
+<li>Vamos a usar php como un servicio con PHP-FPM para ello primero hay que instalar dos paquetes y despues listamos para comprobar que se ha instalado</li>
+</ul>
+<pre><code>sudo apt install software-properties-common -y
+sudo add-apt-repository ppa:ondrej/php -y
+ls /etc/apt/sources.list.d/ | grep ondrej
+</code></pre>
+<h4 id="instalar-apache">Instalar apache</h4>
+<ul>
+<li>Instalamos las librerias, descativamos php para poder cambiar al servicio FPM</li>
+</ul>
+<pre><code>sudo apt install libapache2-mod-php8.3 php8.3-fpm -y
+sudo a2dismod php8.3
+sudo a2dismod mpm_prefork
+sudo a2enmod mpm_event proxy_fcgi
+sudo a2enconf php8.3-fpm
+sudo systemctl restart apache2
+</code></pre>
+<ul>
+<li>Configuramos el php.ini para un entorno de desarrollo, primero hacemos copia del archivo.</li>
+</ul>
+<pre><code>cd /etc/php/8.3/fpm/
+sudo cp php.ini php.ini.bk20251007
+sudo nano php.ini
+</code></pre>
+<ul>
+<li>Editamos el archivo php.ini (con ctrl+w buscamos) y cambiamos tres cosas
+<img src="images\php1.png" alt="Alt">
+<img src="images\php2.png" alt="Alt"></li>
+<li>Reiniciamos el servicio php y comprobamos que esta running</li>
+</ul>
+<pre><code>sudo systemctl restart php8.3-fpm.service
+sudo systemctl status php8.3-fpm.service
+</code></pre>
+<ul>
+<li>con el comando phpinfo(); comprobamos que se han habilitado los cambios
+<img src="images\php3.png" alt="Alt">
+<img src="images\php4.png" alt="Alt"></li>
+<li>para ver los modulos activos, concretamente interesa el mpm_XXX</li>
+</ul>
+<pre><code>apache2ctl -M
+</code></pre>
+<h4 id="114-mysql">1.1.4 MySQL</h4>
+<h4 id="115-xdebug">1.1.5 XDebug</h4>
+<h4 id="116-servidor-web-seguro-https">1.1.6 Servidor web seguro (HTTPS)</h4>
+<h4 id="117-dns">1.1.7 DNS</h4>
+<h4 id="118-sftp">1.1.8 SFTP</h4>
+<h4 id="119-apache-tomcat">1.1.9 Apache Tomcat</h4>
+<h4 id="1110-ldap">1.1.10 LDAP</h4>
+<h3 id="12-windows-1110">1.2 Windows 11/10</h3>
+<h4 id="121-configuración-inicial">1.2.1 <strong>Configuración inicial</strong></h4>
+<h5 id="nombre-y-configuración-de-red"><strong>Nombre y configuración de red</strong></h5>
+<h5 id="cuentas-administradoras-1"><strong>Cuentas administradoras</strong></h5>
+<h4 id="122-navegadores">1.2.2 <strong>Navegadores</strong></h4>
+<h4 id="123-filezilla">1.2.3 <strong>FileZilla</strong></h4>
+<h4 id="124-netbeans">1.2.4 <strong>Netbeans</strong></h4>
+<h4 id="crear-proyecto-con-conexion-sftp-al-servidor">Crear proyecto con conexion (SFTP) al servidor</h4>
+<ul>
+<li>Nuevo proyecto PHP marcando la opción &quot;PHP Application from Remote Server&quot;
+<img src="images\nb1.png" alt="Alt"></li>
+<li>Ponemos nombre de proyecto y cambiamos la ruta por la nuestra personal
+<img src="images\nb2.png" alt="Alt"></li>
+<li>Configuramos la url con nuestro servidor y el nombre del proyecto en el servidor, en el caso del proyecto principal no tiene carpeta es la raíz (/)
+<img src="images\nb3.png" alt="Alt"></li>
+<li>La primera vez que creamos un proyecto con conexión al servidor hay que configurarlo con nombre de usuario, contraseña y directorio inicial
+<img src="images\nb4.png" alt="Alt"></li>
+<li>Si todo ha ido bien se conectará al servidor y entrará en la carpeta del proyecto que previamente tenemos que haber creado y que haya por lo menos un archivo en ella. Aquí ya marcamos para que se bajen los archivos que queramos.
+<img src="images\nb5.png" alt="Alt"></li>
+</ul>
+<h4 id="borrar-proyecto-con-conexion-sftp-al-servidor">Borrar proyecto con conexion (SFTP) al servidor</h4>
+<ul>
+<li>botón secundario sobre el proyecto y delete. Nos pedirá confirmación y si queremos que borre los archivos en nuestro ordenador. Los del servidor lo tenemos que borrar a mano.
+<img src="images\nb6.png" alt="Alt"></li>
+</ul>
+<h4 id="125-visual-studio-code">1.2.5 <strong>Visual Studio Code</strong></h4>
+<h2 id="2-github">2. GitHub</h2>
+<h2 id="3entorno-de-explotación">3.Entorno de Explotación</h2>
+<hr>
+<blockquote>
+<p><strong>Gonzalo Junquera Lorenzo</strong><br>
+Curso: 2025/2026<br>
+2º Curso CFGS Desarrollo de Aplicaciones Web</p>
+</blockquote>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>
