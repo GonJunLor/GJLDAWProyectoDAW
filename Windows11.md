@@ -50,11 +50,12 @@
 Apache NetBeans IDE 20
 
 #### Configuración
+- configurar carpetas por defecto, cambiar las rutas
 
 #### Ejemplo de uso
-- version y plugins de netbeans
+- version y plugins de netbeans (las que esten por defecto, donde se ve)
 - como usar github
-- como llevar a casa y volver a usar aquí
+- como llevar a casa y volver a usar aquí (es github)
 - capturas solo de la parte ineteresada, no de toda la pantalla
 
 **Crear proyecto con conexion (SFTP) al servidor**
@@ -113,6 +114,14 @@ Apache NetBeans IDE 20
 **SFTP (Extensión)**
 
 <img src="webroot/media/images/vscExt07.png" width="600px">
+
+**PHP Intelephense (Extensión)**
+
+<img src="webroot/media/images/vscExt08.png" width="600px">
+
+- Para que funcione hay deshabilitar la que viene por defecto, buscamos @builtin php en el buscador de extensiones.
+
+<img src="webroot/media/images/vscExt09.png" width="600px">
 
 #### Ejemplo de uso
 
