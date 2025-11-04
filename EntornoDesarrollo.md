@@ -43,6 +43,7 @@
         - [php8.3-mysql](#php83-mysql)
         - [php8.3-intl](#php83-intl)
         - [php8.3-xdebug](#php83-xdebug)
+        - [DirectoryIndex](#directoryindex)
       - [1.1.6 Servidor web seguro (HTTPS)](#116-servidor-web-seguro-https)
         - [Instalación](#instalación-3)
         - [Configuración](#configuración-3)
@@ -555,6 +556,13 @@ Creamos una pagina info.php en la raiz de nuestro servidor con la la siguiente l
 ![Alt](webroot/media/images/xdebug.png)
 **Mantenimiento**
 
+##### DirectoryIndex
+
+Comprobamos si esta el modulo activo
+````Bash
+ls /etc/apache2/mods-enabled | grep dir
+````
+Abrimos el dir.conf para ver el orden por defecto que tiene para abrir el index
 
 #### 1.1.6 Servidor web seguro (HTTPS)
 ##### Instalación
@@ -593,6 +601,18 @@ sudo a2ensite gjl-used.conf
 * Abrir el puerto 443
 ````Bash
 sudo ufw allow 443
+````
+* Redirigir http a https
+
+Activamos el modulo:
+````Bash
+sudo a2enmod rewrite
+````
+En el archivo .htaccess
+````Bash
+RewriteEngine On
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://10.199.8.153/$1 [R,L]
 ````
 ##### Monitorización
 ##### Mantenimiento
