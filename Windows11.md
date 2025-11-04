@@ -123,6 +123,10 @@ Apache NetBeans IDE 20
 
 <img src="webroot/media/images/vscExt09.png" width="600px">
 
+**Conventional Commits (Extensión)**
+
+<img src="webroot/media/images/vscExt10.png" width="600px">
+
 #### Ejemplo de uso
 
 > **Gonzalo Junquera Lorenzo**  

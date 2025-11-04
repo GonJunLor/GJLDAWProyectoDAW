@@ -24,6 +24,7 @@
         - [**Comprobar ip, puerta de enlace y dns**](#comprobar-ip-puerta-de-enlace-y-dns)
         - [**Particiones**](#particiones)
         - [**Actualización**](#actualización)
+        - [**Enjaular usuarios**](#enjaular-usuarios)
       - [1.1.2 Instalación del servidor web](#112-instalación-del-servidor-web)
         - [Instalación](#instalación)
         - [Configuración](#configuración)
@@ -222,6 +223,48 @@ fdisk -l
 ````Bash
 sudo apt update
 sudo apt upgrade
+````
+
+##### **Enjaular usuarios**
+Creamos el grupo ftpusers
+````Bash
+sudo groupadd sftpusers
+````
+
+Creamos el usuario usuarioenjaulado1 con carpeta home var/www/usuarioenjaulado1 y le ponemos contraseña
+````Bash
+sudo useradd -g www-data -G sftpusers -m -d /var/www/usuarioenjaulado1 usuarioenjaulado1
+sudo passwd usuarioenjaulado1
+````
+
+Cambiamos el propietario y los permisos al home del usuario para que pertenezca al root
+````Bash
+sudo chown root:root /var/www/usuarioenjaulado1
+sudo chmod 555 /var/www/usuarioenjaulado1
+````
+
+Creamos una carpeta dentro que será la que el usuarioenjaulado1 puede escribir
+````Bash
+sudo mkdir /var/www/usuarioenjaulado1/htdocs
+sudo chmod 2775 -R /var/www/usuarioenjaulado1/htdocs
+sudo chown usuarioenjaulado1:www-data -R /var/www/usuarioenjaulado1/htdocs
+````
+
+Copia de seguridad de /etc/ssh/sshd_config y lo modificamos con sudo nano
+````Bash
+Subsystem sftp internal-sftp
+
+Match Group sftpusers
+ChrootDirectory %h
+ForceCommand internal-sftp -u 2
+AllowTcpFordwarding yes
+PermitTunnel no
+X11Forwarding no
+````
+
+Reiniciamos ssh
+````Bash
+sudo systemctl restart ssh
 ````
 
 #### 1.1.2 Instalación del servidor web
