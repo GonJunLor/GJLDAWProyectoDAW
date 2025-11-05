@@ -1,5 +1,5 @@
 <!-- title: README -->
-# 2. Windows 10/11
+# WINDOWS 10/11
 
 |  CFGS DESARROLLO  DE APLICACIONES WEB |
 |:-----------:|
@@ -9,50 +9,50 @@
 | DAWES Tema 2. INSTALACIÓN, CONFIGURACIÓN Y DOCUMENTACIÓN DE ENTORNO DE DESARROLLO Y DEL ENTORNO DE EXPLOTACIÓN |
 
 
-- [2. Windows 10/11](#2-windows-1011)
-    - [2.1 **Configuración inicial**](#21-configuración-inicial)
-      - [**Nombre y configuración de red**](#nombre-y-configuración-de-red)
-      - [**Cuentas administradoras**](#cuentas-administradoras)
-    - [2.2 **Navegadores**](#22-navegadores)
-    - [2.3 **MobaXterm**](#23-mobaxterm)
-      - [Instalación](#instalación)
-      - [Configuración](#configuración)
-      - [Ejemplo de uso](#ejemplo-de-uso)
-    - [2.4 **Netbeans**](#24-netbeans)
-      - [Instalación](#instalación-1)
-      - [Configuración](#configuración-1)
-      - [Ejemplo de uso](#ejemplo-de-uso-1)
-    - [2.5 **Visual Studio Code**](#25-visual-studio-code)
-      - [Instalación](#instalación-2)
-      - [Configuración](#configuración-2)
-      - [Ejemplo de uso](#ejemplo-de-uso-2)
+- [WINDOWS 10/11](#windows-1011)
+  - [1 **Configuración inicial**](#1-configuración-inicial)
+    - [**Nombre y configuración de red**](#nombre-y-configuración-de-red)
+    - [**Cuentas administradoras**](#cuentas-administradoras)
+  - [2 **Navegadores**](#2-navegadores)
+  - [3 **MobaXterm**](#3-mobaxterm)
+    - [Instalación](#instalación)
+    - [Configuración](#configuración)
+    - [Ejemplo de uso](#ejemplo-de-uso)
+  - [4 **Netbeans**](#4-netbeans)
+    - [Instalación](#instalación-1)
+    - [Configuración](#configuración-1)
+    - [Ejemplo de uso](#ejemplo-de-uso-1)
+  - [5 **Visual Studio Code**](#5-visual-studio-code)
+    - [Instalación](#instalación-2)
+    - [Configuración](#configuración-2)
+    - [Ejemplo de uso](#ejemplo-de-uso-2)
 
 
-### 2.1 **Configuración inicial**
+## 1 **Configuración inicial**
 
-#### **Nombre y configuración de red**
+### **Nombre y configuración de red**
 
-#### **Cuentas administradoras**
+### **Cuentas administradoras**
 
-### 2.2 **Navegadores**
+## 2 **Navegadores**
 
-### 2.3 **MobaXterm**
+## 3 **MobaXterm**
 - ver la parte del servidor y local con el otro programa
 
-#### Instalación
+### Instalación
 
-#### Configuración
+### Configuración
 
-#### Ejemplo de uso
+### Ejemplo de uso
 
-### 2.4 **Netbeans**
-#### Instalación
+## 4 **Netbeans**
+### Instalación
 Apache NetBeans IDE 20
 
-#### Configuración
+### Configuración
 - configurar carpetas por defecto, cambiar las rutas
 
-#### Ejemplo de uso
+### Ejemplo de uso
 - version y plugins de netbeans (las que esten por defecto, donde se ve)
 - como usar github
 - como llevar a casa y volver a usar aquí (es github)
@@ -81,11 +81,11 @@ Apache NetBeans IDE 20
 ![Alt](webroot/media/images/nb6.png)
 
 
-### 2.5 **Visual Studio Code**
+## 5 **Visual Studio Code**
 
-#### Instalación
+### Instalación
 
-#### Configuración
+### Configuración
 
 **Git Graph (Extensión)**
 
@@ -127,7 +127,7 @@ Apache NetBeans IDE 20
 
 <img src="webroot/media/images/vscExt10.png" width="600px">
 
-#### Ejemplo de uso
+### Ejemplo de uso
 
 > **Gonzalo Junquera Lorenzo**  
 > Curso: 2025/2026  

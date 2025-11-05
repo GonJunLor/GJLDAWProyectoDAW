@@ -1,5 +1,5 @@
 <!-- title: README -->
-# CFGS Desarrollo de Aplicaciones Web
+# ENTORNO DE EXPLOTACIÓN
 
 |  CFGS DESARROLLO  DE APLICACIONES WEB |
 |:-----------:|
@@ -9,14 +9,12 @@
 | DAWES Tema 2. INSTALACIÓN, CONFIGURACIÓN Y DOCUMENTACIÓN DE ENTORNO DE DESARROLLO Y DEL ENTORNO DE EXPLOTACIÓN |
 
 
-- [CFGS Desarrollo de Aplicaciones Web](#cfgs-desarrollo-de-aplicaciones-web)
-  - [3.Entorno de Explotación](#3entorno-de-explotación)
-    - [Subdominios](#subdominios)
+- [ENTORNO DE EXPLOTACIÓN](#entorno-de-explotación)
+  - [Subdominios](#subdominios)
 
 
-## 3.Entorno de Explotación
 
-### Subdominios
+## Subdominios
 1.- Crear un subdominio
 nombreproyecto
 alojamiento /httpdocs/nombreproyecto

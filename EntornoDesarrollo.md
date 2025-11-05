@@ -1,5 +1,5 @@
 <!-- title: README -->
-# CFGS Desarrollo de Aplicaciones Web
+# ENTORNO DE DESARROLLO
 
 |  CFGS DESARROLLO  DE APLICACIONES WEB |
 |:-----------:|
@@ -9,74 +9,122 @@
 | DAWES Tema 2. INSTALACIÓN, CONFIGURACIÓN Y DOCUMENTACIÓN DE ENTORNO DE DESARROLLO Y DEL ENTORNO DE EXPLOTACIÓN |
 
 
-- [CFGS Desarrollo de Aplicaciones Web](#cfgs-desarrollo-de-aplicaciones-web)
-  - [1. Entorno de Desarrollo](#1-entorno-de-desarrollo)
-    - [1.1 Ubuntu Server 24.04.3 LTS](#11-ubuntu-server-24043-lts)
-      - [1.1.1 **Configuración inicial**](#111-configuración-inicial)
-        - [**Comprobaciones sistema operativo**](#comprobaciones-sistema-operativo)
-        - [**Cambiar nombre servidor**](#cambiar-nombre-servidor)
-        - [**Actualizar el sistema**](#actualizar-el-sistema)
-        - [**Configuración fecha y hora**](#configuración-fecha-y-hora)
-        - [**Antivirus**](#antivirus)
-        - [**Cuentas administradoras**](#cuentas-administradoras)
-        - [**Habilitar cortafuegos**](#habilitar-cortafuegos)
-        - [**Conexión al servidor desde windows**](#conexión-al-servidor-desde-windows)
-        - [**Comprobar ip, puerta de enlace y dns**](#comprobar-ip-puerta-de-enlace-y-dns)
-        - [**Particiones**](#particiones)
-        - [**Actualización**](#actualización)
-        - [**Enjaular usuarios**](#enjaular-usuarios)
-      - [1.1.2 Instalación del servidor web](#112-instalación-del-servidor-web)
-        - [Instalación](#instalación)
-        - [Configuración](#configuración)
-        - [Monitorización](#monitorización)
-        - [Mantenimiento](#mantenimiento)
-      - [1.1.3 PHP](#113-php)
-        - [Instalación](#instalación-1)
-        - [Configuración](#configuración-1)
-        - [Monitorización](#monitorización-1)
-        - [Mantenimiento](#mantenimiento-1)
-      - [1.1.4 MariaDB](#114-mariadb)
-        - [Instalación](#instalación-2)
-        - [Configuración](#configuración-2)
-        - [Monitorización](#monitorización-2)
-        - [Mantenimiento](#mantenimiento-2)
-      - [1.1.5 Módulos PHP](#115-módulos-php)
-        - [php8.3-mysql](#php83-mysql)
-        - [php8.3-intl](#php83-intl)
-        - [php8.3-xdebug](#php83-xdebug)
-        - [DirectoryIndex](#directoryindex)
-      - [1.1.6 Servidor web seguro (HTTPS)](#116-servidor-web-seguro-https)
-        - [Instalación](#instalación-3)
-        - [Configuración](#configuración-3)
-        - [Monitorización](#monitorización-3)
-        - [Mantenimiento](#mantenimiento-3)
-      - [1.1.7 DNS](#117-dns)
-      - [1.1.8 SFTP](#118-sftp)
-      - [1.1.9 Apache Tomcat](#119-apache-tomcat)
-      - [1.1.10 LDAP](#1110-ldap)
-    - [1.2 XAMP](#12-xamp)
+- [ENTORNO DE DESARROLLO](#entorno-de-desarrollo)
+  - [1 Ubuntu Server 24.04.3 LTS](#1-ubuntu-server-24043-lts)
+    - [**1.1 Configuración inicial**](#11-configuración-inicial)
+      - [Instalación sistema operativo](#instalación-sistema-operativo)
+      - [Comandos útiles](#comandos-útiles)
+      - [Configuraciones sistema operativo](#configuraciones-sistema-operativo)
+      - [**Cambiar nombre servidor**](#cambiar-nombre-servidor)
+      - [**Actualizar el sistema**](#actualizar-el-sistema)
+      - [**Configuración fecha y hora**](#configuración-fecha-y-hora)
+      - [**Antivirus**](#antivirus)
+      - [**Cuentas administradoras**](#cuentas-administradoras)
+      - [**Habilitar cortafuegos**](#habilitar-cortafuegos)
+      - [**Conexión al servidor desde windows**](#conexión-al-servidor-desde-windows)
+      - [**Comprobar ip, puerta de enlace y dns**](#comprobar-ip-puerta-de-enlace-y-dns)
+      - [**Particiones**](#particiones)
+      - [**Actualización**](#actualización)
+      - [**Enjaular usuarios**](#enjaular-usuarios)
+    - [1.2 Apache](#12-apache)
+      - [Instalación](#instalación)
+      - [Configuración](#configuración)
+      - [Monitorización](#monitorización)
+      - [Mantenimiento](#mantenimiento)
+    - [1.3 PHP](#13-php)
+      - [Instalación](#instalación-1)
+      - [Configuración](#configuración-1)
+      - [Monitorización](#monitorización-1)
+      - [Mantenimiento](#mantenimiento-1)
+    - [1.4 MariaDB](#14-mariadb)
+      - [Instalación](#instalación-2)
+      - [Configuración](#configuración-2)
+      - [Monitorización](#monitorización-2)
+      - [Mantenimiento](#mantenimiento-2)
+    - [1.5 Módulos PHP](#15-módulos-php)
+      - [php8.3-mysql](#php83-mysql)
+      - [php8.3-intl](#php83-intl)
+      - [php8.3-xdebug](#php83-xdebug)
+      - [DirectoryIndex](#directoryindex)
+    - [1.6 Servidor web seguro (HTTPS)](#16-servidor-web-seguro-https)
+      - [Instalación](#instalación-3)
+      - [Configuración](#configuración-3)
+      - [Monitorización](#monitorización-3)
+      - [Mantenimiento](#mantenimiento-3)
+    - [1.7 DNS](#17-dns)
+    - [1.8 SFTP](#18-sftp)
+    - [1.9 Apache Tomcat](#19-apache-tomcat)
+    - [1.10 LDAP](#110-ldap)
+  - [2 XAMP](#2-xamp)
 
-## 1. Entorno de Desarrollo
 
-### 1.1 Ubuntu Server 24.04.3 LTS
+
+## <h1>1 Ubuntu Server 24.04.3 LTS</h1>
 
 Este documento es una guía detallada del proceso de instalación y configuración de un servidor de aplicaciones en Ubuntu Server utilizando Apache, con soporte PHP y MySQL
 
-#### 1.1.1 **Configuración inicial**
+### <h2>**1.1 Configuración inicial**</h2>
 
-##### **Comprobaciones sistema operativo**
-- Tipo de sistema operativo
+#### <h2>Instalación sistema operativo</h2>
+**<h3>Configurar maquina virtual</h3>**
+Configuramos la maquina en virtualBox con al menos 2GB de ram y 2 procesadores.
+
+<img src="webroot/media/images/vb01.png" width="600px">
+
+En cuanto al almacenamiento configuramos un disco duro virtual de 500GB dinámico para que vaya llenandose según lo usamos y no reserve todo el espacio desde el principio.
+
+<img src="webroot/media/images/vb02.png" width="600px">
+
+**<h3>Particiones</h3>**
+Creamos dos particiones, una de 150GB para la raiz del servidor y otra del resto para la carpeta /var
+
+<img src="webroot/media/images/us1.png" width="600px">
+<img src="webroot/media/images/us2.png" width="600px">
+
+**<h3>Datos del administrador</h3>**
+Configuramos aqui el nombre del servidor y el primer usuario administrador del servidor, miadmin con contraseña paso.
+
+<img src="webroot/media/images/us3.png" width="600px">
+
+**<h3>Servidor OpenSSH</h3>**
+Activamos esa opción para que se instale el servidor ssh para conectarnos despues desde windows por consola con el [MobaXterm](Windows11.md#3-mobaxterm)
+
+<img src="webroot/media/images/us4.png" width="600px">
+
+#### <h2>Comandos útiles</h2>
+En esta sección incluiré una serie de comandos que nos pueden servir a lo largo de esta guía.
+
+**<h3></h3>**
+
+**<h3>Tipo de sistema operativo</h3>**
+Para comprobar el nombre del servidor, la versión del sistema operativo instalado actualmente, la versión de kernel utilizado, tipo de arquitectura del procesador, etc.
 ````Bash
 uname -a
 hostnamectl
 ````
-- Ver procesos
+
+**<h3>Ver procesos</h3>**
 ````Bash
 ps -ef
 ````
 
-- Nombre y configuración de red
+**<h3>Ver datos de conexión</h3>**
+Para ver los datos de ip, mac, etc de los adaptadores de red que tenemos instalados en nuestro servidor.
+````Bash
+ip a
+hostname -I  # Para ver solo la ip asignada a nuestro nombre de host
+````
 
+#### <h2>Configuraciones sistema operativo</h2>
+Antes de poder conectarnos desde windows tenemos que entrar directamente en el servidor con el usuario administrador creado en la instalación miadmin/paso. Aquí vamos a realizar unas configuraciones para preparar la maquina limpia que luego clonaremos para instalar nuestra infraestructura para el desarrollo de aplicaciones web.
+Lo que hacemos será configurar la red para poner una ip fija, crear otra cuenta administradora, 
+
+Antes de empezar actualizamos el sistema operativo.
+````Bash
+sudo apt update
+sudo apt upgrade
+````
+Colección de los datos que hemos configurado hasta ahora y los de la red que pondremos después, esta información es válida para el servidor que usamos en clase, en casa cambiarán la IP, GW y DNS.
 > **Nombre de la máquina**: gjl-uslimpia\
 > **Memoria RAM**: 2G\
 > **Particiones**: 150G(/) y resto (/var)\
@@ -85,16 +133,23 @@ ps -ef
 > **GW**: 10.199.8.1/22\
 > **DNS**: 10.151.123.21 10.151.126.21
 
-* Creamos una copia del archivo que viene por defecto 50-cloud-init.yml
+**<h3>Configuración de red</h3>**
+Para poder conectarnos siempre sin problemas a nuestro servidor vamos a configurar una ip fija, para ello modificaremos el archivo enp0s3.yaml (copia de 50-cloud-init.yaml) y aplicaremos esa configuración.
+
+Creamos una copia del archivo que viene por defecto 50-cloud-init.yaml
 ````Bash
 cd /etc/netplan
-sudo cp 50-cloud-init.yml enp0s3.yaml
+sudo cp 50-cloud-init.yaml enp0s3.yaml
 ````
-- Editar el fichero de configuración del interface de red  **/etc/netplan/enp0s3.yaml**
+
+Editar el fichero de configuración del interface de red que acabamos de crear. 
+````Bash
+sudo nano /etc/netplan/enp0s3.yaml
+# ctrl+o para guardar y ctrl+x para salir 
+````
 
 ```bash
-
-# This is the network config written by 'subiquity'
+# Esta conexión es la usada en clase bajo el dominio de educa
 network:
   ethernets:
     enp0s3:
@@ -110,11 +165,18 @@ network:
            via: 10.199.8.1   
   version: 2
 ```
-- Actualizar la configuración de red
+Una vez que hemos rellenado el archivo de conexión podemos actualizar la configuración de red. 
 ````Bash
 sudo netplan apply
+# En caso de que hubieramos cometido algún error al rellenar el archivo de conexión, nos saltará un aviso diciendo donde está mal, ya que en este archivo es muy importante poner las tabulaciones correctamente.
 ````
-##### **Cambiar nombre servidor**
+Si la configuración está correcta (no veremos ningún mensaje) ya podremos conectarnos por consola desde windows. A partir de aquí haremos todas las configuraciones desde el [MobaXterm](Windows11.md#3-mobaxterm) (click en él para ver como conectarnos).
+
+
+
+
+#### **Cambiar nombre servidor**
+
 ````Bash
 sudo hostnamectl set-hostname gjl-used
 ````
@@ -124,20 +186,20 @@ sudo nano /etc/hosts
 cat /etc/hosts
 ````
 
-##### **Actualizar el sistema**
+#### **Actualizar el sistema**
 
 ```bash
 sudo apt update
 sudo apt upgrade
 ```
 
-##### **Configuración fecha y hora**
+#### **Configuración fecha y hora**
 
 [Establecer fecha, hora y zona horaria](https://somebooks.es/establecer-la-fecha-hora-y-zona-horaria-en-la-terminal-de-ubuntu-20-04-lts/ "Cambiar fecha y hora")
 ````Bash
 sudo timedatectl set-timezone Europe/Madrid
 ````
-##### **Antivirus**
+#### **Antivirus**
 ````Bash
 sudo apt install clamav
 ````
@@ -145,7 +207,7 @@ Ver versión
 ````Bash
 clamscan --version
 ````
-##### **Cuentas administradoras**
+#### **Cuentas administradoras**
 
 > - [X] root(inicio)
 > - [X] miadmin/paso
@@ -165,7 +227,7 @@ sudo userdel miadmin2
 cat /etc/passwd
 cat /etc/group
 ````
-##### **Habilitar cortafuegos**
+#### **Habilitar cortafuegos**
 
 - Activar cortafuegos
 ````Bash
@@ -184,7 +246,7 @@ sudo ufw status numbered
 ````Bash
 sudo ufw delete [numPuerto]
 ````
-##### **Conexión al servidor desde windows**
+#### **Conexión al servidor desde windows**
 * Arrancamos el servicio ssh en el servidor
 ````Bash
 sudo systemctl start ssh
@@ -198,7 +260,7 @@ sudo systemctl status ssh
 ssh miadmin@10.10.199.8.153
 ````
 
-##### **Comprobar ip, puerta de enlace y dns**
+#### **Comprobar ip, puerta de enlace y dns**
 * Para ver la ip, el nombre de nuestro adaptador de red (enp0s3), si es dinámica pondra dynamic en la misma linea, si es estática no pondrá nada.
 ````Bash
 ip a
@@ -211,21 +273,21 @@ ip r
 ````Bash
 resolvectl
 ````
-##### **Particiones**
+#### **Particiones**
 * Con ambos comandos vemos que particiones hay y de que tamaño son. El primero da mas información del tamaño usado.
 ````Bash
 df -h
 lsblk [-a][-fm][-fn]
 fdisk -l
 ````
-##### **Actualización**
+#### **Actualización**
 * Para comprobar si hay actualizaciones y despues que actualice todo lo necesario
 ````Bash
 sudo apt update
 sudo apt upgrade
 ````
 
-##### **Enjaular usuarios**
+#### **Enjaular usuarios**
 Creamos el grupo ftpusers
 ````Bash
 sudo groupadd sftpusers
@@ -267,9 +329,9 @@ Reiniciamos ssh
 sudo systemctl restart ssh
 ````
 
-#### 1.1.2 Instalación del servidor web
+### 1.2 Apache
 
-##### Instalación
+#### Instalación
 - Instalamos apache
 ````Bash
 sudo apt update
@@ -281,7 +343,7 @@ sudo ufw allow 80
 sudo ufw status numbered
 sudo ufw delete 3
 ````
-##### Configuración
+#### Configuración
 **Permisos y usuarios**
 - Creamos usuario del dominio para administrar la web.
   - Nombre: operadorweb/paso
@@ -335,7 +397,7 @@ ErrorDocument 403 /GJLDWESProyectoDWES/error/403.html
 ErrorDocument 500 /GJLDWESProyectoDWES/error/500.html
 ````
 
-##### Monitorización
+#### Monitorización
 - Comprobamos que el servicio esta en ejecucion (running)
 ````bash
 sudo systemctl status apache2
@@ -345,15 +407,15 @@ sudo systemctl status apache2
 cd /var/www/html
 ls
 ````
-##### Mantenimiento
+#### Mantenimiento
 
 
-#### 1.1.3 PHP
-##### Instalación
+### 1.3 PHP
+#### Instalación
 ````Bash
 sudo apt install php8.3-fpm php8.3
 ````
-##### Configuración
+#### Configuración
 **Ficheros de configuración de PHP para php-fpm:**
 * **/etc/php/8.3/fpm/conf.d**: Módulos instalados en esta configuración de php (enlaces simbólicos a /etc/php/8.3/mods-available)
 * **/etc/php/8.3/fpm/php-fpm.conf** : Configuración general de php-fpm
@@ -426,7 +488,7 @@ apache2ctl -M
 ````Bash
 sudo update-alternatives --config php
 ````
-##### Monitorización
+#### Monitorización
 Comprobación de funcionamiento PHP-FPM
 
 
@@ -452,10 +514,10 @@ listen = 127.0.0.1:9000
 Está escuchando por TCP/IP en la dirección local
 
 
-##### Mantenimiento
+#### Mantenimiento
 
-#### 1.1.4 MariaDB
-##### Instalación
+### 1.4 MariaDB
+#### Instalación
 ````Bash
 sudo apt udpate
 sudo apt install mariadb-server -y
@@ -465,7 +527,7 @@ sudo apt install mariadb-server -y
 sudo ufw allow 3306
 
 ````
-##### Configuración
+#### Configuración
 
 ````Bash
 sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf
@@ -501,7 +563,7 @@ GRANT ALL ON *.* TO 'adminsql'@'%' IDENTIFIED BY 'paso' WITH GRANT OPTION;
 **Instalar modulo pdo_mysql**
 Para que funcione el poder usar la clase PDO desde php. (Ver sección modulos php [php8.3-mysql](#php83-mysql))
 
-##### Monitorización
+#### Monitorización
 Comandos útiles del servicio
 
 ````Bash
@@ -521,12 +583,12 @@ sudo systemctl disable mariadb
 mariadb --version	Muestra la versión actual de MariaDB instalada.
 ````
 
-##### Mantenimiento
+#### Mantenimiento
 
 
-#### 1.1.5 Módulos PHP
+### 1.5 Módulos PHP
 
-##### php8.3-mysql
+#### php8.3-mysql
 
 **Instalación**
 
@@ -549,9 +611,9 @@ Mostrar que extensión se han instalado
 sudo php -m | grep mysql
 ````
 
-##### php8.3-intl
+#### php8.3-intl
 
-##### php8.3-xdebug
+#### php8.3-xdebug
 **Instalación**
 Primero, actualiza la lista de paquetes y luego instala el paquete específico para PHP 8.3:
 ````Bash
@@ -599,7 +661,7 @@ Creamos una pagina info.php en la raiz de nuestro servidor con la la siguiente l
 ![Alt](webroot/media/images/xdebug.png)
 **Mantenimiento**
 
-##### DirectoryIndex
+#### DirectoryIndex
 
 Comprobamos si esta el modulo activo
 ````Bash
@@ -607,8 +669,8 @@ ls /etc/apache2/mods-enabled | grep dir
 ````
 Abrimos el dir.conf para ver el orden por defecto que tiene para abrir el index
 
-#### 1.1.6 Servidor web seguro (HTTPS)
-##### Instalación
+### 1.6 Servidor web seguro (HTTPS)
+#### Instalación
 * Creamos los certificados y configuramos los datos
 ````Bash
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/gjl-used.key -out /etc/ssl/certs/gjl-used.crt
@@ -626,7 +688,7 @@ sudo ls -l /etc/ssl/private/ | grep gjl-used
 sudo a2enmod ssl
 sudo systemctl restart apache2
 ````
-##### Configuración
+#### Configuración
 * Copiar el fichero default-ssl.conf a gjl-used.conf
 ````Bash
 cd /etc/apache2/sites-available/
@@ -657,16 +719,20 @@ RewriteEngine On
 RewriteCond %{SERVER_PORT} 80
 RewriteRule ^(.*)$ https://10.199.8.153/$1 [R,L]
 ````
-##### Monitorización
-##### Mantenimiento
+#### Monitorización
+#### Mantenimiento
 
-#### 1.1.7 DNS
-#### 1.1.8 SFTP
+### 1.7 DNS
+### 1.8 SFTP
 
-#### 1.1.9 Apache Tomcat
-#### 1.1.10 LDAP
+### 1.9 Apache Tomcat
+### 1.10 LDAP
 
-### 1.2 XAMP
+**phpmyadmin**
+
+https://www.devtutorial.io/how-to-install-phpmyadmin-with-apache-on-ubuntu-24-04-p3467.html
+
+## 2 XAMP
 
 
 > **Gonzalo Junquera Lorenzo**  
