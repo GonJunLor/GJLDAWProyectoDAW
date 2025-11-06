@@ -10,23 +10,12 @@
 
 
 - [ENTORNO DE DESARROLLO](#entorno-de-desarrollo)
-  - [1. Entorno de Desarrollo](#1-entorno-de-desarrollo)
-    - [1.1 Ubuntu Server 24.04.3 LTS](#11-ubuntu-server-24043-lts)
+  - [1 Ubuntu Server 24.04.3 LTS](#1-ubuntu-server-24043-lts)
     - [**1.1 Configuración inicial**](#11-configuración-inicial)
       - [Instalación sistema operativo](#instalación-sistema-operativo)
       - [Comandos útiles](#comandos-útiles)
       - [Configuraciones sistema operativo](#configuraciones-sistema-operativo)
-      - [**Cambiar nombre servidor**](#cambiar-nombre-servidor)
-      - [**Actualizar el sistema**](#actualizar-el-sistema)
-      - [**Configuración fecha y hora**](#configuración-fecha-y-hora)
-      - [**Antivirus**](#antivirus)
-      - [**Cuentas administradoras**](#cuentas-administradoras)
-      - [**Habilitar cortafuegos**](#habilitar-cortafuegos)
-      - [**Conexión al servidor desde windows**](#conexión-al-servidor-desde-windows)
-      - [**Comprobar ip, puerta de enlace y dns**](#comprobar-ip-puerta-de-enlace-y-dns)
-      - [**Particiones**](#particiones)
-      - [**Actualización**](#actualización)
-      - [**Enjaular usuarios**](#enjaular-usuarios)
+      - [Cuentas administradoras](#cuentas-administradoras)
     - [1.2 Apache](#12-apache)
       - [Instalación](#instalación)
       - [Configuración](#configuración)
@@ -56,11 +45,13 @@
     - [1.8 SFTP](#18-sftp)
       - [1.1.9 Apache Tomcat](#119-apache-tomcat)
       - [1.1.10 LDAP](#1110-ldap)
+      - [1.1.11 phpMyAdmin](#1111-phpmyadmin)
+- [Despues de instalar](#despues-de-instalar)
+- [Comparamos los dos ficheros (estando en la ruta /home/miadmin/)](#comparamos-los-dos-ficheros-estando-en-la-ruta-homemiadmin)
   - [2 XAMP](#2-xamp)
 
-## 1. Entorno de Desarrollo
+## 1 Ubuntu Server 24.04.3 LTS
 
-### 1.1 Ubuntu Server 24.04.3 LTS
 
 Este documento es una guía detallada del proceso de instalación y configuración de un servidor de aplicaciones en Ubuntu Server utilizando Apache, con soporte PHP y MySQL
 
@@ -109,11 +100,39 @@ hostnamectl
 ps -ef
 ````
 
+**<h3>Ubicación</h3>**
+Para saber en que directorio estamos cuando estamos poniendo comando en la consola.
+````Bash
+pwd
+````
+
 **<h3>Ver datos de conexión</h3>**
 Para ver los datos de ip, mac, etc de los adaptadores de red que tenemos instalados en nuestro servidor.
 ````Bash
 ip a
+
 hostname -I  # Para ver solo la ip asignada a nuestro nombre de host
+
+ip r # Para ver la puerta de enlace, en la primera linea pone la 
+# puerta de enlace y tambien el nombre de la tarjeta de red
+
+resolvectl # Para ver los dns, en DNS Servers se ve cuales hay configurados, 
+# tambien vemos a que dominio pertenecemos en DNS Domain
+````
+
+**<h3>Particiones</h3>**
+Con todos los comandos vemos que particiones hay y de que tamaño son. El primero da mas información del tamaño usado.
+````Bash
+df -h
+lsblk [-a][-fm][-fn]
+fdisk -l
+````
+
+**<h3>Ver datos de las cuentas</h3>**
+
+````Bash
+cat /etc/passwd # datos de los usuarios
+cat /etc/group # datos de los grupos
 ````
 
 #### <h2>Configuraciones sistema operativo</h2>
@@ -169,38 +188,45 @@ network:
 Una vez que hemos rellenado el archivo de conexión podemos actualizar la configuración de red. 
 ````Bash
 sudo netplan apply
-# En caso de que hubieramos cometido algún error al rellenar el archivo de conexión, nos saltará un aviso diciendo donde está mal, ya que en este archivo es muy importante poner las tabulaciones correctamente.
+# En caso de que hubieramos cometido algún error al rellenar el archivo de conexión, 
+# nos saltará un aviso diciendo donde está mal, ya que en este archivo es muy 
+# importante poner las tabulaciones correctamente.
 ````
 Si la configuración está correcta (no veremos ningún mensaje) ya podremos conectarnos por consola desde windows. A partir de aquí haremos todas las configuraciones desde el [MobaXterm](Windows11.md#3-mobaxterm) (click en él para ver como conectarnos).
 
 
+**<h3>Conexión al servidor desde windows</h3>**
+Aunque vamos a usar el MobaXterm desde windows, también podemos conectarnos con la consola de windows, para ello primero arrancamos el servicio ssh en el servidor (por si no estuviera activo) y comprobamos si esta activo.
+````Bash
+sudo systemctl start ssh
+sudo systemctl status ssh
+````
+Abrimos la consola de windows (simbolo del sistema): usamos el comando ssh con nuestro nombre de usuario e ip del servidor, después nos pedirá la clave.
+````Bash
+ssh miadmin@10.10.199.8.153
+````
 
-
-#### **Cambiar nombre servidor**
+**<h3>Cambiar nombre servidor</h3>**
 
 ````Bash
 sudo hostnamectl set-hostname gjl-used
 ````
-- También cambiamos el nombre en ese archivo y comprobamos con cat
+También cambiamos el nombre en ese archivo y comprobamos con cat
 ````Bash
 sudo nano /etc/hosts
 cat /etc/hosts
 ````
 
-#### **Actualizar el sistema**
-
-```bash
-sudo apt update
-sudo apt upgrade
-```
-
-#### **Configuración fecha y hora**
+**<h3>Configuración fecha y hora</h3>**
+Para configurar la zona horaria del servidor
 
 [Establecer fecha, hora y zona horaria](https://somebooks.es/establecer-la-fecha-hora-y-zona-horaria-en-la-terminal-de-ubuntu-20-04-lts/ "Cambiar fecha y hora")
 ````Bash
 sudo timedatectl set-timezone Europe/Madrid
 ````
-#### **Antivirus**
+
+**<h3>Antivirus</h3>**
+
 ````Bash
 sudo apt install clamav
 ````
@@ -208,87 +234,48 @@ Ver versión
 ````Bash
 clamscan --version
 ````
-#### **Cuentas administradoras**
+
+**<h3>Cortafuegos</h3>**
+Activar cortafuegos
+````Bash
+sudo ufw enable
+````
+Abrir puerto 22
+````Bash
+sudo ufw allow 22
+````
+Ver puertos abiertos, cualquiera de los dos comandos.
+````Bash
+sudo ufw status
+sudo ufw status numbered 
+````
+Quitar número de puerto
+````Bash
+sudo ufw delete [numPuerto]
+````
+
+#### <h2>Cuentas administradoras</h2>
 
 > - [X] root(inicio)
 > - [X] miadmin/paso
 > - [X] miadmin2/paso
 
-* Para crear el usuario miadmin2 como administrador en los mismos grupos que miadmin, miadmin está creado al instalar ubuntu server. Después le ponemos una contraseña
+Para crear el usuario miadmin2 como administrador en los mismos grupos que miadmin, miadmin está creado al instalar ubuntu server. Después le ponemos una contraseña.
 ````Bash
 sudo useradd -m -G sudo,adm,cdrom,dip,plugdev,lxd -s /bin/bash miadmin2
 sudo passwd miadmin2
 ````
-* Para borrar un usuario
+Para borrar un usuario
 ````Bash
 sudo userdel miadmin2
 ````
-* Para ver datos de las cuentas
+Para ver datos de las cuentas
 ````Bash
 cat /etc/passwd
 cat /etc/group
 ````
-#### **Habilitar cortafuegos**
 
-- Activar cortafuegos
-````Bash
-sudo ufw enable
-````
-- Abrir puerto 22
-````Bash
-sudo ufw allow 22
-````
-- Ver puertos abiertos, cualquiera de los dos comandos.
-````Bash
-sudo ufw status
-sudo ufw status numbered 
-````
-- Quitar número de puerto
-````Bash
-sudo ufw delete [numPuerto]
-````
-#### **Conexión al servidor desde windows**
-* Arrancamos el servicio ssh en el servidor
-````Bash
-sudo systemctl start ssh
-````
-* Comprobamos que esta en active (running)
-````Bash
-sudo systemctl status ssh
-````
-* Abrimos la consola de windows (simbolo del sistema): usamos el comando ssh con nuestro nombre de usuario y ip del servidor, despues nos pedirá la clave.
-````Bash
-ssh miadmin@10.10.199.8.153
-````
-
-#### **Comprobar ip, puerta de enlace y dns**
-* Para ver la ip, el nombre de nuestro adaptador de red (enp0s3), si es dinámica pondra dynamic en la misma linea, si es estática no pondrá nada.
-````Bash
-ip a
-````
-* Para ver la puerta de enlace, en la primera linea pone la puerta de enlace y tambien el nombre de la tarjeta de red
-````Bash
-ip r
-````
-* Para ver los dns, en DNS Servers se ve cuales hay configurados, tambien vemos a que dominio pertenecemos en DNS Domain
-````Bash
-resolvectl
-````
-#### **Particiones**
-* Con ambos comandos vemos que particiones hay y de que tamaño son. El primero da mas información del tamaño usado.
-````Bash
-df -h
-lsblk [-a][-fm][-fn]
-fdisk -l
-````
-#### **Actualización**
-* Para comprobar si hay actualizaciones y despues que actualice todo lo necesario
-````Bash
-sudo apt update
-sudo apt upgrade
-````
-
-#### **Enjaular usuarios**
+**<h3>Enjaular usuarios</h3>**
 Creamos el grupo ftpusers
 ````Bash
 sudo groupadd sftpusers
@@ -313,18 +300,26 @@ sudo chmod 2775 -R /var/www/usuarioenjaulado1/htdocs
 sudo chown usuarioenjaulado1:www-data -R /var/www/usuarioenjaulado1/htdocs
 ````
 
-Copia de seguridad de /etc/ssh/sshd_config.dsudo nano  y lo modificamos con sudo nano
+Copia de seguridad de /etc/ssh/sshd_config.d   
 ````Bash
-# Me ha dado problemas el añadir este código, de momento lo tengo comentado
-Subsystem sftp internal-sftp
+sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_configBK20251106
+````
+y lo modificamos con 
+````Bash
+sudo nano /etc/ssh/sshd_config
+````
+````Bash
+Subsystem sftp internal
 
 Match Group sftpusers
 ChrootDirectory %h
 ForceCommand internal-sftp -u 2
-AllowTcpFordwarding yes
+AllowTcpForwarding yes
 PermitTunnel no
 X11Forwarding no
 ````
+
+<img src="webroot/media/images/jaula1.png" width="600px">
 
 Reiniciamos ssh
 ````Bash
@@ -560,6 +555,7 @@ sudo mariadb
 Creamos el usuario que usaremos para conectarnos a esta base de datos
 ````Bash
 GRANT ALL ON *.* TO 'adminsql'@'%' IDENTIFIED BY 'paso' WITH GRANT OPTION;
+exit # para salir de la consola de mariadb
 ````
 
 **Instalar modulo pdo_mysql**
@@ -729,6 +725,115 @@ RewriteRule ^(.*)$ https://10.199.8.153/$1 [R,L]
 
 #### 1.1.9 Apache Tomcat
 #### 1.1.10 LDAP
+
+#### 1.1.11 phpMyAdmin
+Antes de instalar guardamos la lista de modulos actuales para despues de intalar volver a crearla y comparar
+php -m > /home/miadmin/listadomodulos.txt
+# Despues de instalar
+php -m > /home/miadmin/listadomodulos2.txt
+# Comparamos los dos ficheros (estando en la ruta /home/miadmin/)
+diff listadomodulos.txt listadomodulos2.txt
+
+sudo apt update
+sudo apt install phpmyadmin
+
+Con la barra espaciadora elegimos apache
+
+Le damos a que si en crear bbdd
+
+Contraseña paso
+
+Habilitamos la extensión PHP mbstring (si no se hizo automáticamente):
+sudo phpenmod mbstring
+
+Si da error WARNING: Module mbstring ini file doesn't exist under /etc/php/8.3/mods-available
+Podemos comprobar igualmente si esta activado con:
+php -m | grep mbstring
+
+Durante la instalación de phpMyAdmin, se debe crear un archivo de configuración de Apache que vincule la URL /phpmyadmin con la carpeta donde residen los archivos.
+Para hacerlo manualmente:
+sudo ln -s /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf
+
+En caso de que ya exista el /etc/apache2/conf-available/phpmyadmin.conf, hacemos una copia y lo borramos para hacerlo de nuevo.
+sudo mv /etc/apache2/conf-available/phpmyadmin.conf /etc/apache2/conf-available/phpmyadmin.confBK20251105
+
+Habilitamos la configuracion de phpmyadmin
+sudo a2enconf phpmyadmin
+
+Reiniciar apache
+sudo systemctl restart apache2
+
+Me sale file not found al entrar a 10.199.8.153/phpmyadmin/
+````Bash
+miadmin@gjl-used3:/etc/apache2/conf-available$ sudo a2enmod php8.3
+Considering dependency mpm_prefork for php8.3:
+Considering conflict mpm_event for mpm_prefork:
+ERROR: Module mpm_event is enabled - cannot proceed due to conflicts. It needs to be disabled first!
+Considering conflict mpm_worker for mpm_prefork:
+ERROR: Could not enable dependency mpm_prefork for php8.3, aborting
+
+¡Excelente! El mensaje que has compartido identifica el problema exacto y explica por qué Apache no está procesando los archivos PHP dentro del directorio de phpMyAdmin, lo que resulta en el error "File not found."
+
+🚨 El Conflicto: MPM Modules
+El problema es un conflicto entre los Módulos de Procesamiento Múltiple (MPM) de Apache:
+
+mpm_event (Habilitado): Este módulo está optimizado para PHP-FPM y no es compatible con el módulo tradicional de PHP de Apache (libapache2-mod-php).
+
+mpm_prefork (Requerido): El módulo php8.3 que intentas habilitar requiere el módulo mpm_prefork para funcionar.
+
+Como mpm_event está habilitado, no se puede habilitar mpm_prefork, lo que impide que el módulo php8.3 se cargue. Sin el módulo php8.3, Apache no sabe cómo ejecutar el archivo index.php de phpMyAdmin, y te devuelve "File not found."
+
+🛠️ Solución: Deshabilitar el Módulo Conflictivo
+Para resolver esto, tienes dos opciones:
+
+Opción 1: Usar PHP como Módulo de Apache (Más sencillo, para desarrollo)
+Esta es la forma tradicional y más sencilla para phpMyAdmin, pero requiere deshabilitar mpm_event.
+
+Deshabilitar mpm_event y mpm_worker:
+
+Bash
+
+sudo a2dismod mpm_event
+sudo a2dismod mpm_worker
+Habilitar mpm_prefork y el módulo PHP 8.3: Al intentar habilitar php8.3, Apache intentará automáticamente habilitar mpm_prefork.
+
+Bash
+
+sudo a2enmod php8.3
+Reiniciar Apache:
+
+Bash
+
+sudo systemctl restart apache2
+Ahora, Apache usará el módulo PHP nativo, y al acceder a http://10.199.8.153/phpmyadmin/, deberías ver la página de inicio de sesión.
+
+Opción 2: Usar PHP-FPM (Recomendado para producción)
+Si estás usando mpm_event, lo más probable es que estés configurado para usar PHP-FPM (FastCGI Process Manager), que es la forma moderna y más eficiente de ejecutar PHP.
+
+Si quieres mantener mpm_event, debes asegurarte de que los módulos mod_proxy y mod_proxy_fcgi estén habilitados y configurados para pasar las peticiones .php al socket de PHP-FPM.
+
+Habilitar módulos FPM:
+
+Bash
+
+sudo a2enmod proxy proxy_fcgi setenvif
+Habilitar la configuración FPM para PHP 8.3:
+
+Bash
+
+sudo a2enconf php8.3-fpm
+# Nota: El nombre del archivo puede variar, como 
+# 'php8.3-fpm.conf' o 'php8.3-fpm'.
+Reiniciar los servicios:
+
+Bash
+
+sudo systemctl restart php8.3-fpm
+sudo systemctl restart apache2
+Recomendación: Para la instalación simple de phpMyAdmin, te sugiero seguir la Opción 1 (deshabilitar mpm_event y usar mpm_prefork con mod_php8.3).
+
+¿Quieres proceder con la Opción 1 para solucionar el conflicto de módulos?
+````
 
 **phpmyadmin**
 
