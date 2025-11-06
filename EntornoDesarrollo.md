@@ -12,43 +12,41 @@
 - [ENTORNO DE DESARROLLO](#entorno-de-desarrollo)
   - [1 Ubuntu Server 24.04.3 LTS](#1-ubuntu-server-24043-lts)
     - [**1.1 Configuración inicial**](#11-configuración-inicial)
-      - [Instalación sistema operativo](#instalación-sistema-operativo)
-      - [Comandos útiles](#comandos-útiles)
-      - [Configuraciones sistema operativo](#configuraciones-sistema-operativo)
-      - [Cuentas administradoras](#cuentas-administradoras)
-    - [1.2 Apache](#12-apache)
-      - [Instalación](#instalación)
-      - [Configuración](#configuración)
-      - [Monitorización](#monitorización)
-      - [Mantenimiento](#mantenimiento)
-    - [1.3 PHP](#13-php)
-      - [Instalación](#instalación-1)
+      - [*Instalación sistema operativo*](#instalación-sistema-operativo)
+      - [*Comandos útiles*](#comandos-útiles)
+      - [*Configuraciones sistema operativo*](#configuraciones-sistema-operativo)
+      - [*Cuentas administradoras*](#cuentas-administradoras)
+    - [**1.2 Apache**](#12-apache)
+      - [*Instalación*](#instalación)
+      - [*Configuración*](#configuración)
+      - [*Monitorización*](#monitorización)
+      - [*Mantenimiento*](#mantenimiento)
+    - [**1.3 PHP**](#13-php)
+      - [*Instalación*](#instalación-1)
       - [Configuración](#configuración-1)
-      - [Monitorización](#monitorización-1)
-      - [Mantenimiento](#mantenimiento-1)
-    - [1.4 MariaDB](#14-mariadb)
-      - [Instalación](#instalación-2)
-      - [Configuración](#configuración-2)
-      - [Monitorización](#monitorización-2)
-      - [Mantenimiento](#mantenimiento-2)
-    - [1.5 Módulos PHP](#15-módulos-php)
-      - [php8.3-mysql](#php83-mysql)
-      - [php8.3-intl](#php83-intl)
-      - [php8.3-xdebug](#php83-xdebug)
-      - [DirectoryIndex](#directoryindex)
-    - [1.6 Servidor web seguro (HTTPS)](#16-servidor-web-seguro-https)
-      - [Instalación](#instalación-3)
-      - [Configuración](#configuración-3)
-      - [Monitorización](#monitorización-3)
-      - [Mantenimiento](#mantenimiento-3)
-    - [1.7 DNS](#17-dns)
-    - [1.8 SFTP](#18-sftp)
-      - [1.1.9 Apache Tomcat](#119-apache-tomcat)
-      - [1.1.10 LDAP](#1110-ldap)
-      - [1.1.11 phpMyAdmin](#1111-phpmyadmin)
-- [Despues de instalar](#despues-de-instalar)
-- [Comparamos los dos ficheros (estando en la ruta /home/miadmin/)](#comparamos-los-dos-ficheros-estando-en-la-ruta-homemiadmin)
-  - [2 XAMP](#2-xamp)
+      - [*Monitorización*](#monitorización-1)
+      - [*Mantenimiento*](#mantenimiento-1)
+    - [**1.4 MariaDB**](#14-mariadb)
+      - [*Instalación*](#instalación-2)
+      - [*Configuración*](#configuración-2)
+      - [*Monitorización*](#monitorización-2)
+      - [*Mantenimiento*](#mantenimiento-2)
+    - [**1.5 Módulos PHP**](#15-módulos-php)
+      - [*php8.3-mysql*](#php83-mysql)
+      - [*php8.3-intl*](#php83-intl)
+      - [*php8.3-xdebug*](#php83-xdebug)
+      - [*DirectoryIndex*](#directoryindex)
+    - [**1.6 Servidor web seguro (HTTPS)**](#16-servidor-web-seguro-https)
+      - [*Instalación*](#instalación-3)
+      - [*Configuración*](#configuración-3)
+      - [*Monitorización*](#monitorización-3)
+      - [*Mantenimiento*](#mantenimiento-3)
+    - [**1.7 DNS**](#17-dns)
+    - [**1.8 SFTP**](#18-sftp)
+    - [**1.9 Apache Tomcat**](#19-apache-tomcat)
+    - [**1.10 LDAP**](#110-ldap)
+    - [**1.11 phpMyAdmin**](#111-phpmyadmin)
+  - [**2 XAMP**](#2-xamp)
 
 ## 1 Ubuntu Server 24.04.3 LTS
 
@@ -57,7 +55,8 @@ Este documento es una guía detallada del proceso de instalación y configuraci�
 
 ### <h2>**1.1 Configuración inicial**</h2>
 
-#### <h2>Instalación sistema operativo</h2>
+#### <h2>*Instalación sistema operativo*</h2>
+
 **<h3>Configurar maquina virtual</h3>**
 Configuramos la maquina en virtualBox con al menos 2GB de ram y 2 procesadores.
 
@@ -83,10 +82,9 @@ Activamos esa opción para que se instale el servidor ssh para conectarnos despu
 
 <img src="webroot/media/images/us4.png" width="600px">
 
-#### <h2>Comandos útiles</h2>
+#### <h2>*Comandos útiles*</h2>
 En esta sección incluiré una serie de comandos que nos pueden servir a lo largo de esta guía.
 
-**<h3></h3>**
 
 **<h3>Tipo de sistema operativo</h3>**
 Para comprobar el nombre del servidor, la versión del sistema operativo instalado actualmente, la versión de kernel utilizado, tipo de arquitectura del procesador, etc.
@@ -135,7 +133,12 @@ cat /etc/passwd # datos de los usuarios
 cat /etc/group # datos de los grupos
 ````
 
-#### <h2>Configuraciones sistema operativo</h2>
+**<h3>Para ver los modulos activos de php</h3>**
+````Bash
+apache2ctl -M
+````
+
+#### <h2>*Configuraciones sistema operativo*</h2>
 Antes de poder conectarnos desde windows tenemos que entrar directamente en el servidor con el usuario administrador creado en la instalación miadmin/paso. Aquí vamos a realizar unas configuraciones para preparar la maquina limpia que luego clonaremos para instalar nuestra infraestructura para el desarrollo de aplicaciones web.
 Lo que hacemos será configurar la red para poner una ip fija, crear otra cuenta administradora, 
 
@@ -223,6 +226,7 @@ Para configurar la zona horaria del servidor
 [Establecer fecha, hora y zona horaria](https://somebooks.es/establecer-la-fecha-hora-y-zona-horaria-en-la-terminal-de-ubuntu-20-04-lts/ "Cambiar fecha y hora")
 ````Bash
 sudo timedatectl set-timezone Europe/Madrid
+sudo timedatectl # para ver fechas y zona horaria
 ````
 
 **<h3>Antivirus</h3>**
@@ -254,7 +258,7 @@ Quitar número de puerto
 sudo ufw delete [numPuerto]
 ````
 
-#### <h2>Cuentas administradoras</h2>
+#### <h2>*Cuentas administradoras*</h2>
 
 > - [X] root(inicio)
 > - [X] miadmin/paso
@@ -326,9 +330,9 @@ Reiniciamos ssh
 sudo systemctl restart ssh
 ````
 
-### 1.2 Apache
+### <h2>**1.2 Apache**</h2>
 
-#### Instalación
+#### <h2>*Instalación*</h2>
 - Instalamos apache
 ````Bash
 sudo apt update
@@ -340,14 +344,17 @@ sudo ufw allow 80
 sudo ufw status numbered
 sudo ufw delete 3
 ````
-#### Configuración
-**Permisos y usuarios**
+
+#### <h2>*Configuración*</h2>
+
+**<h3>Permisos y usuarios</h3>**
+
 - Creamos usuario del dominio para administrar la web.
   - Nombre: operadorweb/paso
   - directorio de trabajo: /var/www/html 
   - grupo:www-data
   - shell:/bin/bash
-  - 
+
 ````Bash
 sudo useradd -M -d /var/www/html -N -g www-data -s /bin/bash operadorweb
 ````
@@ -364,56 +371,86 @@ sudo chown -R operadorweb:www-data /var/www/html
 sudo chmod -R 775 /var/www/html
 ````
 
-**Archivos de configuración**
+**<h3>Archivos de configuración</h3>**
 
 Estan en etc/apache2/
-* Redirección de errores a archivo error.log, añadimos la línea CustomLog al archivo 000-default.conf. Previamente hay que tener creada la carpeta error en /var/www/html/
+
+Redirección de errores a archivo error.log, añadimos la línea CustomLog al archivo 000-default.conf. Previamente hay que tener creada la carpeta error en /var/www/html/ y una copia de seguridad del archivo.
 ````Bash
-sudo nano sites-available/000-default.conf
+sudo cp 000-default.conf 000-default.confBK20251106
+sudo nano /etc/apache2/sites-available/000-default.conf
 CustomLog ${APACHE_LOG_DIR}/access.log combined
 ````
-* Quitar aviso al usar el comando apache2ctl configtest.
+Quitar aviso al usar el comando apache2ctl configtest.
+
 ![Alt](webroot/media/images/apache1.png)
-* añadimos el nombre del servidor al final del archivo de configuración apache2.conf
+
+Añadimos el nombre del servidor al final del archivo de configuración apache2.conf
 ````Bash
 sudo nano /etc/apache2/apache2.conf
 ServerName gjl-used
 ````
-* Para poder poner directivas solo a nuestra web lo hacemos con un archivo .htaccess, pero para poder usar este archivo primero tenemos que cambiar la configuracion de apache2.conf
+Para poder poner directivas solo a nuestra web lo hacemos con un archivo .htaccess, pero para poder usar este archivo primero tenemos que cambiar la configuracion de apache2.conf. 
 
-**Errores con htaccess**
+Cambiamos AllowOverride None por All. Hay que buscar ese directory el <Directory /var/www/>
+````Bash
+<Directory /var/www/>
+    Options Indexes FollowSymLinks
+    AllowOverride All  # este es el cambio
+    Require all granted
+</Directory>
+````
+
+
+**<h3>Errores con htaccess</h3>**
 Al lado del index general de nuestra aplicación creamos el archivo .htaccess el cual manejará los errores 500, 404 y 403.
-* Inicialmente podemos configurar un mensaje de error en este mismo archivo añadiendo esta línea.
+Inicialmente podemos configurar un mensaje de error en este mismo archivo añadiendo esta línea.
+
 ````Bash
 ErrorDocument 404 "Mensaje de error"
 ````
-* Mejor se hace con enlaces a paginas html de errores que estan en la carpeta error. De momento usamos rutas absolutas desde la raiz de nuestro servidor
+
+Mejor se hace con enlaces a paginas html de errores que estan en la carpeta error. De momento usamos rutas absolutas desde la raiz de nuestro servidor
+
 ````Bash
 ErrorDocument 404 /GJLDWESProyectoDWES/error/404.html
 ErrorDocument 403 /GJLDWESProyectoDWES/error/403.html
 ErrorDocument 500 /GJLDWESProyectoDWES/error/500.html
 ````
 
-#### Monitorización
-- Comprobamos que el servicio esta en ejecucion (running)
+Reiniciamos apache2
+````Bash
+sudo systemctl restart apache2
+````
+
+#### <h2>*Monitorización*</h2>
+Comprobamos que el servicio esta en ejecucion (running)
+
 ````bash
 sudo systemctl status apache2
 ````
-- Comprobamos ubicacion de la carpeta y los archivos web
+
+Comprobamos ubicacion de la carpeta y los archivos web
 ````Bash
 cd /var/www/html
 ls
 ````
-#### Mantenimiento
+
+#### <h2>*Mantenimiento*</h2>
 
 
-### 1.3 PHP
-#### Instalación
+
+### <h2>**1.3 PHP**</h2>
+
+#### <h2>*Instalación*</h2>
+
 ````Bash
 sudo apt install php8.3-fpm php8.3
 ````
-#### Configuración
-**Ficheros de configuración de PHP para php-fpm:**
+
+#### <h2>Configuración</h2>
+
+**<h3>Ficheros de configuración de PHP para php-fpm:</h3>**
 * **/etc/php/8.3/fpm/conf.d**: Módulos instalados en esta configuración de php (enlaces simbólicos a /etc/php/8.3/mods-available)
 * **/etc/php/8.3/fpm/php-fpm.conf** : Configuración general de php-fpm
 * **/etc/php/8.3/fpm/php.ini** : Configuración de php para este escenario
@@ -424,39 +461,49 @@ Reiniciar el servicio:
 sudo systemctl restart php8.3-fpm
 ```
 
-Activamos el módulo de Apache2 con PHP-FPM
+Activamos el módulo de Apache2 con PHP-FPM y reiniciamos apache2
 
 ```bash
 sudo a2enmod proxy_fcgi setenvif
+sudo systemctl restart apache2
 ```
 
 
-**Activarlo para cada virtualhost**
+**<h3>Activarlo para cada virtualhost</h3>**
   
 Existe un **archivo especial** en `/run/php/php8.3-fpm.sock`que actua como punto de comunicación dentro de la propia máquina en sistemas UNIX/Linux y no usa puertos ni direcciones IP.
  
  Se pone esta expresion en el archivo /etc/apache2/sites-available/000-default.conf
 ```bash
-  ProxyPassMatch ^/(.*\.php)$ unix:/run/php/php8.3-fpm.sock|fcgi://127.0.0.1/var/www/html
+# lo abrimos con nano:
+sudo nano /etc/apache2/sites-available/000-default.conf
+
+# Copiamos lo siguiente:
+ProxyPassMatch ^/(.*\.php)$ unix:/run/php/php8.3-fpm.sock|fcgi://127.0.0.1/var/www/html
 ```
 ![Alt](webroot/media/images/apache2000DefaultPHP.png)
 
-**Activarlo para todos los virtualhost**
+**<h3>Activarlo para todos los virtualhost</h3>**
 
 El fichero de configuración `php8.3-fpm`en el directorio `/etc/apache2/conf-available`, por defecto funciona cuando php-fpm está escuchando en un socket UNIX:
 
 ```bash
+# lo abrimos con nano:
+sudo nano /etc/apache2/conf-available/php8.3-fpm.conf
+
+# Copiamos lo siguiente o comprobamos que ya está:
 <FilesMatch ".+\.ph(?:ar|p|tml)$">
     SetHandler "proxy:unix:/run/php/php8.3-fpm.sock|fcgi://localhost"
 </FilesMatch>
 ```
   
-Por último activamos (o comprobar que esta activado):
+Por último activamos (o comprobar que esta activado) y recargamos apache2:
 
 ```bash
 sudo a2enconf php8.3-fpm
+systemctl reload apache2
 ```
-**Configuramos el php.ini para un entorno de desarrollo, primero hacemos copia del archivo.**
+**<h3>Configuramos el php.ini para un entorno de desarrollo, primero hacemos copia del archivo.</h3>**
 
 ````Bash
 cd /etc/php/8.3/fpm/
@@ -481,11 +528,13 @@ sudo systemctl status php8.3-fpm.service
 apache2ctl -M
 ````
 
-- Comando para cambiar la version activa de php: Con eso te salta un dialogo con las vesiones que tienes instaladas, la que esta activa y si quieres cambiar la activa
+- Comando para cambiar la version activa de php: Con eso te salta un dialogo con las versiones que tienes instaladas, la que esta activa y si quieres cambiar la activa
 ````Bash
 sudo update-alternatives --config php
 ````
-#### Monitorización
+
+#### <h2>*Monitorización*</h2>
+
 Comprobación de funcionamiento PHP-FPM
 
 
@@ -510,11 +559,13 @@ listen = 127.0.0.1:9000
 
 Está escuchando por TCP/IP en la dirección local
 
+#### <h2>*Mantenimiento*</h2>
 
-#### Mantenimiento
 
-### 1.4 MariaDB
-#### Instalación
+### <h2>**1.4 MariaDB**</h2>
+
+#### <h2>*Instalación*</h2>
+
 ````Bash
 sudo apt udpate
 sudo apt install mariadb-server -y
@@ -524,7 +575,9 @@ sudo apt install mariadb-server -y
 sudo ufw allow 3306
 
 ````
-#### Configuración
+
+#### <h2>*Configuración*</h2>
+
 
 ````Bash
 sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf
@@ -536,18 +589,18 @@ Modificamos la linea bind-address, este cambio permite a mariadb acepte conexion
 sudo systemctl restart mariadb
 ````
 
-**Comprobación del puerto usado por el servidor Mariadb**
+**<h3>Comprobación del puerto usado por el servidor Mariadb</h3>**
 ````Bash
 sudo ss -punta |grep mariadb
 tcp   LISTEN  0  80  127.0.0.1:3306   0.0.0.0:*   users:(("mariadbd",pid=1234,fd=10))
 ````
 
-**Listar los procesos en ejecución relacionados con el servidor mariadb**
+**<h3>Listar los procesos en ejecución relacionados con el servidor mariadb</h3>**
 ````bash
 sudo ps -aux |grep maria
 ````
 
-**Creación de un usuario administrador que utilice autenticación con constraseña**
+**<h3>Creación de un usuario administrador que utilice autenticación con constraseña</h3>**
 Entramos en la consola de mariadb
 ````Bash
 sudo mariadb
@@ -558,10 +611,11 @@ GRANT ALL ON *.* TO 'adminsql'@'%' IDENTIFIED BY 'paso' WITH GRANT OPTION;
 exit # para salir de la consola de mariadb
 ````
 
-**Instalar modulo pdo_mysql**
+**<h3>Instalar modulo pdo_mysql</h3>**
 Para que funcione el poder usar la clase PDO desde php. (Ver sección modulos php [php8.3-mysql](#php83-mysql))
 
-#### Monitorización
+#### <h2>*Monitorización*</h2>
+
 Comandos útiles del servicio
 
 ````Bash
@@ -581,14 +635,15 @@ sudo systemctl disable mariadb
 mariadb --version	Muestra la versión actual de MariaDB instalada.
 ````
 
-#### Mantenimiento
+#### <h2>*Mantenimiento*</h2>
 
 
-### 1.5 Módulos PHP
 
-#### php8.3-mysql
+### <h2>**1.5 Módulos PHP**</h2>
 
-**Instalación**
+#### <h2>*php8.3-mysql*</h2>
+
+**<h3>Instalación</h3>**
 
 Primero comprobamos la version de php que tenemos instalada
 ````Bash
@@ -609,10 +664,12 @@ Mostrar que extensión se han instalado
 sudo php -m | grep mysql
 ````
 
-#### php8.3-intl
+#### <h2>*php8.3-intl*</h2>
 
-#### php8.3-xdebug
-**Instalación**
+
+#### <h2>*php8.3-xdebug*</h2>
+
+**<h3>Instalación</h3>**
 Primero, actualiza la lista de paquetes y luego instala el paquete específico para PHP 8.3:
 ````Bash
 sudo apt update
@@ -622,7 +679,7 @@ Habilitamos el módulo
 ````Bash
 sudo phpenmod xdebug
 ````
-**Configuración**
+**<h3>Configuración</h3>**
 Puerto 9003, 
 Editamos el fichero de configuración:
 ````Bash
@@ -650,16 +707,17 @@ Reiniciamos todos los servicios y habilitamos xdebug
 sudo systemctl restart php8.3-fpm.service
 sudo systemctl restart apache2
 ````
-**Monitorización**
+**<h3>Monitorización</h3>**
 Desde el navegador podemos ver la sección de xdebug en phpinfo.
 Creamos una pagina info.php en la raiz de nuestro servidor con la la siguiente linea y la abrimos con el navegador
 ````Bash
 <?php phpinfo(); ?>
 ````
 ![Alt](webroot/media/images/xdebug.png)
-**Mantenimiento**
+**<h3>Mantenimiento</h3>**
 
-#### DirectoryIndex
+#### <h2>*DirectoryIndex*</h2>
+
 
 Comprobamos si esta el modulo activo
 ````Bash
@@ -667,8 +725,10 @@ ls /etc/apache2/mods-enabled | grep dir
 ````
 Abrimos el dir.conf para ver el orden por defecto que tiene para abrir el index
 
-### 1.6 Servidor web seguro (HTTPS)
-#### Instalación
+### <h2>**1.6 Servidor web seguro (HTTPS)**</h2>
+
+#### <h2>*Instalación*</h2>
+
 * Creamos los certificados y configuramos los datos
 ````Bash
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/gjl-used.key -out /etc/ssl/certs/gjl-used.crt
@@ -686,7 +746,9 @@ sudo ls -l /etc/ssl/private/ | grep gjl-used
 sudo a2enmod ssl
 sudo systemctl restart apache2
 ````
-#### Configuración
+
+#### <h2>*Configuración*</h2>
+
 * Copiar el fichero default-ssl.conf a gjl-used.conf
 ````Bash
 cd /etc/apache2/sites-available/
@@ -717,25 +779,38 @@ RewriteEngine On
 RewriteCond %{SERVER_PORT} 80
 RewriteRule ^(.*)$ https://10.199.8.153/$1 [R,L]
 ````
-#### Monitorización
-#### Mantenimiento
 
-### 1.7 DNS
-### 1.8 SFTP
+#### <h2>*Monitorización*</h2>
 
-#### 1.1.9 Apache Tomcat
-#### 1.1.10 LDAP
 
-#### 1.1.11 phpMyAdmin
+#### <h2>*Mantenimiento*</h2>
+
+
+### <h2>**1.7 DNS**</h2>
+
+### <h2>**1.8 SFTP**</h2>
+
+### <h2>**1.9 Apache Tomcat**</h2>
+
+### <h2>**1.10 LDAP**</h2>
+
+### <h2>**1.11 phpMyAdmin**</h2>
+
+https://www.devtutorial.io/how-to-install-phpmyadmin-with-apache-on-ubuntu-24-04-p3467.html
+
 Antes de instalar guardamos la lista de modulos actuales para despues de intalar volver a crearla y comparar
+````bash
 php -m > /home/miadmin/listadomodulos.txt
 # Despues de instalar
 php -m > /home/miadmin/listadomodulos2.txt
 # Comparamos los dos ficheros (estando en la ruta /home/miadmin/)
 diff listadomodulos.txt listadomodulos2.txt
-
+````
+Instalamos phpmyadmin, pirmero actualizamos
+````bash
 sudo apt update
 sudo apt install phpmyadmin
+````
 
 Con la barra espaciadora elegimos apache
 
@@ -744,27 +819,42 @@ Le damos a que si en crear bbdd
 Contraseña paso
 
 Habilitamos la extensión PHP mbstring (si no se hizo automáticamente):
+````bash
 sudo phpenmod mbstring
+````
 
 Si da error WARNING: Module mbstring ini file doesn't exist under /etc/php/8.3/mods-available
 Podemos comprobar igualmente si esta activado con:
+````bash
 php -m | grep mbstring
+````
 
 Durante la instalación de phpMyAdmin, se debe crear un archivo de configuración de Apache que vincule la URL /phpmyadmin con la carpeta donde residen los archivos.
 Para hacerlo manualmente:
+````bash
 sudo ln -s /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf
+````
 
 En caso de que ya exista el /etc/apache2/conf-available/phpmyadmin.conf, hacemos una copia y lo borramos para hacerlo de nuevo.
+````bash
 sudo mv /etc/apache2/conf-available/phpmyadmin.conf /etc/apache2/conf-available/phpmyadmin.confBK20251105
+````
 
 Habilitamos la configuracion de phpmyadmin
+````bash
 sudo a2enconf phpmyadmin
+````
 
 Reiniciar apache
+````bash
 sudo systemctl restart apache2
+````
 
 Me sale file not found al entrar a 10.199.8.153/phpmyadmin/
+
+
 ````Bash
+# ayuda con IA, seleccionar lo necesario y borrar el resto
 miadmin@gjl-used3:/etc/apache2/conf-available$ sudo a2enmod php8.3
 Considering dependency mpm_prefork for php8.3:
 Considering conflict mpm_event for mpm_prefork:
@@ -835,11 +925,8 @@ Recomendación: Para la instalación simple de phpMyAdmin, te sugiero seguir la 
 ¿Quieres proceder con la Opción 1 para solucionar el conflicto de módulos?
 ````
 
-**phpmyadmin**
 
-https://www.devtutorial.io/how-to-install-phpmyadmin-with-apache-on-ubuntu-24-04-p3467.html
-
-## 2 XAMP
+## <h2>**2 XAMP**</h2>
 
 
 > **Gonzalo Junquera Lorenzo**  
