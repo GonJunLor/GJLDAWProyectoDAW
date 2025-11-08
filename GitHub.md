@@ -11,12 +11,14 @@
 
 - [GIT Y GITHUB](#git-y-github)
   - [Git](#git)
+    - [**Configuracion global en local**](#configuracion-global-en-local)
+    - [**Remover archivo del seguimiento de git.**](#remover-archivo-del-seguimiento-de-git)
   - [GitHub](#github)
 
 
 ## <h1>Git</h1>
 
-**Configuracion global en local**
+### <h2>**Configuracion global en local**</h2>
 
 Abrimos git bash y configuramos nuestro email y nuestro nombre
 ````Bash
@@ -24,7 +26,7 @@ git config --global user.name "Tu Nombre Completo"
 git config --global user.email "tu.email@ejemplo.com"
 ````
 
-**Remover archivo del seguimiento de git.**
+### <h2>**Remover archivo del seguimiento de git.**</h2> 
 
 git rm elimina un archivo tanto del directorio de trabajo como del área de preparación de Git, marcando su eliminación para el próximo commit. Este comando combina la eliminación del archivo con git add para que los cambios se preparen y se registren en el historial. Para solo eliminar un archivo del seguimiento de Git sin borrarlo del disco, se puede usar la opción --cached. 
 Uso básico 

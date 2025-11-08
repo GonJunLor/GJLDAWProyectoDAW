@@ -1,5 +1,5 @@
 <!-- title: README -->
-# ENTORNO DE DESARROLLO
+# SERVIDOR DE DESARROLLO
 
 |  CFGS DESARROLLO  DE APLICACIONES WEB |
 |:-----------:|
@@ -9,7 +9,7 @@
 | DAWES Tema 2. INSTALACIÓN, CONFIGURACIÓN Y DOCUMENTACIÓN DE ENTORNO DE DESARROLLO Y DEL ENTORNO DE EXPLOTACIÓN |
 
 
-- [ENTORNO DE DESARROLLO](#entorno-de-desarrollo)
+- [SERVIDOR DE DESARROLLO](#servidor-de-desarrollo)
   - [1 Ubuntu Server 24.04.3 LTS](#1-ubuntu-server-24043-lts)
     - [**1.1 Configuración inicial**](#11-configuración-inicial)
       - [*Instalación sistema operativo*](#instalación-sistema-operativo)
@@ -46,9 +46,9 @@
     - [**1.9 Apache Tomcat**](#19-apache-tomcat)
     - [**1.10 LDAP**](#110-ldap)
     - [**1.11 phpMyAdmin**](#111-phpmyadmin)
-  - [**2 XAMP**](#2-xamp)
+  - [2 XAMP](#2-xamp)
 
-## 1 Ubuntu Server 24.04.3 LTS
+## <h1>1 Ubuntu Server 24.04.3 LTS</h1>
 
 
 Este documento es una guía detallada del proceso de instalación y configuración de un servidor de aplicaciones en Ubuntu Server utilizando Apache, con soporte PHP y MySQL
@@ -926,7 +926,7 @@ Recomendación: Para la instalación simple de phpMyAdmin, te sugiero seguir la 
 ````
 
 
-## <h2>**2 XAMP**</h2>
+## <h1>2 XAMP</h1>
 
 
 > **Gonzalo Junquera Lorenzo**  
