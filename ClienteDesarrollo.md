@@ -28,8 +28,9 @@
     - [*Ejemplo de uso*](#ejemplo-de-uso-2)
       - [**Abrir proyecto**](#abrir-proyecto)
       - [**Depurar con Xdebug**](#depurar-con-xdebug)
-      - [**Conexión SFTP al servidor**](#conexión-sftp-al-servidor)
+      - [**Conexión SFTP y SSH al servidor**](#conexión-sftp-y-ssh-al-servidor)
       - [**Conectar a base de datos**](#conectar-a-base-de-datos)
+      - [**Uso de Git y GitHub**](#uso-de-git-y-github)
 
 
 ## <h2>**1 Configuración inicial**</h2>
@@ -89,57 +90,48 @@ Apache NetBeans IDE 20
 ## <h2>**5 Visual Studio Code**</h2>
 
 ### <h2>*Instalación*</h2>
+https://code.visualstudio.com/
+
+En la pagina oficial le damos a *Download for Windows* para descargar la última version disponible. 
+Abrimos el ejecutable y todo siguiente, siguiente y terminar.
 
 ### <h2>*Configuración*</h2>
 
-**<h3>Git Graph (Extensión)</h3>**
+**<h3>Cambiar idioma a español</h3>**
+https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-es
 
-<img src="webroot/media/images/vscExt01.png" width="600px">
-
-**<h3>Live Server (Extensión)</h3>**
-
-<img src="webroot/media/images/vscExt02.png" width="600px">
-
-**<h3>Markdown All in One (Extensión)</h3>**
-
-<img src="webroot/media/images/vscExt03.png" width="600px">
-
-**<h3>SQLTools (Extensión)</h3>**
-
-<img src="webroot/media/images/vscExt04.png" width="600px">
-
-**<h3>SQLTools MySQL/MariaDB/TiDB (Extensión)</h3>**
-
-<img src="webroot/media/images/vscExt05.png" width="600px">
-
-**<h3>vscode-pdf (Extensión)</h3>**
-
-<img src="webroot/media/images/vscExt06.png" width="600px">
-
-**<h3>SFTP (Extensión)</h3>**
-
-<img src="webroot/media/images/vscExt07.png" width="600px">
-
-**<h3>PHP Intelephense (Extensión)</h3>**
-
-<img src="webroot/media/images/vscExt08.png" width="600px">
-
-Para que funcione hay deshabilitar la que viene por defecto, buscamos @builtin php en el buscador de extensiones y la desactivamos.
-
-<img src="webroot/media/images/vscExt09.png" width="600px">
-
-**<h3>Conventional Commits (Extensión)</h3>**
-
-<img src="webroot/media/images/vscExt10.png" width="600px">
+Instalamos esa extensión y le damos a "change languaje and restart" en la ventana emergente que sale abajop a la derecha.
 
 **<h3>Auto Close Tag (Extensión)</h3>**
+https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-close-tag
 
-<img src="webroot/media/images/vscExt11.png" width="600px">
+<img src="webroot/media/images/vscExt11.png" width="400px">
+
+**<h3>Conventional Commits (Extensión)</h3>**
+https://marketplace.visualstudio.com/items?itemName=vivaxy.vscode-conventional-commits
+
+<img src="webroot/media/images/vscExt10.png" width="400px">
+
+**<h3>Git Graph (Extensión)</h3>**
+https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph
+
+<img src="webroot/media/images/vscExt01.png" width="400px">
+
+**<h3>Live Server (Extensión)</h3>**
+https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer
+
+<img src="webroot/media/images/vscExt02.png" width="400px">
+
+**<h3>Markdown All in One (Extensión)</h3>**
+https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one
+
+<img src="webroot/media/images/vscExt03.png" width="400px">
 
 **<h3>PHP Extension Pack (Extensión)</h3>**
 https://marketplace.visualstudio.com/items?itemName=xdebug.php-pack&ssr=false#overview
 
-<img src="webroot/media/images/vscExt12.png" width="600px">
+<img src="webroot/media/images/vscExt12.png" width="400px">
+
 Esta extensión instala otras dos, la PHP IntelliSense
 
 https://marketplace.visualstudio.com/items?itemName=zobo.php-intellisense
@@ -147,6 +139,36 @@ https://marketplace.visualstudio.com/items?itemName=zobo.php-intellisense
 y PHP Debug
 
 https://marketplace.visualstudio.com/items?itemName=xdebug.php-debug
+
+**<h3>PHP Intelephense (Extensión)</h3>**
+https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client
+
+<img src="webroot/media/images/vscExt08.png" width="400px">
+
+Para que funcione hay deshabilitar la que viene por defecto, buscamos @builtin php en el buscador de extensiones y la desactivamos.
+
+<img src="webroot/media/images/vscExt09.png" width="400px">
+
+**<h3>SFTP (Extensión)</h3>**
+https://marketplace.visualstudio.com/items?itemName=Natizyskunk.sftp
+
+<img src="webroot/media/images/vscExt07.png" width="400px">
+
+**<h3>SQLTools (Extensión)</h3>**
+https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools
+
+<img src="webroot/media/images/vscExt04.png" width="400px">
+
+**<h3>SQLTools MySQL/MariaDB/TiDB (Extensión)</h3>**
+https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql
+
+<img src="webroot/media/images/vscExt05.png" width="400px">
+
+**<h3>vscode-pdf (Extensión)</h3>**
+https://marketplace.visualstudio.com/items?itemName=tomoki1207.pdf
+
+<img src="webroot/media/images/vscExt06.png" width="400px">
+
 
 ### <h2>*Ejemplo de uso*</h2>
 
@@ -191,9 +213,70 @@ En el codigo resaltará en amarillo por donde va la ejecución del codigo, en es
 Para finalizar ejecutamos hasta que acabe el codigo o le damos al cuadrado rojo en la barra de botones.
 
 
-#### **<h3>Conexión SFTP al servidor</h3>**
+#### **<h3>Conexión SFTP y SSH al servidor</h3>**
+Para conectarnos a nuestro servidor por sftp tenemos que instalar la extensión [SFTP](https://marketplace.visualstudio.com/items?itemName=Natizyskunk.sftp). Damos a F1, buscamos *SFTP: Config* y le damos. Ésto creará un archivo *sftp.json* en la carpeta .vscode donde configurar los datos de nuestra conexión:
+````Bash
+{
+    "name": "gjl-used",
+    "host": "10.199.8.153", # esto lo cambiamos en casa y en clase
+    "protocol": "sftp",
+    "port": 22,
+    "username": "operadorweb",
+    "remotePath": "/var/www/html/GJLDWESProyectoTema4", # con ruta relativa no siempre funciona
+    "password": "paso",
+    "uploadOnSave": true, # para que se suba al guardar el archivo o al hacer cualquier cambio
+    "useTempFile": false,
+    "openSsh": false
+}
+````
+>La contraseña no viene por defecto, lo que hace es pedir que pongamos la contraseña que cada vez que nos conectamos, para evitar que la pida cada x tiempo la ponemos en el archivo de configuración.  
+
+También crea una pestaña <img src="webroot/media/images/vscSftp01.png" width="60px"> para administrar los archivos directamente en el servidor, al darle se abre el *SFTP:EXPLORER* donde vemos lo que tenemos subirdo al servidor y si hacemos clicke derecho sobre él vemos algunas opciones.
+
+<img src="webroot/media/images/vscSftp02.png" width="300px">
+
+**Open SSH in Terminal:** es para abrir una consola de nuestro servidor conectándonos con nuestro usuario operadorweb en este caso, en caso de que el usuario no tenga permisos nos dará error.
+
+**Upload Folder:** es para subir todos los archivos en local al servidor o solo los que falten, hay que darle al botón de actualizar para ver los cambios.
+
+Si damos boton secundario sobre un archivo o carpeta podemos borrarla con *delete*.
+
+Por último si vamos al explorador de nuestro proyecto en local y damos click derecho sobre cualquier archivo o carpeta abrán aparecido tres opciones más que son *Upload File*, *Upload File to All profiles* y *Download File*, nos interesa sobre todo el primero para subir cualquier archivo de forma manual sin esperar a que se suba solo cuando guardemos.
 
 #### **<h3>Conectar a base de datos</h3>**
+Primero tenemos que instalar las extensiones [SQLTools](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools) y [SQLTools MySQL/MariaDB/TiDB Driver](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql). Nos aparecerá una nueva pestaña a la izquierda para controlar la base detos <img src="webroot/media/images/vscBBDD01.png" height="30px">.
+
+Abrimos esa pestaña, damos a Añadir nueva conexión y elegimos MariaDB.
+
+<img src="webroot/media/images/vscBBDD02.png" width="300px">
+
+y configuramos los datos de nuestro servidor (* son obligatorios) , usuario, contraseña y la base datos.
+````Bash
+Connection name*: gjl-used
+Connect using*: Server and Port
+Server Address*: 10.199.8.153 # hay que cambiarlo entre clase y casa
+Port*: 3306
+Database*: mysql
+Username*: adminsql
+Password mode: Save as plaintext in settings # válido para hacer pruebas, en trabajo 
+# real dejaría Ask on Connect para que me pida siempre la contraseña
+Password*: paso
+````
+Damos a SAVE CONNECTION, creará un archivo settings.json en la carpeta .vscode con los datos de nuestra conexión, ahí podemos cambiar la ip de clase por la de casa. Además en la pestaña de base de datos crea una nueva entrada.
+
+<img src="webroot/media/images/vscBBDD03.png" width="400px">
+
+Para conectarnos y poder administrar la base de datos le damos al icono verde. Al hacerlo ya nnos saldrán todas las bases de datos con sus tablas, vistas, etc. 
+Cuando abrimos un archivo .sql vemos una opcion arriba para ejecutar todo el codigo SQL (Run on active connection) o si tenemos muchas instrucciones y solo queremos ejecutar alguna, la seleccionamos y con boton derecho sobre ella damos a *Run Selected Query*.
+
+<img src="webroot/media/images/vscBBDD04.png" width="700px">
+
+Si se ejecuta bien aparece una pestaña a la derecha con el resultado.
+
+#### **<h3>Uso de Git y GitHub</h3>**
+Lo primero será instalar y configurar git, ya lo tengo documentado 
+<a href="GitHub.md#instalación" target="_blank">aquí<a>.
+
 
 
 > **Gonzalo Junquera Lorenzo**  

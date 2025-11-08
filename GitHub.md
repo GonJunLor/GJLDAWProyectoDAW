@@ -11,12 +11,20 @@
 
 - [GIT Y GITHUB](#git-y-github)
   - [Git](#git)
+    - [**Instalación**](#instalación)
     - [**Configuracion global en local**](#configuracion-global-en-local)
     - [**Remover archivo del seguimiento de git.**](#remover-archivo-del-seguimiento-de-git)
   - [GitHub](#github)
 
 
 ## <h1>Git</h1>
+
+### <h2>**Instalación**</h2>
+https://git-scm.com/
+
+Lo descargamos desde la web oficial. 
+
+Lo ejecutamos y vamos dando a *next*, en una ventana pregunta por el editor por defecto, yo he escogido *Use NotePad as Git's default editor* el resto de ventanas todo *next* hasta llegar a *Install* y ya estaría instalado.
 
 ### <h2>**Configuracion global en local**</h2>
 

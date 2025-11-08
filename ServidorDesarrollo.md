@@ -78,7 +78,7 @@ Configuramos aqui el nombre del servidor y el primer usuario administrador del s
 <img src="webroot/media/images/us3.png" width="600px">
 
 **<h3>Servidor OpenSSH</h3>**
-Activamos esa opción para que se instale el servidor ssh para conectarnos despues desde windows por consola con el [MobaXterm](Windows11.md#3-mobaxterm)
+Activamos esa opción para que se instale el servidor ssh para conectarnos despues desde windows por consola con el <a href="ServidorDesarrollo.md#3-mobaxterm" target="_blank">MobaXterm</a>
 
 <img src="webroot/media/images/us4.png" width="600px">
 
@@ -195,7 +195,7 @@ sudo netplan apply
 # nos saltará un aviso diciendo donde está mal, ya que en este archivo es muy 
 # importante poner las tabulaciones correctamente.
 ````
-Si la configuración está correcta (no veremos ningún mensaje) ya podremos conectarnos por consola desde windows. A partir de aquí haremos todas las configuraciones desde el [MobaXterm](Windows11.md#3-mobaxterm) (click en él para ver como conectarnos).
+Si la configuración está correcta (no veremos ningún mensaje) ya podremos conectarnos por consola desde windows. A partir de aquí haremos todas las configuraciones desde el <a href="ServidorDesarrollo.md#3-mobaxterm" target="_blank">MobaXterm</a> (Click en él para ver como conectarnos).
 
 
 **<h3>Conexión al servidor desde windows</h3>**
