@@ -18,6 +18,8 @@
     - [*Instalación*](#instalación)
     - [*Configuración*](#configuración)
     - [*Ejemplo de uso*](#ejemplo-de-uso)
+      - [**Conexion SSH**](#conexion-ssh)
+      - [**Conexión SFTP**](#conexión-sftp)
   - [**4 Netbeans**](#4-netbeans)
     - [*Instalación*](#instalación-1)
     - [*Configuración*](#configuración-1)
@@ -42,13 +44,47 @@
 ## <h2>**2 Navegadores**</h2>
 
 ## <h2>**3 MobaXterm**</h2>
-- ver la parte del servidor y local con el otro programa
 
 ### <h2>*Instalación*</h2>
+https://mobaxterm.mobatek.net/download-home-edition.html
+
+Lo descargamos de la página oficial, tenemos dos versiones, una portable y otra para instalar, yo uso la portable.
+
+Una vez descargada, la descomprimimos donde no moleste, entramos y ejecutamos *MobaXterm_Personal_25.3.exe*.
 
 ### <h2>*Configuración*</h2>
 
 ### <h2>*Ejemplo de uso*</h2>
+
+#### **<h3>Conexion SSH</h3>**
+Damos al icono de *Session* arriba a la izquierda, elegimos SSH y configuramos ip y nombre de usuario.
+
+<img src="webroot/media/images/moba01.png" width="600px">
+
+Le damos a OK y nos pedirá la contraseña para conectarse.
+
+Si es la primera vez que configuramos una sesión no ssaldrá otra ventana para guardar las contraseñas, si aceptamos nos pedira que pongamos una contraseña general para el programa, si no aceptamos tendremos que poner la contraseña cada vez que nos conectemos.
+
+Nos conectamos seleccionando en la lista de *User sessions* y se abrirá una consola lista con nuestro usuario para poner comandos
+````Bash
+miadmin@gjl-used:~$
+````
+
+#### **<h3>Conexión SFTP</h3>**
+Damos al icono de *Session* arriba a la izquierda, elegimos SFTP y configuramos ip y nombre de usuario.
+<img src="webroot/media/images/moba02.png" width="600px">
+
+Le damos a OK y nos pedirá la contraseña para conectarse.
+
+Una vez configurado saldra en la lista de *User sessions* para poder usarlas.
+
+<img src="webroot/media/images/moba03.png" width="200px">
+
+Lo seleccionamos en la lista y se abrirá una ventana con la parte local a la izquierda para buscar los archivos que queremos subir y la parte del servidor a la derecha donde tenemos iconos para ir **arriba**, **actualizar**, **crear carpetas**, **crear archivos**, **abrir carpeta**, **borrar elementos**, **subir archivo** (se abre el explorador de windows para elegir un archivo), **descargar archivo** (seleccionamos un archivo, le damos al boton y se abre el explorador de windows para elegir donde guardarlo) y la barra que indica la ruta donde estamos.
+
+<img src="webroot/media/images/moba04.png" width="600px">
+
+También podemos abrir cualquier archivo de texto, html, php, etc (con doble click) con el editor de texto de MobaXterm por si tenemos que hacer alguna modificación menor o ver el código.
 
 ## <h2>**4 Netbeans**</h2>
 
