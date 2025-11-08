@@ -9,8 +9,8 @@
 | DAWES Tema 2. INSTALACIÓN, CONFIGURACIÓN Y DOCUMENTACIÓN DE ENTORNO DE DESARROLLO Y DEL ENTORNO DE EXPLOTACIÓN |
 
 CFGS Desarrollo de Aplicaciones Web
-- [1. Entorno de desarrollo](EntornoDesarrollo.md)
-- [2. Windows 11](Windows11.md)
+- [1. Servidor de desarrollo](ServidorDesarrollo.md)
+- [2. Cliente de desarrollo](ClienteDesarrollo.md)
 - [3. GitHub](GitHub.md)
 - [4. Entorno de Explotación](EntornoExplotacion.md)
 
