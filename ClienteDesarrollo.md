@@ -310,8 +310,8 @@ Cuando abrimos un archivo .sql vemos una opcion arriba para ejecutar todo el cod
 Si se ejecuta bien aparece una pestaña a la derecha con el resultado.
 
 #### **<h3>Uso de Git y GitHub</h3>**
-Lo primero será instalar y configurar git, ya lo tengo documentado 
-<a href="GitHub.md#instalación" target="_blank">aquí<a>.
+Toda esta sección lo tengo documentado
+<a href="GitHub.md#instalación" target="_blank">aquí</a>.
 
 
 
