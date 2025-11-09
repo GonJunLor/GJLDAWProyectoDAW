@@ -643,17 +643,23 @@ mariadb --version	Muestra la versión actual de MariaDB instalada.
 ### <h2>**1.5 Módulos PHP**</h2>
 
 #### <h2>*php8.3-mbstring*</h2>
-mbstring proporciona un conjunto de funciones que reemplazan o complementan a las funciones estándar de manejo de cadenas de PHP (como strlen(), substr(), strpos(), etc.).
+
+**<h3>Instalación</h3>**
+````Bash
+sudo apt install php8.3-mbstring
+sudo service apache2 restart
+````
+**<h3>¿Por qué es Necesaria?</h3>**
+
+**mbstring** proporciona un conjunto de funciones que reemplazan o complementan a las funciones estándar de manejo de cadenas de PHP (como strlen(), substr(), strpos(), etc.).
 
 Su función principal es garantizar que las operaciones con strings se realicen basándose en el número real de caracteres (o puntos de código Unicode) en lugar del número de bytes.
-
-**<h3>¿Por qué es Necesaria?</h3>**
 
 Las funciones de cadena estándar de PHP (como strlen()) fueron históricamente diseñadas para trabajar con codificaciones de un solo byte (como ASCII o ISO-8859-1).
 
 En la codificación UTF-8, caracteres como la ñ, las vocales acentuadas (á, é), o cualquier emoji, ocupan dos o más bytes.
 
-Si usas la función estándar strlen() en un string UTF-8 que contiene una ñ, el resultado contará los bytes (ej. 2) en lugar de contar 1 carácter.
+**Si usas la función estándar strlen() en un string UTF-8 que contiene una ñ, el resultado contará los bytes (ej. 2) en lugar de contar 1 carácter.**
 
 La extensión mbstring resuelve esto proporcionando funciones como:
 
@@ -664,8 +670,7 @@ La extensión mbstring resuelve esto proporcionando funciones como:
 >mb_convert_encoding(): Permite cambiar la codificación de una cadena.
 
 **<h3>¿Donde lo usamos?</h3>**
-En nuestro caso la necesitamos para usar la funcion mb_strlen() en nuestra librería de validación ya que de usar la función por defecto de php strlen() tenemos porblemas cuando estamos validando la Ñ.
-
+En nuestro caso la necesitamos para usar la funcion mb_strlen() en nuestra **librería de validación** en las funciones **comprobarMaxTamanio() y comprobarMinTamanio()** ya que de usar la función por defecto de php strlen() tenemos problemas cuando estamos validando la Ñ.
 
 #### <h2>*php8.3-mysql*</h2>
 
