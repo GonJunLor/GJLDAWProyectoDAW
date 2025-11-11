@@ -48,6 +48,7 @@
     - [**1.9 Apache Tomcat**](#19-apache-tomcat)
     - [**1.10 LDAP**](#110-ldap)
     - [**1.11 phpMyAdmin**](#111-phpmyadmin)
+      - [*Instalación*](#instalación-4)
       - [*Configuración*](#configuración-4)
       - [*Monitorización*](#monitorización-4)
       - [*Mantenimiento*](#mantenimiento-4)
@@ -860,7 +861,7 @@ sudo systemctl restart ssh
 #### <h2>*Instalación*</h2>
 https://www.devtutorial.io/how-to-install-phpmyadmin-with-apache-on-ubuntu-24-04-p3467.html
 
-Antes de instalar guardamos la lista de modulos actuales para despues de intalar volver a crearla y comparar
+Antes de instalar guardamos la lista de modulos actuales para despues de instalar volver a crearla y comparar
 ````bash
 php -m > /home/miadmin/listadomodulos.txt
 # Despues de instalar
@@ -868,6 +869,8 @@ php -m > /home/miadmin/listadomodulos2.txt
 # Comparamos los dos ficheros (estando en la ruta /home/miadmin/)
 diff listadomodulos.txt listadomodulos2.txt
 ````
+<img src="webroot/media/images/phpMyAdmin00.png" width="400px">
+
 Instalamos phpmyadmin, primero actualizamos
 ````bash
 sudo apt update
