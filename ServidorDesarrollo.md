@@ -47,6 +47,7 @@
     - [**1.9 Apache Tomcat**](#19-apache-tomcat)
     - [**1.10 LDAP**](#110-ldap)
     - [**1.11 phpMyAdmin**](#111-phpmyadmin)
+    - [**1.12 Sitios virtuales**](#112-sitios-virtuales)
   - [2 XAMP](#2-xamp)
 
 ## <h1>1 Ubuntu Server 24.04.3 LTS</h1>
@@ -956,6 +957,9 @@ Recomendación: Para la instalación simple de phpMyAdmin, te sugiero seguir la 
 ¿Quieres proceder con la Opción 1 para solucionar el conflicto de módulos?
 ````
 
+### <h2>**1.12 Sitios virtuales**</h2>
+- creamos en plesk un registro sitio.gonzalo.... en dns
+- 
 
 ## <h1>2 XAMP</h1>
 

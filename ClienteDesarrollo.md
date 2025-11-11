@@ -209,6 +209,13 @@ https://marketplace.visualstudio.com/items?itemName=tomoki1207.pdf
 ### <h2>*Ejemplo de uso*</h2>
 
 #### **<h3>Abrir proyecto</h3>**
+En vsCode no tenemos el concepto de proyecto como tal, lo que hacemos es abrir la carpeta donde tenemos los archivos.
+
+Primero, si estamos trabajando en algun proyecto ya y queremos abrir otro, lo que hacemos es abrir nueva ventana en archivos(File)
+
+Para abrir una carpeta vamos a archivos(File) y a abrir carpeta(open folder), se abrirá el explorador de archivos y buscamos la carpeta del proyecto.
+
+Otra opción que tenemos para abrir proyectos recientes rápidamente es desde la ventana principal que aparecen los ultimos 5 proyectos que hemos abierto y si damos a más podemos abrir practicamente cualquier proyecto anterior.
 
 #### **<h3>Depurar con Xdebug</h3>**
 Para poder depurar necesitamos tener instalada la extensión [PHP Extension Pack](https://marketplace.visualstudio.com/items?itemName=xdebug.php-pack&ssr=false#overview) la cual instala la extensión PHP Debug que necesitamos.
