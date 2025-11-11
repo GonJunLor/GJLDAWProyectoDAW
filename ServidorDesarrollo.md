@@ -53,6 +53,8 @@
       - [*Monitorización*](#monitorización-4)
       - [*Mantenimiento*](#mantenimiento-4)
     - [**1.12 Sitios virtuales**](#112-sitios-virtuales)
+      - [*Crear DNS sitio1 en plesk*](#crear-dns-sitio1-en-plesk)
+      - [*Configurar sitio1*](#configurar-sitio1)
   - [2 XAMP](#2-xamp)
 
 ## <h1>1 Ubuntu Server 24.04.3 LTS</h1>
@@ -917,8 +919,85 @@ Probamos en el navegador con nuestra ip/phpmyadmin y usamos el usuario y contras
 
 
 ### <h2>**1.12 Sitios virtuales**</h2>
-- creamos en plesk un registro sitio.gonzalo.... en dns
-- 
+
+#### <h2>*Crear DNS sitio1 en plesk*</h2>
+Entramos en nuestra cuenta de plesk, deplegamos nuestro dominio principal, damos a *Hosting y DNS* y a *DNS*.
+
+<img src="webroot/media/images/virtual01.png" width="600px">
+
+Damos a añadir regitro.
+
+<img src="webroot/media/images/virtual02.png" width="600px">
+
+Configuramos el nuevo DNS con los datos de nuestro servidor local y aceptar.
+
+<img src="webroot/media/images/virtual03.png" width="500px">
+
+Damos actualizar ne el aviso.
+
+<img src="webroot/media/images/virtual04.png" width="600px">
+
+Si todo ha ido bien saldrá el mensaje de confirmación.
+
+<img src="webroot/media/images/virtual05.png" width="600px">
+
+#### <h2>*Configurar sitio1*</h2>
+
+Por si no tenemos la carpeta error en el directorio de usuarioenjaulado, la creamos y le damos permisos igual que a httpdocs.
+````Bash
+sudo chmod 2775 -R /var/www/usuarioenjaulado1/error
+sudo chown usuarioenjaulado1:www-data -R /var/www/usuarioenjaulado1/error
+````
+
+Hacemos copia de seguridad del archivo por defecto para los sitio http y abrimos la copia en este caso sitio1.conf
+````Bash
+sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/sitio1.conf
+sudo nano /etc/apache2/sites-available/sitio1.conf
+````
+
+Por si necesitamos hacer la copia del archivo para https en vez del otro
+````Bash
+sudo cp /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/sitio1.conf
+````
+
+Configuramos el archivo sitio1.conf (el que era http)
+````Bash
+<VirtualHost *:80>
+
+  ServerName sitio1.gonzalojunlor.ieslossauces.es
+
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/usuarioenjaulado1/httpdocs
+
+  ErrorLog ${APACHE_LOG_DIR}/error-sitio1.log
+  ErrorLog /var/www/usuarioenjaulado1/error/error.log
+  CustomLog ${APACHE_LOG_DIR}/access-sitio1.log combined
+  ProxyPassMatch ^/(.*\.php)$ unix:/run/php/php8.3-fpm.sock|fcgi://127.0.0.1/var/www/usuarioenjaulado1/httpdocs
+
+</VirtualHost>
+````
+
+<img src="webroot/media/images/virtual06.png" width="700px">
+
+Ya hacemos los siguiente:
+````Bash
+# Habilita el nuevo sitio
+sudo a2ensite sitio1.conf
+
+# Deshabilita el sitio por defecto de Apache (opcional, si no lo necesitas)
+sudo a2dissite 000-default.conf
+
+# Verifica que la configuración de Apache no tenga errores
+sudo apache2ctl configtest
+
+# Recarga el servicio de Apache para aplicar los cambios
+sudo systemctl reload apache2
+````
+
+Agregamos lo que sea a la carpeta */var/www/usuarioenjaulado1/httpdocs/* para visualizarlo
+
+>De momento me funciona solo por http, si pongo https me dirige a la carpeta principal */var/www/html*
+
 
 ## <h1>2 XAMP</h1>
 
