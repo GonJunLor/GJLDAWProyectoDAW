@@ -320,8 +320,7 @@ y lo modificamos con
 sudo nano /etc/ssh/sshd_config
 ````
 ````Bash
-Subsystem sftp internal
-
+Subsystem sftp internal-sftp
 Match Group sftpusers
 ChrootDirectory %h
 ForceCommand internal-sftp -u 2
