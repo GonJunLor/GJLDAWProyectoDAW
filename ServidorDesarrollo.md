@@ -87,6 +87,11 @@ Activamos esa opción para que se instale el servidor ssh para conectarnos despu
 #### <h2>*Comandos útiles*</h2>
 En esta sección incluiré una serie de comandos que nos pueden servir a lo largo de esta guía.
 
+**<h3>Cambiar usuario en consola</h3>**
+````Bash
+su [nombre usuario]
+exit # para salir
+````
 
 **<h3>Tipo de sistema operativo</h3>**
 Para comprobar el nombre del servidor, la versión del sistema operativo instalado actualmente, la versión de kernel utilizado, tipo de arquitectura del procesador, etc.
@@ -301,9 +306,9 @@ sudo chmod 555 /var/www/usuarioenjaulado1
 
 Creamos una carpeta dentro que será la que el usuarioenjaulado1 puede escribir
 ````Bash
-sudo mkdir /var/www/usuarioenjaulado1/htdocs
-sudo chmod 2775 -R /var/www/usuarioenjaulado1/htdocs
-sudo chown usuarioenjaulado1:www-data -R /var/www/usuarioenjaulado1/htdocs
+sudo mkdir /var/www/usuarioenjaulado1/httpdocs
+sudo chmod 2775 -R /var/www/usuarioenjaulado1/httpdocs
+sudo chown usuarioenjaulado1:www-data -R /var/www/usuarioenjaulado1/httpdocs
 ````
 
 Copia de seguridad de /etc/ssh/sshd_config.d   
