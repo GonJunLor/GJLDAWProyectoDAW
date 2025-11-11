@@ -48,6 +48,9 @@
     - [**1.9 Apache Tomcat**](#19-apache-tomcat)
     - [**1.10 LDAP**](#110-ldap)
     - [**1.11 phpMyAdmin**](#111-phpmyadmin)
+      - [*Configuración*](#configuración-4)
+      - [*Monitorización*](#monitorización-4)
+      - [*Mantenimiento*](#mantenimiento-4)
     - [**1.12 Sitios virtuales**](#112-sitios-virtuales)
   - [2 XAMP](#2-xamp)
 
@@ -854,6 +857,7 @@ sudo systemctl restart ssh
 
 ### <h2>**1.11 phpMyAdmin**</h2>
 
+#### <h2>*Instalación*</h2>
 https://www.devtutorial.io/how-to-install-phpmyadmin-with-apache-on-ubuntu-24-04-p3467.html
 
 Antes de instalar guardamos la lista de modulos actuales para despues de intalar volver a crearla y comparar
@@ -864,7 +868,7 @@ php -m > /home/miadmin/listadomodulos2.txt
 # Comparamos los dos ficheros (estando en la ruta /home/miadmin/)
 diff listadomodulos.txt listadomodulos2.txt
 ````
-Instalamos phpmyadmin, pirmero actualizamos
+Instalamos phpmyadmin, primero actualizamos
 ````bash
 sudo apt update
 sudo apt install phpmyadmin
@@ -872,30 +876,24 @@ sudo apt install phpmyadmin
 
 Con la barra espaciadora elegimos apache
 
+<img src="webroot/media/images/phpMyAdmin01.png" width="600px">
+
 Le damos a que si en crear bbdd
+
+<img src="webroot/media/images/phpMyAdmin02.png" width="600px">
 
 Contraseña paso
 
-Habilitamos la extensión PHP mbstring (si no se hizo automáticamente):
-````bash
-sudo phpenmod mbstring
-````
+<img src="webroot/media/images/phpMyAdmin03.png" width="600px">
 
-Si da error WARNING: Module mbstring ini file doesn't exist under /etc/php/8.3/mods-available
-Podemos comprobar igualmente si esta activado con:
-````bash
-php -m | grep mbstring
-````
+Confirmar contraseño paso
 
-Durante la instalación de phpMyAdmin, se debe crear un archivo de configuración de Apache que vincule la URL /phpmyadmin con la carpeta donde residen los archivos.
-Para hacerlo manualmente:
-````bash
-sudo ln -s /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf
-````
+<img src="webroot/media/images/phpMyAdmin04.png" width="250px">
 
-En caso de que ya exista el /etc/apache2/conf-available/phpmyadmin.conf, hacemos una copia y lo borramos para hacerlo de nuevo.
+#### <h2>*Configuración*</h2>
+Creamos enlace simbólico del archivo apache.conf en conf-available
 ````bash
-sudo mv /etc/apache2/conf-available/phpmyadmin.conf /etc/apache2/conf-available/phpmyadmin.confBK20251105
+sudo ln -sf /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf
 ````
 
 Habilitamos la configuracion de phpmyadmin
@@ -907,81 +905,13 @@ Reiniciar apache
 ````bash
 sudo systemctl restart apache2
 ````
+#### <h2>*Monitorización*</h2>
+Probamos en el navegador con nuestra ip/phpmyadmin y usamos el usuario y contraseña de mariadb (adminsql/paso)
+<img src="webroot/media/images/phpMyAdmin05.png" width="250px">
+<img src="webroot/media/images/phpMyAdmin06.png" width="400px">
 
-Me sale file not found al entrar a 10.199.8.153/phpmyadmin/
+#### <h2>*Mantenimiento*</h2>
 
-
-````Bash
-# ayuda con IA, seleccionar lo necesario y borrar el resto
-miadmin@gjl-used3:/etc/apache2/conf-available$ sudo a2enmod php8.3
-Considering dependency mpm_prefork for php8.3:
-Considering conflict mpm_event for mpm_prefork:
-ERROR: Module mpm_event is enabled - cannot proceed due to conflicts. It needs to be disabled first!
-Considering conflict mpm_worker for mpm_prefork:
-ERROR: Could not enable dependency mpm_prefork for php8.3, aborting
-
-¡Excelente! El mensaje que has compartido identifica el problema exacto y explica por qué Apache no está procesando los archivos PHP dentro del directorio de phpMyAdmin, lo que resulta en el error "File not found."
-
-🚨 El Conflicto: MPM Modules
-El problema es un conflicto entre los Módulos de Procesamiento Múltiple (MPM) de Apache:
-
-mpm_event (Habilitado): Este módulo está optimizado para PHP-FPM y no es compatible con el módulo tradicional de PHP de Apache (libapache2-mod-php).
-
-mpm_prefork (Requerido): El módulo php8.3 que intentas habilitar requiere el módulo mpm_prefork para funcionar.
-
-Como mpm_event está habilitado, no se puede habilitar mpm_prefork, lo que impide que el módulo php8.3 se cargue. Sin el módulo php8.3, Apache no sabe cómo ejecutar el archivo index.php de phpMyAdmin, y te devuelve "File not found."
-
-🛠️ Solución: Deshabilitar el Módulo Conflictivo
-Para resolver esto, tienes dos opciones:
-
-Opción 1: Usar PHP como Módulo de Apache (Más sencillo, para desarrollo)
-Esta es la forma tradicional y más sencilla para phpMyAdmin, pero requiere deshabilitar mpm_event.
-
-Deshabilitar mpm_event y mpm_worker:
-
-Bash
-
-sudo a2dismod mpm_event
-sudo a2dismod mpm_worker
-Habilitar mpm_prefork y el módulo PHP 8.3: Al intentar habilitar php8.3, Apache intentará automáticamente habilitar mpm_prefork.
-
-Bash
-
-sudo a2enmod php8.3
-Reiniciar Apache:
-
-Bash
-
-sudo systemctl restart apache2
-Ahora, Apache usará el módulo PHP nativo, y al acceder a http://10.199.8.153/phpmyadmin/, deberías ver la página de inicio de sesión.
-
-Opción 2: Usar PHP-FPM (Recomendado para producción)
-Si estás usando mpm_event, lo más probable es que estés configurado para usar PHP-FPM (FastCGI Process Manager), que es la forma moderna y más eficiente de ejecutar PHP.
-
-Si quieres mantener mpm_event, debes asegurarte de que los módulos mod_proxy y mod_proxy_fcgi estén habilitados y configurados para pasar las peticiones .php al socket de PHP-FPM.
-
-Habilitar módulos FPM:
-
-Bash
-
-sudo a2enmod proxy proxy_fcgi setenvif
-Habilitar la configuración FPM para PHP 8.3:
-
-Bash
-
-sudo a2enconf php8.3-fpm
-# Nota: El nombre del archivo puede variar, como 
-# 'php8.3-fpm.conf' o 'php8.3-fpm'.
-Reiniciar los servicios:
-
-Bash
-
-sudo systemctl restart php8.3-fpm
-sudo systemctl restart apache2
-Recomendación: Para la instalación simple de phpMyAdmin, te sugiero seguir la Opción 1 (deshabilitar mpm_event y usar mpm_prefork con mod_php8.3).
-
-¿Quieres proceder con la Opción 1 para solucionar el conflicto de módulos?
-````
 
 ### <h2>**1.12 Sitios virtuales**</h2>
 - creamos en plesk un registro sitio.gonzalo.... en dns
