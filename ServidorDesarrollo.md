@@ -44,6 +44,7 @@
       - [*Mantenimiento*](#mantenimiento-3)
     - [**1.7 DNS**](#17-dns)
     - [**1.8 SFTP**](#18-sftp)
+      - [*Enjaular usuarios*](#enjaular-usuarios)
     - [**1.9 Apache Tomcat**](#19-apache-tomcat)
     - [**1.10 LDAP**](#110-ldap)
     - [**1.11 phpMyAdmin**](#111-phpmyadmin)
@@ -284,56 +285,6 @@ Para ver datos de las cuentas
 ````Bash
 cat /etc/passwd
 cat /etc/group
-````
-
-**<h3>Enjaular usuarios</h3>**
-Creamos el grupo ftpusers
-````Bash
-sudo groupadd sftpusers
-````
-
-Creamos el usuario usuarioenjaulado1 con carpeta home var/www/usuarioenjaulado1 y le ponemos contraseña
-````Bash
-sudo useradd -g www-data -G sftpusers -m -d /var/www/usuarioenjaulado1 usuarioenjaulado1
-sudo passwd usuarioenjaulado1
-````
-
-Cambiamos el propietario y los permisos al home del usuario para que pertenezca al root
-````Bash
-sudo chown root:root /var/www/usuarioenjaulado1
-sudo chmod 555 /var/www/usuarioenjaulado1
-````
-
-Creamos una carpeta dentro que será la que el usuarioenjaulado1 puede escribir
-````Bash
-sudo mkdir /var/www/usuarioenjaulado1/httpdocs
-sudo chmod 2775 -R /var/www/usuarioenjaulado1/httpdocs
-sudo chown usuarioenjaulado1:www-data -R /var/www/usuarioenjaulado1/httpdocs
-````
-
-Copia de seguridad de /etc/ssh/sshd_config.d   
-````Bash
-sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_configBK20251106
-````
-y lo modificamos con 
-````Bash
-sudo nano /etc/ssh/sshd_config
-````
-````Bash
-Subsystem sftp internal-sftp
-Match Group sftpusers
-ChrootDirectory %h
-ForceCommand internal-sftp -u 2
-AllowTcpForwarding yes
-PermitTunnel no
-X11Forwarding no
-````
-
-<img src="webroot/media/images/jaula1.png" width="600px">
-
-Reiniciamos ssh
-````Bash
-sudo systemctl restart ssh
 ````
 
 ### <h2>**1.2 Apache**</h2>
@@ -825,6 +776,77 @@ RewriteRule ^(.*)$ https://10.199.8.153/$1 [R,L]
 ### <h2>**1.7 DNS**</h2>
 
 ### <h2>**1.8 SFTP**</h2>
+SFTP no necesita instalarse, viene incluido dentro del OpenSSH instalado previamente.
+Solo debemos asegurarnos de que el servidor SSH esté instalado:
+````Bash
+sudo systemctl status ssh
+````
+
+Si no esta, lo instalamos con:
+````Bash
+sudo apt update
+sudo apt install openssh-server -y 
+sudo systemctl restart ssh
+````
+
+Comandos para controlarlo
+````Bash
+sudo systemctl start ssh      # Iniciar el servicio
+sudo systemctl stop ssh       # Detener el servicio
+sudo systemctl restart ssh    # Reiniciar para aplicar cambios
+sudo systemctl enable ssh     # Habilitar inicio automático
+sudo systemctl disable ssh    # Deshabilitar inicio automático
+````
+
+#### <h2>*Enjaular usuarios*</h2>
+Creamos el grupo ftpusers
+````Bash
+sudo groupadd sftpusers
+````
+
+Creamos el usuario usuarioenjaulado1 con carpeta home var/www/usuarioenjaulado1 y le ponemos contraseña
+````Bash
+sudo useradd -g www-data -G sftpusers -m -d /var/www/usuarioenjaulado1 usuarioenjaulado1
+sudo passwd usuarioenjaulado1
+````
+
+Cambiamos el propietario y los permisos al home del usuario para que pertenezca al root
+````Bash
+sudo chown root:root /var/www/usuarioenjaulado1
+sudo chmod 555 /var/www/usuarioenjaulado1
+````
+
+Creamos una carpeta dentro que será la que el usuarioenjaulado1 puede escribir
+````Bash
+sudo mkdir /var/www/usuarioenjaulado1/httpdocs
+sudo chmod 2775 -R /var/www/usuarioenjaulado1/httpdocs
+sudo chown usuarioenjaulado1:www-data -R /var/www/usuarioenjaulado1/httpdocs
+````
+
+Copia de seguridad de /etc/ssh/sshd_config.d   
+````Bash
+sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_configBK20251106
+````
+y lo modificamos con 
+````Bash
+sudo nano /etc/ssh/sshd_config
+````
+````Bash
+Subsystem sftp internal-sftp
+Match Group sftpusers
+ChrootDirectory %h
+ForceCommand internal-sftp -u 2
+AllowTcpForwarding yes
+PermitTunnel no
+X11Forwarding no
+````
+
+<img src="webroot/media/images/jaula1.png" width="600px">
+
+Reiniciamos ssh
+````Bash
+sudo systemctl restart ssh
+````
 
 ### <h2>**1.9 Apache Tomcat**</h2>
 
