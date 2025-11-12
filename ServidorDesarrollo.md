@@ -932,6 +932,10 @@ sudo systemctl restart apache2
 ````
 #### <h2>*Monitorización*</h2>
 Probamos en el navegador con nuestra ip/phpmyadmin y usamos el usuario y contraseña de mariadb (adminsql/paso)
+````Bash
+https://10.199.8.153/phpmyadmin/
+````
+
 <img src="webroot/media/images/phpMyAdmin05.png" width="250px">
 <img src="webroot/media/images/phpMyAdmin06.png" width="400px">
 
