@@ -969,6 +969,7 @@ Si todo ha ido bien saldrá el mensaje de confirmación.
 
 Por si no tenemos la carpeta error en el directorio de usuarioenjaulado, la creamos y le damos permisos igual que a httpdocs.
 ````Bash
+sudo mkdir /var/www/usuarioenjaulado1/error
 sudo chmod 2775 -R /var/www/usuarioenjaulado1/error
 sudo chown usuarioenjaulado1:www-data -R /var/www/usuarioenjaulado1/error
 ````
@@ -1027,7 +1028,7 @@ apache2ctl -S
 Agregamos lo que sea a la carpeta */var/www/usuarioenjaulado1/httpdocs/* para visualizarlo
 
 >De momento me funciona solo por http, si pongo https me dirige a la carpeta principal */var/www/html*
-
+>He intentado activar HTTPS para esta carpeta pero solo funciona si desactivo el sitio gjl-used.conf.
 
 ## <h1>2 XAMP</h1>
 
