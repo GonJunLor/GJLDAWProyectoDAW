@@ -181,13 +181,13 @@ network:
       addresses:
        - 10.199.8.153/22
       nameservers:
-         addresses:
-         - 10.151.123.21
-         - 10.151.126.21
-      search: [educa.jcyl.es]
+       addresses:
+        - 10.151.123.21
+        - 10.151.126.21
+       search: [educa.jcyl.es]
       routes:
         - to: default
-           via: 10.199.8.1   
+          via: 10.199.8.1   
   version: 2
 ```
 Una vez que hemos rellenado el archivo de conexión podemos actualizar la configuración de red. 
