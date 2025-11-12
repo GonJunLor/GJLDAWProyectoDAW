@@ -211,6 +211,24 @@ sudo netplan apply
 ````
 Si la configuración está correcta (no veremos ningún mensaje) ya podremos conectarnos por consola desde windows. A partir de aquí haremos todas las configuraciones desde el <a href="ClienteDesarrollo.md#3-mobaxterm" target="_blank">MobaXterm</a> (Click en él para ver como conectarnos).
 
+**<h3>Cortafuegos</h3>**
+Activar cortafuegos
+````Bash
+sudo ufw enable
+````
+Abrir puerto 22
+````Bash
+sudo ufw allow 22
+````
+Ver puertos abiertos, cualquiera de los dos comandos.
+````Bash
+sudo ufw status
+sudo ufw status numbered 
+````
+Quitar número de puerto
+````Bash
+sudo ufw delete [numPuerto]
+````
 
 **<h3>Conexión al servidor desde windows</h3>**
 Aunque vamos a usar el MobaXterm desde windows, también podemos conectarnos con la consola de windows, para ello primero arrancamos el servicio ssh en el servidor (por si no estuviera activo) y comprobamos si esta activo.
@@ -251,25 +269,6 @@ sudo apt install clamav
 Ver versión
 ````Bash
 clamscan --version
-````
-
-**<h3>Cortafuegos</h3>**
-Activar cortafuegos
-````Bash
-sudo ufw enable
-````
-Abrir puerto 22
-````Bash
-sudo ufw allow 22
-````
-Ver puertos abiertos, cualquiera de los dos comandos.
-````Bash
-sudo ufw status
-sudo ufw status numbered 
-````
-Quitar número de puerto
-````Bash
-sudo ufw delete [numPuerto]
 ````
 
 #### <h2>*Cuentas administradoras*</h2>
