@@ -75,6 +75,10 @@ En cuanto al almacenamiento configuramos un disco duro virtual de 500GB dinámic
 
 <img src="webroot/media/images/vb02.png" width="600px">
 
+Antes de encender la maquina vamos a configuración y cambias el adaptador de red a adaptador puente
+
+<img src="webroot/media/images/vb03.png" width="600px">
+
 **<h3>Particiones</h3>**
 Creamos dos particiones, una de 150GB para la raiz del servidor y otra del resto para la carpeta /var
 
@@ -150,6 +154,11 @@ cat /etc/group # datos de los grupos
 **<h3>Para ver los modulos activos de php</h3>**
 ````Bash
 apache2ctl -M
+````
+
+**<h3>Para ver los sitios activos</h3>**
+````Bash
+apache2ctl -S
 ````
 
 #### <h2>*Configuraciones sistema operativo*</h2>
@@ -230,6 +239,10 @@ Quitar número de puerto
 sudo ufw delete [numPuerto]
 ````
 
+Antes de nada abrimos la consola de comandos de windows y hacemos ping a nuestra ip, si no va probamos a reiniciar ubuntu server
+
+<img src="webroot/media/images/vb04.png" width="600px">
+
 **<h3>Conexión al servidor desde windows</h3>**
 Aunque vamos a usar el MobaXterm desde windows, también podemos conectarnos con la consola de windows, para ello primero arrancamos el servicio ssh en el servidor (por si no estuviera activo) y comprobamos si esta activo.
 ````Bash
@@ -239,17 +252,6 @@ sudo systemctl status ssh
 Abrimos la consola de windows (simbolo del sistema): usamos el comando ssh con nuestro nombre de usuario e ip del servidor, después nos pedirá la clave.
 ````Bash
 ssh miadmin@10.199.8.153
-````
-
-**<h3>Cambiar nombre servidor</h3>**
-
-````Bash
-sudo hostnamectl set-hostname gjl-used
-````
-También cambiamos el nombre en ese archivo y comprobamos con cat
-````Bash
-sudo nano /etc/hosts
-cat /etc/hosts
 ````
 
 **<h3>Configuración fecha y hora</h3>**
@@ -290,6 +292,18 @@ Para ver datos de las cuentas
 ````Bash
 cat /etc/passwd
 cat /etc/group
+````
+
+**<h3>Cambiar nombre servidor</h3>**
+A partir de aqui vamos a clonar la maquina limpia y la llamaremos gjl-used.
+
+````Bash
+sudo hostnamectl set-hostname gjl-used
+````
+También cambiamos el nombre en ese archivo y comprobamos con cat
+````Bash
+sudo nano /etc/hosts
+cat /etc/hosts
 ````
 
 ### <h2>**1.2 Apache**</h2>
@@ -337,9 +351,16 @@ sudo chmod -R 775 /var/www/html
 
 Estan en etc/apache2/
 
-Redirección de errores a archivo error.log, añadimos la línea CustomLog al archivo 000-default.conf. Previamente hay que tener creada la carpeta error en /var/www/html/ y una copia de seguridad del archivo.
+Creamos la carpeta error y cambiamos los permisos para que sea igual que html
 ````Bash
-sudo cp 000-default.conf 000-default.confBK20251106
+sudo mkdir /var/www/html/error
+sudo chown -R operadorweb:www-data /var/www/html/error
+sudo chmod -R 775 /var/www/html/error
+````
+
+Redirección de errores a archivo error.log, añadimos la línea CustomLog al archivo 000-default.conf. Previamente hay que tener creada una copia de seguridad del archivo.
+````Bash
+sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.confBK20251106
 sudo nano /etc/apache2/sites-available/000-default.conf
 CustomLog ${APACHE_LOG_DIR}/access.log combined
 ````
@@ -992,6 +1013,12 @@ sudo apache2ctl configtest
 # Recarga el servicio de Apache para aplicar los cambios
 sudo systemctl reload apache2
 ````
+
+Sólo tiene que haber tres sitios activos, el 000-default.conf, sitio1.conf y gjl-used.conf
+Para saber cuales están activos
+````Bash
+apache2ctl -S
+```` 
 
 Agregamos lo que sea a la carpeta */var/www/usuarioenjaulado1/httpdocs/* para visualizarlo
 
