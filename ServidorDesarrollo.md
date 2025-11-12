@@ -220,7 +220,7 @@ sudo systemctl status ssh
 ````
 Abrimos la consola de windows (simbolo del sistema): usamos el comando ssh con nuestro nombre de usuario e ip del servidor, después nos pedirá la clave.
 ````Bash
-ssh miadmin@10.10.199.8.153
+ssh miadmin@10.199.8.153
 ````
 
 **<h3>Cambiar nombre servidor</h3>**
