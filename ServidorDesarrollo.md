@@ -346,6 +346,8 @@ sudo chown -R operadorweb:www-data /var/www/html
 ````Bash
 sudo chmod -R 775 /var/www/html
 ````
+Si en algún momento tenemos problemas de permisos para escribir un archivo desde codigo php tenemos que volver a ejecutar este código para que de permisos a todas las carpetas de dentro. 
+>Parece ser que cuando subimos archivos o carpetas con el usuario operadorweb despues de haber dado estos permisos, las carpetas nuevas no tiene permisos de escritura para los usuarios del grupo www-data, solo para el propietario (operadorweb).
 
 **<h3>Archivos de configuración</h3>**
 
