@@ -220,6 +220,8 @@ Otra opción que tenemos para abrir proyectos recientes rápidamente es desde la
 #### **<h3>Depurar con Xdebug</h3>**
 Para poder depurar necesitamos tener instalada la extensión [PHP Extension Pack](https://marketplace.visualstudio.com/items?itemName=xdebug.php-pack&ssr=false#overview) la cual instala la extensión PHP Debug que necesitamos.
 
+En nuestro caso por la configuración de nuestro ubuntu server tenemos que cambiar el identificador del ide que usamos, para ello hay que ir a la configuración y buscar "php.debug.idekey" y ponerle el valor "netbeans-xdebug".
+
 Le damos a la pestaña de depuración  <img src="webroot/media/images/vscXdebug01.png" width="30px"> y damos en "*create a launch.json file*", esto creara un archivo de configuración (launch.json) en la carpeta .vscode.
 
 Abrimos el archivo launch.json y añadimos la ruta de nuestro proyecto en "pathMappings". 
