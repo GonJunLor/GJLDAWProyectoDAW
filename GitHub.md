@@ -25,6 +25,7 @@
   - [GitHub](#github)
       - [*Borrar proyecto.*](#borrar-proyecto)
       - [*Lanzamientos (Releases).*](#lanzamientos-releases)
+      - [*Autenticación ssh con claves privadas.*](#autenticación-ssh-con-claves-privadas)
 
 
 ## <h1>Git</h1>
@@ -212,6 +213,10 @@ Una vez que le hemos dado a *verify* no reenvia a la pagina principal con el men
 <img src="webroot/media/images/github07.png" width="500px">
 
 #### <h2>*Lanzamientos (Releases).*</h2> 
+
+#### <h2>*Autenticación ssh con claves privadas.*</h2> 
+https://docs.github.com/es/enterprise-cloud@latest/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+
 
 > **Gonzalo Junquera Lorenzo**  
 > Curso: 2025/2026  
