@@ -11,6 +11,11 @@
 
 - [ENTORNO DE EXPLOTACIÓN](#entorno-de-explotación)
   - [**Publicar desde GitHub**](#publicar-desde-github)
+  - [**Subir versión estable en github**](#subir-versión-estable-en-github)
+  - [**Crear un subdominio**](#crear-un-subdominio)
+  - [**Conexión por ftp**](#conexión-por-ftp)
+  - [**Bases de datos**](#bases-de-datos)
+  - [**Publicar desde GitHub**](#publicar-desde-github-1)
 
 ## <h2>**Publicar desde GitHub**</h2>
 Lo primero es tener abierto nuestro repositorio en github porque vamos a copiar y configurar cosas.
@@ -31,27 +36,43 @@ En github entramos en settings/webhooks y damos a añadir webhook. Pegamos el ur
 
 Con todo esto cada vez que hagamos push a la rama principal se subirá automáticamente a plesk.
 
-1.- Crear un subdominio
+## <h2>**Subir versión estable en github**</h2>
+.zip descargando una version, descomprimiendo y subiendo por ftp
+
+## <h2>**Crear un subdominio**</h2>
 nombreproyecto
 alojamiento /httpdocs/nombreproyecto
 
-Subir versión estable en github
-Opcion1: .zip descargando una version, descomprimiendo y subiendo por ftp
-Opcion2: sincronizar con github y rama master para que suba automáticamente
-
-3.- Conexión por ftp
+## <h2>**Conexión por ftp**</h2>
 Como configurar usuario y contraseña en plesk para poder conectarnos despues por ftp
 subir por ftp cosas con mobaXterm y con filezilla.
 
-4.- BBDD 
+## <h2>**Bases de datos**</h2>
   - Como crear la bbdd y usuario
   - como hacer creacion tablas, craga inicial y borrado desde phpmyadmin y SQL con las consultas almacenadas
 
-5.- head()
-contenido archivo htaccess para poder usar header('WWW-Authenticate: Basic realm="Contenido restringido"');
-header('HTTP/1.0 401 Unauthorized');
+## <h2>**Publicar desde GitHub**</h2>
+Fichero .htaccess
+https://www.ionos.es/digitalguide/hosting/cuestiones-tecnicas/los-mejores-trucos-para-archivos-htaccess/
+````Bash
+# Redirección a indice personalizado
+directoryindex indexProyectoCIB.php
 
+# Para que funcione el metodo head('WWW-Authenticate: Basic realm="Contenido restringido"') en php
+RewriteEngine On
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%1]
 
+# Redirección de errores a paginas personalizadas en carpeta error de raiz del dominio/subdominio
+ErrorDocument 404 /error/404.html
+ErrorDocument 403 /error/403.html
+ErrorDocument 500 /error/500.html
+
+#Redirección http a https (cambiar ip de https)
+RewriteEngine On
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://10.199.8.153/$1 [R,L]
+````
 
 > **Gonzalo Junquera Lorenzo**  
 > Curso: 2025/2026  
