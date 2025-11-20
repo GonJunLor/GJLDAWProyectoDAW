@@ -49,7 +49,7 @@ subir por ftp cosas con mobaXterm y con filezilla.
 
 ## <h2>**Bases de datos**</h2>
   - Como crear la bbdd y usuario
-  - como hacer creacion tablas, craga inicial y borrado desde phpmyadmin y SQL con las consultas almacenadas
+  - como hacer creacion tablas, carga inicial y borrado desde phpmyadmin y SQL con las consultas almacenadas, para ejecutar las que ya estan almacenadas no hay que volver a cargarla, solo seleccionarla de la lista y darle a continuar a la derecha, así ya la ejecuta.
 
 ## <h2>**Publicar desde GitHub**</h2>
 Fichero .htaccess
