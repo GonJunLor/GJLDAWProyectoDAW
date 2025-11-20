@@ -24,7 +24,7 @@ En plesk vamos a sitios web y dominios, entramos nuestro dominio principal y dam
 
 En github copiamos la url de ssh.
 
-En plesk añadimos repositorio, al pegar la url de github nos sale una clave ssh pública, copiamos esa clave y vamos a github a las opciones de nuestro repostorio a deply keys. Una vez aquí añadimos una nueva clave pegando la que hemos copiado de plesk, poniendo un nombre significativo y dejando *Allow write access* desmarcado.
+En plesk añadimos repositorio, al pegar la url de github nos sale una sección para crear clave ssh pública, tenemos que crear una para cada repositorio, copiamos esa clave y vamos a github a las opciones de nuestro repostorio a deply keys. Una vez aquí añadimos una nueva clave pegando la que hemos copiado de plesk, poniendo un nombre significativo y dejando *Allow write access* desmarcado.
 
 Volvemos a plesk, modificamos el nombre del repositorio como queramos, nos aseguramos que el modo despliegue esta en automático. En ruta de acceso elegimos la carpeta de nuestro proyecto (si no la tenemos la creamos pero es recomendable que esté vacia) dentro de httpdocs. 
 
