@@ -10,12 +10,33 @@
 
 
 - [ENTORNO DE EXPLOTACIÓN](#entorno-de-explotación)
+  - [**Conexión por sftp y ssh**](#conexión-por-sftp-y-ssh)
+  - [**Crear un subdominio**](#crear-un-subdominio)
   - [**Publicar desde GitHub**](#publicar-desde-github)
   - [**Subir versión estable en github**](#subir-versión-estable-en-github)
-  - [**Crear un subdominio**](#crear-un-subdominio)
-  - [**Conexión por ftp**](#conexión-por-ftp)
   - [**Bases de datos**](#bases-de-datos)
-  - [**Publicar desde GitHub**](#publicar-desde-github-1)
+  - [**Archivo de configuracion de conexión a BBDD**](#archivo-de-configuracion-de-conexión-a-bbdd)
+  - [**Fichero .htaccess**](#fichero-htaccess)
+
+
+## <h2>**Conexión por sftp y ssh**</h2>
+
+**<h3>SFTP</h3>**
+Lo primero es tener los datos de conexión, por si no los tenemos vamos a *sitios web y dominios*, damos a *ftp* y en nuestro nombre  se abre una ventana donde podemos configurar el nombre de usuario y contraseña, además de ver que el acceso SSH es */bin/bash* y ver también nuestra ip.
+
+Para conectarnos lo hacemos con [mobaXterm](ClienteDesarrollo.md#3-mobaxterm) igual que cuando nos conectamos a nuestro servidor solo que con los datos que hemos configurado.
+
+**<h3>SSH</h3>**
+Tenemos dos opciones, la primera es directamente desde plesk en *sitios web y dominios*, damos a *SSH Terminal*, se nos abre la consola de comando donde poder hacer lo que tengamos permisos.
+
+La segunda opción es con un cliente como [mobaXterm](ClienteDesarrollo.md#3-mobaxterm) igual que cuando nos conectamos a nuestro servidor pero con los mismos datos de sftp.
+
+
+## <h2>**Crear un subdominio**</h2>
+Desde plesk en *sitios web y dominios* damos a *añadir subdominio*.
+
+Se abre una ventana donde ponemos el nombre del subdominio, normalmente el del proyecto que queremos subir. Elegimos también un directorio para guadar dicho proyecto, en nuestro caso será el mismo que ya tenemos dentro de httpdocs. Muy importante asegurarse de que le nombre de la carpeta sea solo el del proyecto, ya que por defecto plesk pone el dominio entero a esta carpeta, por lo que tenemos que borrarlo antes de darle aceptar.
+
 
 ## <h2>**Publicar desde GitHub**</h2>
 Lo primero es tener abierto nuestro repositorio en github porque vamos a copiar y configurar cosas.
@@ -37,22 +58,70 @@ En github entramos en settings/webhooks y damos a añadir webhook. Pegamos el ur
 Con todo esto cada vez que hagamos push a la rama principal se subirá automáticamente a plesk.
 
 ## <h2>**Subir versión estable en github**</h2>
-.zip descargando una version, descomprimiendo y subiendo por ftp
+Descargamos el proyecto comprimido en zip desde la sección de releases de github que previamente vamos haciendo con versiones estables de nuestro proyecto.
 
-## <h2>**Crear un subdominio**</h2>
-nombreproyecto
-alojamiento /httpdocs/nombreproyecto
-
-## <h2>**Conexión por ftp**</h2>
-Como configurar usuario y contraseña en plesk para poder conectarnos despues por ftp
-subir por ftp cosas con mobaXterm y con filezilla.
+Lo descomprimimos en nuestro pc y lo subimos al servidor por ftp, si es necesario borramos o modificamos archivos de configuración o lo que sea antes de subirlo.
 
 ## <h2>**Bases de datos**</h2>
-  - Como crear la bbdd y usuario
-  - como hacer creacion tablas, craga inicial y borrado desde phpmyadmin y SQL con las consultas almacenadas
+Como crear la bbdd y usuario
+como hacer creacion tablas, craga inicial y borrado desde phpMyAdmin y SQL con las consultas almacenadas
 
-## <h2>**Publicar desde GitHub**</h2>
-Fichero .htaccess
+Para trabajar con bases de datos lo hacemos en dos pasos, el primero será desde plesk donde crearemos la BBDD asociada a un dominio o proyecto y también crearemos el usuario para gestionarla. El segundo será desde phpMyAdmin donde ejecutaremos codigos sql para crear tablas, hacer carga inicial y borrarlas.
+
+**<h3>En plesk</h3>**
+En *sitios web y dominios* damos a *Bases de datos* y *añadir base de datos*.
+
+En la ventana que se abre elegimos el nombre de la BBDD, el sitio relacionado (este será un subdominio asociado a un proyecto que tenemos previamnete creado) y creamos un usuario con su contraseña.
+
+Una vez que le damos a crear ya nos aparece la opcion de abrir phpMyAdmin.
+
+**<h3>En phpMyAdmin</h3>**
+Aqui gestionamos únicamente la bbdd que creamos antes, no podemos ver todas las que hay en plesk. 
+
+Nos vamos a la pestaña SQL, copiamos o escribimos el código a ejecutar y antes de darle a continuar en la parte de abajo Guardamos esta consulta en favoritos poniéndole un nombre. 
+
+Al hacer ésto aparece una nueva sección abajo *Consulta guardada en favoritos* donde tenemos una lista desplegable con todas las que guardemos para poder seleccionarla en cualquier momento y darla a continuar abajo a la derecha para volver a ejecutarla.
+
+## <h2>**Archivo de configuracion de conexión a BBDD**</h2>
+Lo primero es crear unas variables de entorno con los datos de la conexión en el archivo .htaccess del proyecto donde sea necesario.
+````Bash
+SetEnv DB_DSN "mysql:host=localhost; dbname=DBGJLDWESProyectoTema4"
+SetEnv DB_USERNAME "userGJLDWESProyectoTema4"
+SetEnv DB_PASSWORD "5813Libro-Puro"
+````
+
+Este es el contenido del archivo de configuración en explotación.
+````Bash
+<?php
+// Lee las variables de entorno para DSN, USERNAME y PASSWORD
+define('DSN', getenv('DB_DSN'));
+define('USERNAME', getenv('DB_USERNAME'));
+define('PASSWORD', getenv('DB_PASSWORD'));
+
+// Verificar si las variables se cargaron correctamente (opcional pero recomendado)
+if (!DSN || !USERNAME || !PASSWORD) {
+    // Aquí puedes lanzar una excepción o registrar un error si faltan las credenciales
+    error_log("ERROR: Las variables de entorno de la base de datos no están definidas.");
+}
+?>
+````
+
+El objetivo con todo esto es que el archivo de configuración en explotación (rama master) no tenga la contraseñas, usuarios ni datos de la bbdd, a diferencia del entorno de explotación (rama developerGJL) que sí los tiene. Como el resto del código php es el mismo en los dos entornos, usa el mismo archivo (confDBPDO.php). 
+
+Antes de empezar guarda una copia de seguridad por si hay que volver a restaurar los archivos.
+
+Lo primero es añadirlo al archivo .gitignore (lo hacemos todo desde developerGJL y luego ya fusionamos con master).
+````Bash
+conf/confDBPDO.php
+```` 
+Después lo borramos del seguimiento de git (si quieremos asegurarnos más podemos borrarlo por completo sin usar --cached y luego volver a crearlo al final).
+````Bash
+git rm --cached conf/confDBPDO.php
+```` 
+
+En este punto ya no debería estar el archivo en github en ninguna rama, ahora tenemos que crearlo o modificarlo con los datos de conexión del entorno de desarrollo y hacer otra versión para subirla manualmente al entorno de explotación.
+
+## <h2>**Fichero .htaccess**</h2>
 https://www.ionos.es/digitalguide/hosting/cuestiones-tecnicas/los-mejores-trucos-para-archivos-htaccess/
 ````Bash
 # Redirección a indice personalizado
@@ -68,10 +137,15 @@ ErrorDocument 404 /error/404.html
 ErrorDocument 403 /error/403.html
 ErrorDocument 500 /error/500.html
 
-#Redirección http a https (cambiar ip de https)
+# Redirección http a https (cambiar ip de https)
 RewriteEngine On
 RewriteCond %{SERVER_PORT} 80
 RewriteRule ^(.*)$ https://10.199.8.153/$1 [R,L]
+
+# Variables de entorno para BBDD
+SetEnv DB_DSN "mysql:host=localhost; dbname=DBGJLDWESProyectoTema4"
+SetEnv DB_USERNAME "userGJLDWESProyectoTema4"
+SetEnv DB_PASSWORD "5813Libro-Puro"
 ````
 
 > **Gonzalo Junquera Lorenzo**  
