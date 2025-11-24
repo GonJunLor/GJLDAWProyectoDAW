@@ -26,6 +26,7 @@
       - [*Borrar proyecto.*](#borrar-proyecto)
       - [*Lanzamientos (Releases).*](#lanzamientos-releases)
       - [*Autenticación ssh con claves privadas.*](#autenticación-ssh-con-claves-privadas)
+      - [*Añadir colaboradores a repositorio*](#añadir-colaboradores-a-repositorio)
 
 
 ## <h1>Git</h1>
@@ -217,6 +218,57 @@ Una vez que le hemos dado a *verify* no reenvia a la pagina principal con el men
 #### <h2>*Autenticación ssh con claves privadas.*</h2> 
 https://docs.github.com/es/enterprise-cloud@latest/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
 
+#### <h2>*Añadir colaboradores a repositorio*</h2> 
+
+**<h3>🔒 Configurar la Protección de la Rama Principal</h3>**
+
+Ve a la Configuración del Repositorio: En tu proyecto de GitHub, haz clic en la pestaña "Settings" (Configuración).
+
+Accede a Ramas: En el menú lateral izquierdo, haz clic en "Branches" (Ramas).
+
+Añadir Regla de Protección: En la sección "Branch protection rules," haz clic en "Add rule" (Añadir regla).
+
+Define la Rama: En el campo "Branch name pattern," escribe el nombre de tu rama principal, que suele ser main o master.
+
+Nota: La regla aplicará a cualquier rama que coincida con el patrón.
+
+**<h3>⚙️ Opciones Esenciales para tu Requerimiento</h3>**
+
+Para asegurarte de que solo tú (o administradores) puedan hacer merge directamente y que los colaboradores deban usar Pull Requests (PRs), activa las siguientes opciones:
+
+☑️ Require a pull request before merging:
+
+Importante: Esta es la clave para que las contribuciones se hagan siempre a través de PRs.
+
+☑️ Require linear history: (Opcional, pero recomendado para un historial limpio).
+
+Asegúrate de NO tener activas estas opciones:
+
+🗙 Allow force pushes
+
+🗙 Do not allow bypassing the above settings (Mantener desactivada si quieres que solo los administradores puedan saltarse las reglas, o activarla si quieres que nadie lo haga, incluidos los administradores).
+
+**<h3>🤝 Invitar a Colaboradores al Repositorio</h3>**
+
+Si tu proyecto es público, puedes invitar a cualquier persona. Si es privado, solo puedes invitar a colaboradores con una cuenta de GitHub.
+
+Ve a la Configuración del Repositorio: En tu proyecto de GitHub, haz clic en la pestaña "Settings" (Configuración).
+
+Accede a Colaboradores: En el menú lateral izquierdo, haz clic en "Collaborators and teams" (Colaboradores y equipos) o "Manage access" (Gestionar acceso) si es un repositorio de una organización.
+
+Añade Personas: Haz clic en "Add people" (Añadir personas) e ingresa sus nombres de usuario o correos electrónicos.
+
+Una vez que acepten la invitación, tendrán acceso directo para clonar, crear ramas y hacer push de sus cambios.
+
+**<h3>✅ Flujo de Trabajo para Colaboradores</h3>**
+
+Clonan el repositorio directamente.
+
+Crean una rama nueva localmente (Ej: git checkout -b mi-nueva-feature).
+
+Hacen sus cambios y hacen push de esa nueva rama a tu repositorio.
+
+Abren un Pull Request (PR) desde esa nueva rama hacia la rama principal (main).
 
 > **Gonzalo Junquera Lorenzo**  
 > Curso: 2025/2026  
