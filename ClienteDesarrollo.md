@@ -1,3 +1,11 @@
+<div style="position: sticky; top: 0; left: 0; width: 100%; background-color: rgba(255, 255, 255, 1); padding: 10px; border-bottom: 1px solid #ccc; z-index: 999;">
+    <a href="README.md">Inicio</a> |<>|
+    <a href="ServidorDesarrollo.md">Servidor de desarrollo</a> |<>|
+    <a href="GitHub.md">GitHub</a> |<>|
+    <a href="EntornoExplotacion.md">Entorno de explotación</a>
+</div>
+<hr>
+
 <!-- title: README -->
 # CLIENTE DE DESARROLLO - WINDOWS 10/11
 
