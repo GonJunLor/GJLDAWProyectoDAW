@@ -17,6 +17,7 @@
   - [**Bases de datos**](#bases-de-datos)
   - [**Archivo de configuracion de conexión a BBDD**](#archivo-de-configuracion-de-conexión-a-bbdd)
   - [**Fichero .htaccess**](#fichero-htaccess)
+  - [**DNS**](#dns)
 
 
 ## <h2>**Conexión por sftp y ssh**</h2>
@@ -145,6 +146,9 @@ SetEnv DB_DSN "mysql:host=localhost; dbname=DBGJLDWESProyectoTema4"
 SetEnv DB_USERNAME "userGJLDWESProyectoTema4"
 SetEnv DB_PASSWORD "5813Libro-Puro"
 ````
+
+## <h2>**DNS**</h2>
+
 
 > **Gonzalo Junquera Lorenzo**  
 > Curso: 2025/2026  
