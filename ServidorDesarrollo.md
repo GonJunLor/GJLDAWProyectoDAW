@@ -271,6 +271,27 @@ sudo timedatectl set-timezone Europe/Madrid
 sudo timedatectl # para ver fechas y zona horaria
 ````
 
+**<h3>Desbloquear más idiomas</h3>**
+Para desbloquear más idiomas tenemos que abrir el archivo *locale.gen* y descomentar lo idiomas que queremos activar
+````Bash
+sudo nano /etc/locale.gen
+````
+
+En mi caso pruebo con el portugués, por lo que busco ese idioma en la lista y lo descomento
+````Bash
+pt_PT.UTF-8 UTF-8
+````
+
+Para que surta efecto hay que regenerar los idiomas
+````Bash
+sudo locale-gen
+````
+
+Reiniciamos apache, en mi caso he necesitado reiniciar fisicamente el servidor de ubuntu para que funcione.
+````Bash
+sudo systemctl restart apache2
+````
+
 **<h3>Antivirus</h3>**
 
 ````Bash
