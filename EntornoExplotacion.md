@@ -135,9 +135,10 @@ https://www.ionos.es/digitalguide/hosting/cuestiones-tecnicas/los-mejores-trucos
 directoryindex indexProyectoCIB.php
 
 # Para que funcione el metodo head('WWW-Authenticate: Basic realm="Contenido restringido"') en php
-RewriteEngine On
-RewriteCond %{HTTP:Authorization} ^(.*)
-RewriteRule .* - [E=HTTP_AUTHORIZATION:%1]
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+</IfModule>
 
 # Redirección de errores a paginas personalizadas en carpeta error de raiz del dominio/subdominio
 ErrorDocument 404 /error/404.html
