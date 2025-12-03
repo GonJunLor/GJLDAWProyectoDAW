@@ -735,7 +735,6 @@ xdebug.mode=develop,debug
 xdebug.start_with_request=yes
 xdebug.client_host=127.0.0.1
 xdebug.client_port=9003
-xdebug.log=/tmp/xdebug.log
 xdebug.log_level=7
 xdebug.idekey="netbeans-xdebug"
 xdebug.discover_client_host=1
@@ -980,7 +979,7 @@ Entramos en nuestra cuenta de plesk, deplegamos nuestro dominio principal, damos
 
 <img src="webroot/media/images/virtual01.png" width="600px">
 
-Damos a añadir regitro.
+Damos a añadir registro.
 
 <img src="webroot/media/images/virtual02.png" width="600px">
 
