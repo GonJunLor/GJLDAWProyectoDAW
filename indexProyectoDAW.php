@@ -46,6 +46,14 @@
                         <h4>README.html (github)</h4>
                     </a>
                 </article>
+                <article class="practica">
+                    <iframe src="https://ventas.gonzalojunlor.ieslossauces.es/"></iframe>
+                    <a href="https://ventas.gonzalojunlor.ieslossauces.es/" target="_blank">
+                        <img src="webroot/media/images/ies.png" alt="Banner">
+                        <div class="superpuesto"></div>
+                        <h4>DAW2_ExPr01_25_26 - Sistema Libre</h4>
+                    </a>
+                </article>
             </div>
         </section>
     </main>
