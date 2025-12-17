@@ -44,7 +44,6 @@
       - [*php8.3-mysql*](#php83-mysql)
       - [*php8.3-intl*](#php83-intl)
       - [*php8.3-xdebug*](#php83-xdebug)
-      - [*DirectoryIndex*](#directoryindex)
     - [**1.6 Servidor web seguro (HTTPS)**](#16-servidor-web-seguro-https)
       - [*Instalación*](#instalación-3)
       - [*Configuración*](#configuración-3)
@@ -159,7 +158,7 @@ cat /etc/passwd # datos de los usuarios
 cat /etc/group # datos de los grupos
 ````
 
-**<h3>Para ver los modulos activos de php</h3>**
+**<h3>Para ver los modulos activos de apache</h3>**
 ````Bash
 apache2ctl -M
 ````
@@ -414,6 +413,17 @@ Cambiamos AllowOverride None por All. Hay que buscar ese directory el <Directory
     Require all granted
 </Directory>
 ````
+
+<!-- 
+poner directivas:
+DirectoryIndex
+
+Comprobamos si esta el modulo activo
+````Bash
+ls /etc/apache2/mods-enabled | grep dir
+````
+Abrimos el dir.conf para ver el orden por defecto que tiene para abrir el index
+ -->
 
 
 **<h3>Errores con htaccess</h3>**
@@ -759,14 +769,6 @@ Creamos una pagina info.php en la raiz de nuestro servidor con la la siguiente l
 ![Alt](webroot/media/images/xdebug.png)
 **<h3>Mantenimiento</h3>**
 
-#### <h2>*DirectoryIndex*</h2>
-
-
-Comprobamos si esta el modulo activo
-````Bash
-ls /etc/apache2/mods-enabled | grep dir
-````
-Abrimos el dir.conf para ver el orden por defecto que tiene para abrir el index
 
 ### <h2>**1.6 Servidor web seguro (HTTPS)**</h2>
 
