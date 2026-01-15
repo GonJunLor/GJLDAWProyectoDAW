@@ -330,6 +330,12 @@ Si se ejecuta bien aparece una pestaña a la derecha con el resultado.
 Toda esta sección lo tengo documentado
 <a href="GitHub.md#instalación" target="_blank">aquí</a>.
 
+Documentación: indique los requisitos mínimos de phpdocumentor , la instalación y añadir las variables de entorno a nivel de cuenta.
+Visual Studio Code
+Indicar cómo se ejecuta la generación automática de documentación desde este IDE
+Netbeans
+Explicar como se configura, y se genera la documentación
+DoxyGen
 
 
 > **Gonzalo Junquera Lorenzo**  

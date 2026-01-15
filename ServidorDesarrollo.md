@@ -1064,6 +1064,7 @@ Agregamos lo que sea a la carpeta */var/www/usuarioenjaulado1/httpdocs/* para vi
 
 ## <h1>2 XAMP</h1>
 
+Documentación: incluye la instalación y uso de phpdocumentor desde el propio servidor.
 
 > **Gonzalo Junquera Lorenzo**  
 > Curso: 2025/2026  
