@@ -278,6 +278,9 @@ Hacen sus cambios y hacen push de esa nueva rama a tu repositorio.
 
 Abren un Pull Request (PR) desde esa nueva rama hacia la rama principal (main).
 
+Documentación: (INVESTIGAR)
+ Queda pendiente investigar la automatización de generación de documentación a apartir de phpdocumentor usando workflow en Git.
+
 > **Gonzalo Junquera Lorenzo**  
 > Curso: 2025/2026  
 > 2º Curso CFGS Desarrollo de Aplicaciones Web  
