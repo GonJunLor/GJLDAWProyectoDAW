@@ -66,6 +66,8 @@ En github entramos en settings/webhooks y damos a añadir webhook. Pegamos el ur
 
 Con todo esto cada vez que hagamos push a la rama principal se subirá automáticamente a plesk.
 
+Es importante que tengamos un certificado ssl válido en el subdominio de esa aplicación, sino falla la comunicación entre github y plesk. Si tenemos uno creado para el dominio principal solo tenemos que ir a las opciones del subdomnio y hay un apartado para elegir un certificado.
+
 ## <h2>**Subir versión estable en github**</h2>
 Descargamos el proyecto comprimido en zip desde la sección de releases de github que previamente vamos haciendo con versiones estables de nuestro proyecto.
 
