@@ -281,6 +281,11 @@ Abren un Pull Request (PR) desde esa nueva rama hacia la rama principal (main).
 Documentación: (INVESTIGAR)
  Queda pendiente investigar la automatización de generación de documentación a apartir de phpdocumentor usando workflow en Git.
 
+**<h3>Comandos</h3>**
+
+Forzar subir commit a github con push
+>git push origin <nombre_de_tu_rama> --force
+
 > **Gonzalo Junquera Lorenzo**  
 > Curso: 2025/2026  
 > 2º Curso CFGS Desarrollo de Aplicaciones Web  
