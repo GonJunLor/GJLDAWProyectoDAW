@@ -41,6 +41,12 @@
       - [**Conexión SFTP y SSH al servidor**](#conexión-sftp-y-ssh-al-servidor)
       - [**Conectar a base de datos**](#conectar-a-base-de-datos)
       - [**Uso de Git y GitHub**](#uso-de-git-y-github)
+  - [**6 PHPDocumentor**](#6-phpdocumentor)
+    - [*Instalación*](#instalación-3)
+    - [*Ejemplo de uso*](#ejemplo-de-uso-3)
+  - [**7 Doxygen**](#7-doxygen)
+    - [*Instalación*](#instalación-4)
+    - [*Ejemplo de uso*](#ejemplo-de-uso-4)
 
 
 ## <h2>**1 Configuración inicial**</h2>
@@ -330,12 +336,71 @@ Si se ejecuta bien aparece una pestaña a la derecha con el resultado.
 Toda esta sección lo tengo documentado
 <a href="GitHub.md#instalación" target="_blank">aquí</a>.
 
-Documentación: indique los requisitos mínimos de phpdocumentor , la instalación y añadir las variables de entorno a nivel de cuenta.
-Visual Studio Code
-Indicar cómo se ejecuta la generación automática de documentación desde este IDE
-Netbeans
-Explicar como se configura, y se genera la documentación
-DoxyGen
+## <h2>**6 PHPDocumentor**</h2>
+
+phpDocumentor es la aplicación de documentación por excelencia para proyectos PHP. Su proyecto también se beneficiará de más de 20 años de experiencia y de establecer el estándar para la documentación de aplicaciones PHP.
+
+Para más información consultar su documentación oficial https://docs.phpdoc.org/
+
+### <h2>*Instalación*</h2>
+
+La forma más sencilla y limpia de usarlo es mediante el archivo PHAR (un ejecutable de PHP), así no necesitas instalar dependencias globales.
+
+Descarga el ejecutable desde su sitio oficial: [phpDocumentor.phar.](https://phpdoc.org/phpDocumentor.phar)
+
+Coloca el archivo `phpDocumentor.phar` en la raíz de tu proyecto.
+
+### <h2>*Ejemplo de uso*</h2>
+
+````bash
+php phpDocumentor.phar -d ./model -t ./doc/phpdoc
+````
+Si da error de que no encuentra php, podemos añadir al path del sistema la ruta donde esté o indicarla en la consola de comandos, en mi caso lo tengo directamente en c:/php
+
+````bash
+C:\php\php.exe phpDocumentor.phar -d ./model -t ./doc/phpdoc
+````
+
+Explicación de los parámetros:
+
+`-d ./model`: (Directory) Indica la carpeta donde está tu código fuente (donde tienes tus clases Departamento, REST, etc.). Si están en la raíz, puedes usar ./.
+
+`-t ./doc/phpdoc`: (Target) Es la carpeta donde se guardará la documentación generada (el HTML).
+
+Si todo va bien se genera la documentación
+
+<img src="webroot/media/images/phpdoc01.png" width="700px">
+
+Abrimos el index.html
+
+<img src="webroot/media/images/phpdoc02.png" width="700px">
+
+## <h2>**7 Doxygen**</h2>
+
+Aplicación que sirve para generar documentación de varios lenguajes, entre ellos de php.
+
+### <h2>*Instalación*</h2>
+
+Lo descargamos desde su web https://www.doxygen.nl/download.html, en nuestro caso el .zip para no instalar nada. Abrimos el archivo `doxywizard.exe`.
+
+### <h2>*Ejemplo de uso*</h2>
+Elegimos la carpeta donde correra doxigen, en nuestro caso donde se guardará la documentación creada en nuestro proyecto.
+
+Ponemos un nombre de proyecto, un logo, el directorio donde estan las clases que saldrán en la documentación y de nuevo la carpeta donde se guardará.
+
+<img src="webroot/media/images/doxygen01.png" width="700px">
+
+Elegimos All Entities y Optimice for C or PHP output.
+
+<img src="webroot/media/images/doxygen02.png" width="700px">
+
+Le damos a Run Doxygen
+
+<img src="webroot/media/images/doxygen03.png" width="700px">
+
+En la documentacion generada abrimos el index.html
+
+<img src="webroot/media/images/doxygen04.png" width="700px">
 
 
 > **Gonzalo Junquera Lorenzo**  
