@@ -54,6 +54,14 @@
                         <h4>DAW2_ExPr01_25_26 - Sistema Libre</h4>
                     </a>
                 </article>
+                <article class="practica">
+                    <iframe src="https://biblioteca.gonzalojunlor.ieslossauces.es/"></iframe>
+                    <a href="https://biblioteca.gonzalojunlor.ieslossauces.es/" target="_blank">
+                        <img src="webroot/media/images/ies.png" alt="Banner">
+                        <div class="superpuesto"></div>
+                        <h4>DAW2_ExPr02_25_26 - Biblioteca</h4>
+                    </a>
+                </article>
             </div>
         </section>
     </main>
